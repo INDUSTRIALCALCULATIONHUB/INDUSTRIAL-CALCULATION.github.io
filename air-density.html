@@ -1,8 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Air Density Calculator</title>
+<link rel="stylesheet" href="style.css">
+
+<style>
+.container {
+    background: white;
+    padding: 20px;
+    margin: 30px auto;
+    width: 90%;
+    max-width: 500px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+input {
+    width: 90%;
+    padding: 10px;
+    margin: 10px;
+}
+
+button {
+    padding: 10px 20px;
+    margin: 10px;
+    cursor: pointer;
+}
+
+table {
+    margin: 20px auto;
+    border-collapse: collapse;
+    width: 80%;
+}
+
+th, td {
+    border: 1px solid #ccc;
+    padding: 8px;
+}
+
+h1, h2, h3 {
+    text-align: center;
+}
+</style>
+
+</head>
+
+<body>
+
+<h1>Air Density Calculator</h1>
+
+<div class="container">
+
+<p>Calculate air density based on altitude and temperature.</p>
+
+<input type="number" id="altitude" placeholder="Altitude (m above MSL)">
+<input type="number" id="temperature" placeholder="Gas Temperature (°C)">
+
+<br>
+
+<button onclick="calculate()">Calculate</button>
+<button onclick="resetForm()">Reset</button>
+
+</div>
+
+<div id="output"></div>
+
 <script>
 function calculate() {
 
     let altitude = parseFloat(document.getElementById("altitude").value);
     let temp = parseFloat(document.getElementById("temperature").value);
+
+    if (isNaN(altitude) || isNaN(temp)) {
+        document.getElementById("output").innerHTML =
+            "<p style='color:red; text-align:center;'>Please enter valid numeric values</p>";
+        return;
+    }
 
     let P0 = 101325;
     let T0 = 288.16;
@@ -21,10 +95,11 @@ function calculate() {
 
     let rho_lb = rho * 0.062428;
 
-    // Pressure conversions
+    // Pressure Table
     let pressureTable = `
+    <h2>Results</h2>
     <h3>Pressure</h3>
-    <table border="1" style="margin:auto;">
+    <table>
         <tr><th>Unit</th><th>Value</th></tr>
         <tr><td>Pa</td><td>${P.toFixed(2)}</td></tr>
         <tr><td>kPa</td><td>${(P/1000).toFixed(2)}</td></tr>
@@ -34,10 +109,10 @@ function calculate() {
     </table>
     `;
 
-    // Density conversions
+    // Density Table
     let densityTable = `
     <h3>Density</h3>
-    <table border="1" style="margin:auto;">
+    <table>
         <tr><th>Unit</th><th>Value</th></tr>
         <tr><td>kg/m³</td><td>${rho.toFixed(2)}</td></tr>
         <tr><td>lb/ft³</td><td>${rho_lb.toFixed(2)}</td></tr>
@@ -45,7 +120,7 @@ function calculate() {
     `;
 
     document.getElementById("output").innerHTML =
-        "<h2>Results</h2>" + pressureTable + densityTable;
+        pressureTable + densityTable;
 }
 
 function resetForm() {
@@ -54,4 +129,6 @@ function resetForm() {
     document.getElementById("output").innerHTML = "";
 }
 </script>
-<div id="output"></div>
+
+</body>
+</html>
