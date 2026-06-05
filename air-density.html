@@ -8,18 +8,52 @@
 
 <h1>Air Density Calculator</h1>
 
-<p>This tool calculates air density using pressure and temperature.</p>
+<p>Calculate air density based on altitude and temperature.</p>
 
-<input type="number" id="temp" placeholder="Temperature (°C)">
-<input type="number" id="pressure" placeholder="Pressure (Pa)">
+<input type="number" id="altitude" placeholder="Altitude (m)">
+<input type="number" id="temperature" placeholder="Temperature (°C)">
 
 <br><br>
-<button onclick="calculateDensity()">Calculate</button>
+<button onclick="calculate()">Calculate</button>
 <button onclick="resetForm()">Reset</button>
 
-<h3 id="result"></h3>
+<h3 id="output"></h3>
 
-<script src="script.js"></script>
+<script>
+function calculate() {
+
+    let altitude = parseFloat(document.getElementById("altitude").value);
+    let temp = parseFloat(document.getElementById("temperature").value);
+
+    let P0 = 101325;
+    let T0 = 288.16;
+    let L = 0.0065;
+    let g = 9.80665;
+    let M = 0.0289644;
+    let R = 8.314462618;
+    let R_specific = 287.058;
+
+    let exponent = (g * M) / (R * L);
+
+    let P = P0 * Math.pow((1 - (L * altitude) / T0), exponent);
+
+    let T = temp + 273.15;
+    let rho = P / (R_specific * T);
+
+    let rho_lb = rho * 0.062428;
+
+    document.getElementById("output").innerHTML =
+        "Pressure: " + P.toFixed(2) + " Pa<br>" +
+        "Density: " + rho.toFixed(2) + " kg/m³ | " +
+        rho_lb.toFixed(2) + " lb/ft³";
+}
+
+function resetForm() {
+    document.getElementById("altitude").value = "";
+    document.getElementById("temperature").value = "";
+    document.getElementById("output").innerHTML = "";
+}
+</script>
 
 </body>
 </html>
