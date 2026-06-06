@@ -15,12 +15,12 @@ body {
 /* HEADER */
 .header {
     text-align: center;
-    padding: 50px 20px 20px;
+    padding: 60px 20px 30px;
 }
 
 .header h1 {
-    margin: 0;
-    font-size: 36px;
+    font-size: 40px;
+    margin-bottom: 10px;
 }
 
 .header p {
@@ -28,20 +28,33 @@ body {
     opacity: 0.9;
 }
 
+/* NAVBAR */
+.navbar {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.navbar a {
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
+    font-size: 15px;
+}
+
 /* TOOL CARDS */
 .container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin: 30px;
+    padding: 20px;
 }
 
 .card {
     background: white;
     color: #333;
-    width: 280px;
+    width: 300px;
     margin: 15px;
-    padding: 20px;
+    padding: 25px;
     border-radius: 12px;
     text-align: center;
     text-decoration: none;
@@ -50,22 +63,33 @@ body {
 }
 
 .card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-8px);
 }
 
 .card h3 {
-    margin-bottom: 10px;
     color: #2a5298;
+    margin-bottom: 10px;
 }
 
 .card p {
     font-size: 14px;
 }
 
+/* CONTENT SECTION */
+.content {
+    background: white;
+    color: #333;
+    padding: 30px;
+    margin: 30px auto;
+    width: 90%;
+    max-width: 900px;
+    border-radius: 12px;
+}
+
 /* FOOTER */
 .footer {
     text-align: center;
-    margin-top: 40px;
+    margin-top: 30px;
     padding: 20px;
     font-size: 14px;
 }
@@ -83,26 +107,47 @@ body {
 
 <div class="header">
     <h1>Industrial Calculation Hub</h1>
-    <p>Free Engineering Calculators for Accurate Industrial Calculations</p>
+    <p>Professional Engineering Calculators for Accurate Industrial Applications</p>
+</div>
+
+<div class="navbar">
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="privacy.html">Privacy Policy</a>
 </div>
 
 <div class="container">
 
     <a href="air-density.html" class="card">
         <h3>Air Density Calculator</h3>
-        <p>Calculate air density using altitude and temperature with accurate results.</p>
+        <p>Calculate air density using altitude and temperature with high accuracy.</p>
     </a>
 
     <a href="thermal-expansion.html" class="card">
-        <h3>Thermal Expansion</h3>
-        <p>Estimate material expansion based on temperature change.</p>
+        <h3>Thermal Expansion Calculator</h3>
+        <p>Estimate linear expansion of engineering materials based on temperature change.</p>
     </a>
 
     <a href="weight-conversion.html" class="card">
-        <h3>Weight Converter</h3>
-        <p>Convert weight between kg and lb quickly and easily.</p>
+        <h3>Weight Conversion Tool</h3>
+        <p>Convert between multiple engineering units including kg, N, kN, lb and more.</p>
     </a>
 
+</div>
+
+<div class="content">
+    <h2>About Our Tools</h2>
+    <p>
+        Industrial Calculation Hub provides accurate and reliable engineering calculators
+        for professionals, students, and technicians. Our tools are designed to simplify
+        complex calculations such as air density, thermal expansion, and unit conversions.
+    </p>
+
+    <p>
+        These calculators are based on standard engineering formulas and are suitable for
+        real-world industrial applications. Whether you are working in mechanical,
+        civil, or process engineering, these tools help you save time and improve accuracy.
+    </p>
 </div>
 
 <div class="footer">
