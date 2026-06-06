@@ -3,44 +3,97 @@
 <head>
 <meta charset="UTF-8">
 <title>Air Density Calculator</title>
-<link rel="stylesheet" href="style.css">
 
 <style>
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to right, #1e3c72, #2a5298);
+    margin: 0;
+    color: #333;
+}
+
+.header {
+    text-align: center;
+    padding: 30px;
+    color: white;
+}
+
 .container {
     background: white;
-    padding: 20px;
-    margin: 30px auto;
+    padding: 25px;
+    margin: 20px auto;
     width: 90%;
     max-width: 500px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
 }
 
 input {
-    width: 90%;
-    padding: 10px;
-    margin: 10px;
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
 }
 
 button {
-    padding: 10px 20px;
-    margin: 10px;
+    padding: 12px 20px;
+    margin: 10px 5px;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
     cursor: pointer;
 }
 
-table {
+.calc-btn {
+    background: #2a5298;
+    color: white;
+}
+
+.reset-btn {
+    background: #ccc;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+#output {
     margin: 20px auto;
+    width: 90%;
+    max-width: 600px;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+table {
+    width: 100%;
     border-collapse: collapse;
-    width: 80%;
+    margin-top: 10px;
+}
+
+th {
+    background: #2a5298;
+    color: white;
 }
 
 th, td {
-    border: 1px solid #ccc;
-    padding: 8px;
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
 }
 
-h1, h2, h3 {
+.footer {
     text-align: center;
+    margin: 30px;
+    color: white;
 }
 </style>
 
@@ -48,23 +101,28 @@ h1, h2, h3 {
 
 <body>
 
-<h1>Air Density Calculator</h1>
+<div class="header">
+    <h1>Air Density Calculator</h1>
+    <p>Calculate air density based on altitude and temperature</p>
+</div>
 
 <div class="container">
-
-<p>Calculate air density based on altitude and temperature.</p>
 
 <input type="number" id="altitude" placeholder="Altitude (m above MSL)">
 <input type="number" id="temperature" placeholder="Gas Temperature (°C)">
 
-<br>
-
-<button onclick="calculate()">Calculate</button>
-<button onclick="resetForm()">Reset</button>
+<div style="text-align:center;">
+    <button class="calc-btn" onclick="calculate()">Calculate</button>
+    <button class="reset-btn" onclick="resetForm()">Reset</button>
+</div>
 
 </div>
 
 <div id="output"></div>
+
+<div class="footer">
+    <p>© Industrial Calculation Hub</p>
+</div>
 
 <script>
 function calculate() {
@@ -95,28 +153,29 @@ function calculate() {
 
     let rho_lb = rho * 0.062428;
 
-    // Pressure Table
     let pressureTable = `
-    <h2>Results</h2>
-    <h3>Pressure</h3>
-    <table>
-        <tr><th>Unit</th><th>Value</th></tr>
-        <tr><td>Pa</td><td>${P.toFixed(2)}</td></tr>
-        <tr><td>kPa</td><td>${(P/1000).toFixed(2)}</td></tr>
-        <tr><td>bar</td><td>${(P/100000).toFixed(2)}</td></tr>
-        <tr><td>atm</td><td>${(P/101325).toFixed(2)}</td></tr>
-        <tr><td>mmWC</td><td>${(P/9.80665).toFixed(2)}</td></tr>
-    </table>
+    <div class="card">
+        <h3>Pressure</h3>
+        <table>
+            <tr><th>Unit</th><th>Value</th></tr>
+            <tr><td>Pa</td><td>${P.toFixed(2)}</td></tr>
+            <tr><td>kPa</td><td>${(P/1000).toFixed(2)}</td></tr>
+            <tr><td>bar</td><td>${(P/100000).toFixed(2)}</td></tr>
+            <tr><td>atm</td><td>${(P/101325).toFixed(2)}</td></tr>
+            <tr><td>mmWC</td><td>${(P/9.80665).toFixed(2)}</td></tr>
+        </table>
+    </div>
     `;
 
-    // Density Table
     let densityTable = `
-    <h3>Density</h3>
-    <table>
-        <tr><th>Unit</th><th>Value</th></tr>
-        <tr><td>kg/m³</td><td>${rho.toFixed(2)}</td></tr>
-        <tr><td>lb/ft³</td><td>${rho_lb.toFixed(2)}</td></tr>
-    </table>
+    <div class="card">
+        <h3>Density</h3>
+        <table>
+            <tr><th>Unit</th><th>Value</th></tr>
+            <tr><td>kg/m³</td><td>${rho.toFixed(2)}</td></tr>
+            <tr><td>lb/ft³</td><td>${rho_lb.toFixed(2)}</td></tr>
+        </table>
+    </div>
     `;
 
     document.getElementById("output").innerHTML =
