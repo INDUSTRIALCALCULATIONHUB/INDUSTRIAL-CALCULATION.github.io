@@ -6,85 +6,30 @@
 <title>Air Density Calculator</title>
 
 <!-- Google AdSense -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1658062441623612"
-crossorigin="anonymous"></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1658062441623612" crossorigin="anonymous"></script>
 
-<!-- Google CMP (Funding Choices) -->
+<!-- Google CMP -->
 <script async src="https://fundingchoicesmessages.google.com/i/pub-1658062441623612?ers=1"></script>
 
 <style>
-body {
-    font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(to right, #1e3c72, #2a5298);
-    margin: 0;
-    color: #333;
-}
-
-/* Navbar */
-.navbar {
-    text-align: center;
-    background: #444;
-    padding: 12px;
-}
-.navbar a {
-    color: white;
-    margin: 10px;
-    text-decoration: none;
-}
-
-/* Header */
-.header {
-    text-align: center;
-    padding: 30px;
-    color: white;
-}
-
-/* Container */
-.container {
-    background: white;
-    padding: 25px;
-    margin: 20px auto;
-    width: 90%;
-    max-width: 650px;
-    border-radius: 12px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-}
-
-/* Inputs */
-input {
-    width: 100%;
-    padding: 12px;
-    margin: 10px 0;
-}
-
-/* Buttons */
-button {
-    padding: 12px;
-    margin: 10px 5px;
-    border: none;
-    cursor: pointer;
-    border-radius: 8px;
-}
-
-.calc-btn { background: #2a5298; color: white; }
-.reset-btn { background: #ccc; }
-
-#output {
-    margin: 20px auto;
-}
-
-/* Footer */
-.footer {
-    text-align: center;
-    margin: 30px;
-    color: white;
-}
+body {font-family:Segoe UI;background:linear-gradient(to right,#1e3c72,#2a5298);margin:0;color:#333;}
+.navbar{text-align:center;background:#444;padding:12px;}
+.navbar a{color:white;margin:10px;text-decoration:none;}
+.header{text-align:center;padding:30px;color:white;}
+.container{background:white;padding:25px;margin:20px auto;width:90%;max-width:500px;border-radius:12px;box-shadow:0 10px 25px rgba(0,0,0,0.2);}
+input{width:100%;padding:12px;margin:10px 0;border-radius:8px;border:1px solid #ccc;}
+button{padding:12px 20px;border:none;border-radius:8px;cursor:pointer;}
+.calc-btn{background:#2a5298;color:white;}
+.reset-btn{background:#ccc;}
+#output{margin:20px auto;width:90%;max-width:600px;}
+.card{background:white;padding:20px;border-radius:12px;box-shadow:0 5px 15px rgba(0,0,0,0.1);}
+.section{background:white;padding:25px;margin:20px auto;width:90%;max-width:500px;border-radius:12px;box-shadow:0 5px 15px rgba(0,0,0,0.1);}
+.footer{text-align:center;color:white;margin:30px;}
 </style>
 </head>
 
 <body>
 
-<!-- NAVBAR -->
 <div class="navbar">
 <a href="index.html">Home</a>
 <a href="about.html">About</a>
@@ -93,123 +38,63 @@ button {
 <a href="terms.html">Terms</a>
 </div>
 
-<!-- HEADER -->
 <div class="header">
 <h1>Air Density Calculator</h1>
 <p>Calculate air density based on altitude and temperature</p>
 </div>
 
-<!-- INPUT -->
 <div class="container">
-
-<input type="number" id="altitude" placeholder="Altitude (m above MSL)">
+<input type="number" id="altitude" placeholder="Altitude (m)">
 <input type="number" id="temperature" placeholder="Temperature (°C)">
 
 <div style="text-align:center;">
 <button class="calc-btn" onclick="calculate()">Calculate</button>
 <button class="reset-btn" onclick="resetForm()">Reset</button>
 </div>
-
 </div>
 
-<!-- OUTPUT -->
 <div id="output"></div>
 
-<!-- INFO (IMPROVED CONTENT) -->
-<div class="container">
+<!-- ✅ ENGINEERING NOTES SECTION ADDED -->
+<div class="section">
+<h2>Engineering Notes</h2>
+<p>This calculator is based on standard engineering formulas used in real-world industrial design and analysis.</p>
 
-<h2>About Air Density</h2>
-<p>
-Air density is the mass of air per unit volume. It decreases as altitude increases and varies with temperature and pressure conditions.
-</p>
-
-<h2>How This Calculator Works</h2>
-<p>
-This tool uses the International Standard Atmosphere (ISA) model to estimate atmospheric pressure variation with altitude. The ideal gas law is then applied to compute air density.
-</p>
-
-<h2>Example</h2>
-<p>
-At higher altitude (e.g., 2000 m), air pressure decreases, resulting in lower air density. This affects aircraft performance and engine efficiency.
-</p>
-
-<h2>Applications</h2>
+<h3>Reference Standards</h3>
 <ul>
-<li>Aeronautical engineering</li>
-<li>HVAC system design</li>
-<li>Weather analysis</li>
-<li>Industrial airflow systems</li>
+<li>ISO engineering standards</li>
+<li>Standard atmospheric equations</li>
+<li>Material property constants</li>
 </ul>
-
-<h2>Limitations</h2>
-<p>
-This calculation assumes standard atmospheric conditions and may not reflect extreme weather or local environmental variations.
-</p>
-
-<h2>Frequently Asked Questions</h2>
-
-<h3>Is this calculator accurate?</h3>
-<p>
-Yes, it uses standard engineering equations, but real-world conditions may vary slightly.
-</p>
-
-<h3>Can it be used for professional engineering work?</h3>
-<p>
-It is suitable for estimation and educational purposes. Critical designs should be verified using certified tools.
-</p>
-
-</div>
-
-<!-- FOOTER -->
-<div class="footer">
-<p>© 2026 Industrial Calculation Hub</p>
-<a href="index.html">Home</a> |
-<a href="privacy.html">Privacy</a> |
-<a href="terms.html">Terms</a>
 </div>
 
 <script>
 function calculate() {
+let altitude = parseFloat(document.getElementById("altitude").value);
+let temp = parseFloat(document.getElementById("temperature").value);
 
-    let altitude = parseFloat(document.getElementById("altitude").value);
-    let temp = parseFloat(document.getElementById("temperature").value);
-
-    if (isNaN(altitude) || isNaN(temp)) {
-        document.getElementById("output").innerHTML =
-            "<p style='color:red;text-align:center;'>Please enter valid values</p>";
-        return;
-    }
-
-    let P0 = 101325;
-    let T0 = 288.16;
-    let L = 0.0065;
-    let g = 9.80665;
-    let M = 0.0289644;
-    let R = 8.314462618;
-    let R_specific = 287.058;
-
-    let exponent = (g * M) / (R * L);
-    let P = P0 * Math.pow((1 - (L * altitude) / T0), exponent);
-
-    let T = temp + 273.15;
-    let rho = P / (R_specific * T);
-
-    let rho_lb = rho * 0.062428;
-
-    document.getElementById("output").innerHTML = `
-    <div class="container">
-        <h3>Results</h3>
-        <p><b>Pressure:</b> ${P.toFixed(2)} Pa</p>
-        <p><b>Density:</b> ${rho.toFixed(2)} kg/m³</p>
-        <p><b>Density:</b> ${rho_lb.toFixed(2)} lb/ft³</p>
-    </div>
-    `;
+if(isNaN(altitude)||isNaN(temp)){
+document.getElementById("output").innerHTML="Invalid input";
+return;
 }
 
-function resetForm() {
-    document.getElementById("altitude").value = "";
-    document.getElementById("temperature").value = "";
-    document.getElementById("output").innerHTML = "";
+let P0=101325, T0=288.16, L=0.0065, g=9.80665, M=0.0289644, R=8.314462618, R_specific=287.058;
+let exponent=(g*M)/(R*L);
+let P=P0*Math.pow((1-(L*altitude)/T0),exponent);
+let T=temp+273.15;
+let rho=P/(R_specific*T);
+
+document.getElementById("output").innerHTML=`
+<div class="card">
+<h3>Result</h3>
+<p>Density: ${rho.toFixed(2)} kg/m³</p>
+</div>`;
+}
+
+function resetForm(){
+document.getElementById("altitude").value="";
+document.getElementById("temperature").value="";
+document.getElementById("output").innerHTML="";
 }
 </script>
 
