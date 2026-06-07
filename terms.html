@@ -12,6 +12,23 @@ body {
     color: white;
 }
 
+.navbar {
+    text-align: center;
+    background: #444;
+    padding: 12px;
+}
+
+.navbar a {
+    color: white;
+    margin: 10px;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.navbar a:hover {
+    text-decoration: underline;
+}
+
 .header {
     text-align: center;
     padding: 40px 20px;
@@ -26,11 +43,12 @@ body {
     max-width: 900px;
     border-radius: 12px;
     box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-    line-height: 1.6;
+    line-height: 1.7;
 }
 
 h2 {
     color: #2a5298;
+    margin-top: 20px;
 }
 
 .footer {
@@ -38,23 +56,28 @@ h2 {
     margin-top: 30px;
     padding: 20px;
 }
-
-.footer a {
-    color: white;
-    margin: 0 10px;
-    text-decoration: none;
-}
 </style>
 
 </head>
 
 <body>
 
+<!-- Top Navigation -->
+<div class="navbar">
+<a href="index.html">Home</a>
+<a href="about.html">About</a>
+<a href="contact.html">Contact</a>
+<a href="privacy.html">Privacy</a>
+<a href="terms.html">Terms</a>
+</div>
+
+<!-- Header -->
 <div class="header">
     <h1>Terms and Conditions</h1>
     <p>Guidelines for using our services</p>
 </div>
 
+<!-- Content -->
 <div class="container">
 
 <h2>Acceptance of Terms</h2>
@@ -104,12 +127,13 @@ If you have any questions, please contact us at:
 
 </div>
 
+<!-- Footer -->
 <div class="footer">
     <p>© 2026 Industrial Calculation Hub</p>
-    <a href="index.html">Home</a> |
-    <a href="about.html">About</a> |
-    <a href="contact.html">Contact</a> |
-    <a href="privacy.html">Privacy Policy</a>
+    <a href="index.html" style="color:white;">Home</a> |
+    <a href="about.html" style="color:white;">About</a> |
+    <a href="contact.html" style="color:white;">Contact</a> |
+    <a href="privacy.html" style="color:white;">Privacy Policy</a>
 </div>
 
 </body>
