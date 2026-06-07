@@ -2,14 +2,15 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Industrial Calculation Hub | Engineering Tools & Calculators</title>
+<title>Industrial Calculation Hub | Engineering SaaS Tools</title>
 
-<meta name="description" content="Free engineering calculators for air density, heat transfer, pump power, pipe flow, boilers, pressure vessels, and industrial design tools.">
-<meta name="keywords" content="engineering calculator, pump power, pipe flow, heat transfer, boiler efficiency, pressure vessel, hopper calculator">
+<meta name="description" content="Professional engineering calculators, converters, and industrial design tools with real-time search and analysis dashboard.">
+<meta name="keywords" content="engineering calculator, pump, pipe flow, heat transfer, converters, industrial tools">
 <meta name="author" content="Industrial Calculation Hub">
+
+<link rel="canonical" href="https://industrialcalculation.com/">
 
 <!-- AdSense -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1658062441623612"
@@ -21,68 +22,109 @@ crossorigin="anonymous"></script>
 <style>
 body {
     margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(to right, #1e3c72, #2a5298);
+    font-family: Segoe UI, sans-serif;
+    background: #0f172a;
     color: white;
 }
 
-.navbar {
-    text-align: center;
-    background: #444;
-    padding: 12px;
-}
-
-.navbar a {
-    color: white;
-    margin: 10px;
-    text-decoration: none;
-    font-weight: 500;
-}
-
-.header {
-    text-align: center;
-    padding: 60px 20px 30px;
-}
-
-.container {
+/* APP LAYOUT */
+.app {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding-bottom: 20px;
+    height: 100vh;
 }
 
-.card {
-    background: white;
-    color: #333;
-    width: 300px;
-    margin: 15px;
-    padding: 25px;
-    border-radius: 12px;
-    text-align: center;
+/* SIDEBAR */
+.sidebar {
+    width: 240px;
+    background: #111827;
+    padding: 15px;
+}
+
+.sidebar h2 {
+    color: #38bdf8;
+    font-size: 20px;
+}
+
+.sidebar a {
+    display: block;
+    padding: 10px;
+    margin: 5px 0;
+    color: white;
     text-decoration: none;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    border-radius: 6px;
+    cursor: pointer;
 }
 
-.card:hover {
-    transform: scale(1.03);
-    transition: 0.3s;
+.sidebar a:hover {
+    background: #1f2937;
 }
 
-.section {
+/* MAIN AREA */
+.main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* TOP BAR */
+.topbar {
+    background: #1e293b;
+    padding: 10px;
+    position: relative;
+}
+
+.topbar input {
+    width: 60%;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+}
+
+/* AUTOSUGGEST */
+#suggestBox {
+    position: absolute;
     background: white;
-    color: #333;
-    padding: 25px;
-    margin: 30px auto;
-    width: 90%;
-    max-width: 1000px;
-    border-radius: 12px;
-    line-height: 1.6;
+    color: black;
+    width: 60%;
+    max-width: 400px;
+    margin-top: 5px;
+    border-radius: 8px;
+    overflow: hidden;
+    z-index: 1000;
 }
 
-.footer {
-    text-align: center;
-    margin-top: 30px;
+#suggestBox div {
+    padding: 10px;
+    cursor: pointer;
+}
+
+#suggestBox div:hover {
+    background: #eee;
+}
+
+/* CONTENT */
+#content {
     padding: 20px;
+    overflow-y: auto;
+}
+
+/* CARDS */
+.card {
+    display: block;
+    background: #1f2937;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 10px;
+    color: white;
+    text-decoration: none;
+}
+
+/* MOBILE */
+@media(max-width: 800px){
+    .sidebar { display:none; }
+    .topbar input { width: 90%; }
+    #suggestBox { width: 90%; }
 }
 </style>
 
@@ -90,88 +132,150 @@ body {
 
 <body>
 
-<!-- NAVBAR -->
-<div class="navbar">
-<a href="index.html">Home</a>
-<a href="about.html">About</a>
-<a href="contact.html">Contact</a>
-<a href="privacy.html">Privacy</a>
-<a href="terms.html">Terms</a>
-</div>
+<div class="app">
 
-<!-- HEADER -->
-<div class="header">
-<h1>Industrial Calculation Hub</h1>
-<p>Engineering Calculators for Industrial Design & Analysis</p>
-</div>
+<!-- SIDEBAR -->
+<div class="sidebar">
+<h2>ICH Dashboard</h2>
 
-<!-- CALCULATORS -->
-<div class="container">
-
-<a href="air-density.html" class="card">Air Density</a>
-<a href="thermal-expansion.html" class="card">Thermal Expansion</a>
-<a href="heat-transfer.html" class="card">Heat Transfer</a>
-
-<a href="weight-conversion.html" class="card">Weight Conversion</a>
-<a href="length-conversion.html" class="card">Length Conversion</a>
-<a href="pressure-conversion.html" class="card">Pressure Conversion</a>
-<a href="temperature-conversion.html" class="card">Temperature Conversion</a>
-<a href="area-conversion.html" class="card">Area Conversion</a>
-<a href="volume-conversion.html" class="card">Volume Conversion</a>
-
-<a href="pipe-flow-calculator.html" class="card">Pipe Flow Calculator</a>
-<a href="pump-power-calculator.html" class="card">Pump Power Calculator</a>
-<a href="hopper-valley-calculator.html" class="card">Hopper Valley Calculator</a>
+<a onclick="loadPage('home')">🏠 Home</a>
+<a onclick="loadPage('tools')">🔧 Tools</a>
+<a onclick="loadPage('converters')">⚙️ Converters</a>
+<a onclick="loadPage('blogs')">📘 Blogs</a>
+<a onclick="showAnalytics()">📊 Analytics</a>
 
 </div>
 
-<!-- BLOG SECTION -->
-<div class="section">
-<h2>Engineering Knowledge Hub</h2>
+<!-- MAIN -->
+<div class="main">
 
-<ul>
-<li><a href="reynolds-number-explained.html">Reynolds Number Explained</a></li>
-<li><a href="bernoulli-equation-explained.html">Bernoulli Equation Explained</a></li>
-<li><a href="heat-transfer-explained.html">Heat Transfer Explained</a></li>
-<li><a href="pump-power-basics.html">Pump Power Basics</a></li>
-<li><a href="pipe-flow-basics.html">Pipe Flow Basics</a></li>
-<li><a href="boiler-efficiency-explained.html">Boiler Efficiency Explained</a></li>
-<li><a href="pressure-vessel-design-basics.html">Pressure Vessel Design Basics</a></li>
-<li><a href="engineering-calculations-in-real-world.html">Engineering Calculations in Real World</a></li>
-</ul>
-
-<p>
-These articles explain real engineering concepts behind industrial systems and help improve understanding of calculations used in design and analysis.
-</p>
+<!-- TOP SEARCH -->
+<div class="topbar">
+<input id="globalSearch" placeholder="Search tools (pump, flow, heat...)">
+<div id="suggestBox"></div>
 </div>
 
-<!-- ABOUT -->
-<div class="section">
-<h2>About This Platform</h2>
-<p>
-Industrial Calculation Hub provides professional engineering tools for mechanical, civil, thermal, and industrial engineering applications.
-</p>
-
-<p>
-All calculations are based on standard engineering formulas used in real-world design systems.
-</p>
-
-<h3>Domains Covered</h3>
-<ul>
-<li>Fluid Mechanics</li>
-<li>Heat Transfer</li>
-<li>Thermodynamics</li>
-<li>Process Engineering</li>
-<li>Industrial Equipment Design</li>
-</ul>
+<!-- CONTENT -->
+<div id="content">
+<h2>Welcome to Industrial Calculation Hub</h2>
+<p>Engineering tools, converters, and industrial knowledge system.</p>
 </div>
 
-<!-- FOOTER -->
-<div class="footer">
-<p>© 2026 Industrial Calculation Hub</p>
-<a href="privacy.html" style="color:white;">Privacy</a> |
-<a href="terms.html" style="color:white;">Terms</a>
 </div>
+
+</div>
+
+<script>
+/* =========================
+   TOOL DATABASE
+========================= */
+const tools = [
+ {name:"Pump Power Calculator", url:"pump-power-calculator.html", tag:"fluid"},
+ {name:"Pipe Flow Calculator", url:"pipe-flow-calculator.html", tag:"fluid"},
+ {name:"Air Density Calculator", url:"air-density.html", tag:"thermal"},
+ {name:"Heat Transfer Tool", url:"heat-transfer.html", tag:"thermal"},
+ {name:"Hopper Valley Angle Calculator", url:"hopper-valley-angle-calculator.html", tag:"mechanical"},
+ {name:"Weight Conversion", url:"weight-conversion.html", tag:"converter"},
+ {name:"Length Conversion", url:"length-conversion.html", tag:"converter"},
+];
+
+/* =========================
+   PAGE LOADER (SaaS STYLE)
+========================= */
+function loadPage(page){
+
+ let content = document.getElementById("content");
+
+ if(page === "home"){
+    content.innerHTML = "<h2>Dashboard</h2><p>Select tools from sidebar or search above.</p>";
+ }
+
+ if(page === "tools"){
+    content.innerHTML = "<h2>Engineering Tools</h2>" +
+    tools.filter(t=>t.tag!="converter").map(t =>
+        `<a class='card' href='${t.url}' onclick="trackTool('${t.name}')">${t.name}</a>`
+    ).join("");
+ }
+
+ if(page === "converters"){
+    content.innerHTML = "<h2>Converters</h2>" +
+    tools.filter(t=>t.tag=="converter").map(t =>
+        `<a class='card' href='${t.url}' onclick="trackTool('${t.name}')">${t.name}</a>`
+    ).join("");
+ }
+
+ if(page === "blogs"){
+    content.innerHTML = `
+    <h2>Engineering Blogs</h2>
+    <a class='card' href='reynolds-number-explained.html'>Reynolds Number Explained</a>
+    <a class='card' href='bernoulli-equation-explained.html'>Bernoulli Equation Explained</a>
+    <a class='card' href='heat-transfer-explained.html'>Heat Transfer Explained</a>
+    `;
+ }
+}
+
+/* =========================
+   GLOBAL SEARCH
+========================= */
+document.getElementById("globalSearch").addEventListener("keyup", function(e){
+    let val = e.target.value.toLowerCase();
+
+    let results = tools.filter(t =>
+        t.name.toLowerCase().includes(val)
+    );
+
+    document.getElementById("content").innerHTML =
+    "<h2>Search Results</h2>" +
+    results.map(r =>
+        `<a class='card' href='${r.url}' onclick="trackTool('${r.name}')">${r.name}</a>`
+    ).join("");
+});
+
+/* =========================
+   AUTO SUGGEST (YouTube style)
+========================= */
+document.getElementById("globalSearch").addEventListener("input", function(){
+    let val = this.value.toLowerCase();
+    let box = document.getElementById("suggestBox");
+
+    if(!val){
+        box.innerHTML = "";
+        return;
+    }
+
+    let matches = tools.filter(t =>
+        t.name.toLowerCase().includes(val)
+    );
+
+    box.innerHTML = matches.map(m =>
+        `<div onclick="window.location='${m.url}'">${m.name}</div>`
+    ).join("");
+});
+
+/* =========================
+   ANALYTICS (LOCAL STORAGE)
+========================= */
+function trackTool(name){
+    let data = JSON.parse(localStorage.getItem("usage") || "{}");
+    data[name] = (data[name] || 0) + 1;
+    localStorage.setItem("usage", JSON.stringify(data));
+}
+
+/* =========================
+   SHOW ANALYTICS
+========================= */
+function showAnalytics(){
+    let data = JSON.parse(localStorage.getItem("usage") || "{}");
+
+    let html = "<h2>Tool Usage Analytics</h2>";
+
+    for(let k in data){
+        html += `<p>${k} → ${data[k]} clicks</p>`;
+    }
+
+    document.getElementById("content").innerHTML = html;
+}
+</script>
 
 </body>
 </html>
