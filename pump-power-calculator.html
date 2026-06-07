@@ -6,8 +6,8 @@
 
 <title>Pump Power Calculator | Industrial Calculation Hub</title>
 
-<meta name="description" content="Calculate pump power using flow rate, head, efficiency, and fluid density. Engineering hydraulic calculator.">
-<meta name="keywords" content="pump power calculator, hydraulic power, fluid density, flow rate, engineering calculator">
+<meta name="description" content="Calculate pump power using flow rate, head, efficiency, and fluid density. Engineering hydraulic calculator for water, oil and gas systems.">
+<meta name="keywords" content="pump power calculator, hydraulic power, fluid density, flow rate m3/hr, engineering calculator">
 <meta name="author" content="Industrial Calculation Hub">
 
 <!-- AdSense -->
@@ -53,12 +53,13 @@ body {
     box-shadow: 0 10px 25px rgba(0,0,0,0.2);
 }
 
-input {
+input, select {
     width: 100%;
     padding: 12px;
     margin: 10px 0;
     border-radius: 8px;
     border: 1px solid #ccc;
+    font-size: 14px;
 }
 
 button {
@@ -106,6 +107,7 @@ button {
 
 <body>
 
+<!-- NAVBAR -->
 <div class="navbar">
 <a href="index.html">Home</a>
 <a href="about.html">About</a>
@@ -114,16 +116,21 @@ button {
 <a href="terms.html">Terms</a>
 </div>
 
+<!-- HEADER -->
 <div class="header">
 <h1>Pump Power Calculator</h1>
-<p>Hydraulic power calculation using fluid density</p>
+<p>Hydraulic power calculation using fluid density and flow rate (m³/hr)</p>
 </div>
 
+<!-- INPUT -->
 <div class="container">
 
 <input type="number" id="density" placeholder="Fluid Density (kg/m³)">
+
 <input type="number" id="flow" placeholder="Flow Rate (m³/hr)">
+
 <input type="number" id="head" placeholder="Head (m)">
+
 <input type="number" id="eff" placeholder="Efficiency (%)">
 
 <div style="text-align:center;">
@@ -133,25 +140,34 @@ button {
 
 </div>
 
+<!-- OUTPUT -->
 <div id="output"></div>
 
+<!-- FORMULA -->
 <div class="container">
 <h2>Formula</h2>
 <p><b>P = (ρ × g × Q × H) / η</b></p>
 
 <ul>
 <li>ρ = Fluid density (kg/m³)</li>
-<li>Q = Flow rate (converted to m³/s)</li>
+<li>Q = Flow rate (m³/s)</li>
 <li>H = Head (m)</li>
 <li>η = Efficiency</li>
 </ul>
+
+<p><b>Note:</b> Flow is converted from m³/hr → m³/s internally</p>
 </div>
 
+<!-- ENGINEERING NOTES -->
 <div class="section">
 <h2>Engineering Notes</h2>
-<p>This tool converts flow rate from m³/hr to m³/s automatically for correct hydraulic calculation.</p>
+<p>
+This calculator supports any fluid (water, oil, slurry, gas) by allowing manual density input.
+Flow rate is accepted in m³/hr for real industrial use.
+</p>
 </div>
 
+<!-- FOOTER -->
 <div class="footer">
 © 2026 Industrial Calculation Hub
 </div>
@@ -176,7 +192,7 @@ document.getElementById("output").innerHTML =
 return;
 }
 
-// conversion m³/hr → m³/s
+// Convert m³/hr to m³/s
 let Q = Q_hr / 3600;
 
 let g = 9.81;
