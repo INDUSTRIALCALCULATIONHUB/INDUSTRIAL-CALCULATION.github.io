@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Volume Conversion Tool</title>
+
+<!-- Google AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1658062441623612" crossorigin="anonymous"></script>
+
+<!-- CMP -->
+<script async src="https://fundingchoicesmessages.google.com/i/pub-1658062441623612?ers=1"></script>
+
+<style>
+body {margin:0;font-family:'Segoe UI';background:linear-gradient(to right,#1e3c72,#2a5298);}
+.navbar{text-align:center;background:#444;padding:12px;}
+.navbar a{color:white;margin:10px;text-decoration:none;}
+.header{text-align:center;padding:30px;color:white;}
+.container{background:white;padding:25px;margin:20px auto;width:90%;max-width:520px;border-radius:12px;}
+input,select{width:100%;padding:12px;margin:10px 0;border-radius:8px;border:1px solid #ccc;}
+button{padding:12px;border:none;border-radius:8px;width:45%;}
+.calc-btn{background:#2a5298;color:white;}
+.reset-btn{background:#ccc;}
+.card{background:white;padding:20px;border-radius:12px;}
+table{width:100%;border-collapse:collapse;}
+th{background:#2a5298;color:white;}
+th,td{padding:10px;text-align:center;border-bottom:1px solid #ddd;}
+.section{background:white;padding:25px;margin:20px auto;width:90%;max-width:520px;border-radius:12px;}
+.footer{text-align:center;margin:30px;color:white;}
+</style>
+</head>
+
+<body>
+
+<div class="navbar">
+<a href="index.html">Home</a>
+<a href="about.html">About</a>
+<a href="contact.html">Contact</a>
+<a href="privacy.html">Privacy</a>
+<a href="terms.html">Terms</a>
+</div>
+
+<div class="header">
+<h1>Volume Conversion Tool</h1>
+<p>Convert volume units for engineering & industrial use</p>
+</div>
+
+<div class="container">
+<input type="number" id="inputValue" placeholder="Enter Value">
+
+<select id="unit">
+<option value="m3">Cubic Meter (m³)</option>
+<option value="litre">Litre (L)</option>
+<option value="ft3">Cubic Foot (ft³)</option>
+<option value="in3">Cubic Inch (in³)</option>
+<option value="gallon">US Gallon</option>
+</select>
+
+<div style="text-align:center;">
+<button class="calc-btn" onclick="calculate()">Calculate</button>
+<button class="reset-btn" onclick="resetForm()">Reset</button>
+</div>
+</div>
+
+<div id="output"></div>
+
+<div class="section">
+<h2>Engineering Notes</h2>
+<p>This calculator converts volume using SI base unit cubic meter (m³).</p>
+<ul>
+<li>Used in fluid systems</li>
+<li>Storage tank design</li>
+<li>Process engineering</li>
+</ul>
+</div>
+
+<div class="footer">© 2026 Industrial Calculation Hub</div>
+
+<script>
+const TO_M3={
+m3:1,
+litre:0.001,
+ft3:0.0283168,
+in3:0.0000163871,
+gallon:0.00378541
+};
+
+function calculate(){
+let val=parseFloat(inputValue.value);
+let unit=document.getElementById("unit").value;
+
+if(isNaN(val)){output.innerHTML="Invalid input";return;}
+
+let m3=val*TO_M3[unit];
+
+let res={
+"Cubic Meter":m3,
+"Litre":m3/0.001,
+"Cubic Foot":m3/0.0283168,
+"Cubic Inch":m3/0.0000163871,
+"US Gallon":m3/0.00378541
+};
+
+let html=`<div class="card"><table><tr><th>Unit</th><th>Value</th></tr>`;
+for(let k in res){
+html+=`<tr><td>${k}</td><td>${res[k].toFixed(2)}</td></tr>`;
+}
+html+=`</table></div>`;
+output.innerHTML=html;
+}
+
+function resetForm(){
+inputValue.value="";
+unit.value="m3";
+output.innerHTML="";
+}
+</script>
+
+</body>
+</html>
