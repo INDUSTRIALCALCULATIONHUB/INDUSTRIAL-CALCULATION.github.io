@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Area Conversion Tool</title>
+
+<!-- Google AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1658062441623612" crossorigin="anonymous"></script>
+
+<!-- CMP -->
+<script async src="https://fundingchoicesmessages.google.com/i/pub-1658062441623612?ers=1"></script>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to right, #1e3c72, #2a5298);
+    color: #333;
+}
+
+.navbar {
+    text-align: center;
+    background: #444;
+    padding: 12px;
+}
+
+.navbar a {
+    color: white;
+    margin: 10px;
+    text-decoration: none;
+}
+
+.header {
+    text-align: center;
+    padding: 30px;
+    color: white;
+}
+
+.container {
+    background: white;
+    padding: 25px;
+    margin: 20px auto;
+    width: 90%;
+    max-width: 520px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+input, select {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+button {
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 45%;
+}
+
+.calc-btn {background:#2a5298;color:white;}
+.reset-btn {background:#ccc;}
+
+#output {
+    width: 90%;
+    max-width: 600px;
+    margin: 20px auto;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    background: #2a5298;
+    color: white;
+}
+
+th, td {
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+.section {
+    background: white;
+    padding: 25px;
+    margin: 20px auto;
+    width: 90%;
+    max-width: 520px;
+    border-radius: 12px;
+}
+
+.footer {
+    text-align: center;
+    margin: 30px;
+    color: white;
+}
+</style>
+</head>
+
+<body>
+
+<div class="navbar">
+<a href="index.html">Home</a>
+<a href="about.html">About</a>
+<a href="contact.html">Contact</a>
+<a href="privacy.html">Privacy</a>
+<a href="terms.html">Terms</a>
+</div>
+
+<div class="header">
+<h1>Area Conversion Tool</h1>
+<p>Convert area units used in engineering & land measurement</p>
+</div>
+
+<div class="container">
+<input type="number" id="inputValue" placeholder="Enter Value">
+
+<select id="unit">
+<option value="sqm">Square Meter (m²)</option>
+<option value="sqft">Square Foot (ft²)</option>
+<option value="sqin">Square Inch (in²)</option>
+<option value="acre">Acre</option>
+<option value="hectare">Hectare</option>
+</select>
+
+<div style="text-align:center;">
+<button class="calc-btn" onclick="calculate()">Calculate</button>
+<button class="reset-btn" onclick="resetForm()">Reset</button>
+</div>
+</div>
+
+<div id="output"></div>
+
+<div class="section">
+<h2>Engineering Notes</h2>
+<p>This calculator uses standard area conversion relationships used in civil and land engineering.</p>
+<ul>
+<li>SI unit: square meter (m²)</li>
+<li>Common in construction and surveying</li>
+<li>Based on ISO measurement standards</li>
+</ul>
+</div>
+
+<div class="footer">© 2026 Industrial Calculation Hub</div>
+
+<script>
+const TO_SQM = {
+sqm:1,
+sqft:0.092903,
+sqin:0.00064516,
+acre:4046.86,
+hectare:10000
+};
+
+function calculate(){
+let val=parseFloat(document.getElementById("inputValue").value);
+let unit=document.getElementById("unit").value;
+
+if(isNaN(val)){output.innerHTML="Invalid input";return;}
+
+let sqm=val*TO_SQM[unit];
+
+let res={
+"Square Meter":sqm,
+"Square Foot":sqm/0.092903,
+"Square Inch":sqm/0.00064516,
+"Acre":sqm/4046.86,
+"Hectare":sqm/10000
+};
+
+let html=`<div class="card"><table><tr><th>Unit</th><th>Value</th></tr>`;
+for(let k in res){
+html+=`<tr><td>${k}</td><td>${res[k].toFixed(2)}</td></tr>`;
+}
+html+=`</table></div>`;
+output.innerHTML=html;
+}
+
+function resetForm(){
+inputValue.value="";
+unit.value="sqm";
+output.innerHTML="";
+}
+</script>
+
+</body>
+</html>
