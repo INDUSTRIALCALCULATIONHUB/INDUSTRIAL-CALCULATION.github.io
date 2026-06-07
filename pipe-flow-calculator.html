@@ -6,7 +6,7 @@
 
 <title>Pipe Flow Rate Calculator | Industrial Calculation Hub</title>
 
-<meta name="description" content="Calculate pipe flow rate using diameter, velocity, or discharge equations. Engineering tool for fluid mechanics and hydraulic systems.">
+<meta name="description" content="Calculate pipe flow rate using diameter and velocity. Engineering tool for fluid mechanics and pipeline design.">
 <meta name="keywords" content="pipe flow calculator, flow rate calculator, fluid mechanics, discharge calculation, engineering tool">
 <meta name="author" content="Industrial Calculation Hub">
 
@@ -86,14 +86,19 @@ button {
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
-.section {
-    background: white;
-    padding: 25px;
-    margin: 20px auto;
-    width: 90%;
-    max-width: 520px;
-    border-radius: 12px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+table td {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+table td:first-child {
+    font-weight: bold;
 }
 
 .footer {
@@ -119,13 +124,13 @@ button {
 <!-- HEADER -->
 <div class="header">
 <h1>Pipe Flow Rate Calculator</h1>
-<p>Calculate volumetric flow rate in pipes</p>
+<p>Diameter in mm | Velocity in m/s</p>
 </div>
 
 <!-- INPUT -->
 <div class="container">
 
-<input type="number" id="diameter" placeholder="Pipe Diameter (m)">
+<input type="number" id="diameter" placeholder="Pipe Diameter (mm)">
 <input type="number" id="velocity" placeholder="Fluid Velocity (m/s)">
 
 <div style="text-align:center;">
@@ -144,36 +149,20 @@ button {
 <h2>About Pipe Flow Rate</h2>
 
 <p>
-Pipe flow rate is the volume of fluid passing through a pipe per unit time.
-It is widely used in hydraulics, water supply systems, and industrial pipelines.
+Flow rate is the volume of fluid passing through a pipe per unit time using the continuity equation.
 </p>
 
 <h3>Formula</h3>
 <p><b>Q = A × V</b></p>
 
 <ul>
-<li>Q = Flow rate (m³/s)</li>
-<li>A = Cross-sectional area (m²)</li>
-<li>V = Velocity (m/s)</li>
+<li>Q = Flow rate</li>
+<li>A = Cross-sectional area</li>
+<li>V = Velocity</li>
 </ul>
 
-<p><b>A = π × D² / 4</b></p>
+<p><b>A = π × D² / 4</b> (D in meters)</p>
 
-</div>
-
-<!-- ENGINEERING NOTES -->
-<div class="section">
-<h2>Engineering Notes</h2>
-<p>
-This calculator uses standard fluid mechanics principles used in pipeline design and hydraulic engineering systems.
-</p>
-
-<h3>Reference Standards</h3>
-<ul>
-<li>Continuity equation</li>
-<li>Fluid mechanics fundamentals</li>
-<li>ISO pipeline design guidelines</li>
-</ul>
 </div>
 
 <!-- FOOTER -->
@@ -184,30 +173,46 @@ This calculator uses standard fluid mechanics principles used in pipeline design
 <script>
 function calculate() {
 
-let D = parseFloat(document.getElementById("diameter").value);
+let D_mm = parseFloat(document.getElementById("diameter").value);
 let V = parseFloat(document.getElementById("velocity").value);
 
-if (isNaN(D) || isNaN(V)) {
+if (isNaN(D_mm) || isNaN(V)) {
 document.getElementById("output").innerHTML =
 "<p style='color:red;text-align:center;'>Please enter valid numeric values</p>";
 return;
 }
 
-if (D <= 0 || V <= 0) {
+if (D_mm <= 0 || V <= 0) {
 document.getElementById("output").innerHTML =
 "<p style='color:red;text-align:center;'>Values must be greater than zero</p>";
 return;
 }
 
-let area = Math.PI * Math.pow(D, 2) / 4;
-let Q = area * V;
+// conversions
+let D = D_mm / 1000; // mm to m
 
+// area
+let area_m2 = Math.PI * Math.pow(D, 2) / 4;
+let area_mm2 = Math.PI * Math.pow(D_mm, 2) / 4;
+
+// flow
+let Q_m3s = area_m2 * V;
+let Q_m3hr = Q_m3s * 3600;
+let Q_cfm = Q_m3s * 2118.88;
+
+// output table
 document.getElementById("output").innerHTML = `
 <div class="card">
 <h3>Results</h3>
-<p><strong>Area:</strong> ${area.toFixed(5)} m²</p>
-<p><strong>Flow Rate:</strong> ${Q.toFixed(5)} m³/s</p>
-<p><strong>Flow Rate:</strong> ${(Q * 1000).toFixed(3)} L/s</p>
+
+<table>
+<tr><td>Area</td><td>${area_m2.toFixed(2)} m²</td></tr>
+<tr><td>Area</td><td>${area_mm2.toFixed(2)} mm²</td></tr>
+<tr><td>Flow Rate</td><td>${Q_m3s.toFixed(2)} m³/s</td></tr>
+<tr><td>Flow Rate</td><td>${Q_m3hr.toFixed(2)} m³/hr</td></tr>
+<tr><td>Flow Rate</td><td>${Q_cfm.toFixed(2)} CFM</td></tr>
+</table>
+
 </div>
 `;
 }
