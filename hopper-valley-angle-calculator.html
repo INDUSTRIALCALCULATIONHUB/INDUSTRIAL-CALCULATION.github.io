@@ -51,7 +51,7 @@ body{
     box-sizing:border-box;
 }
 
-/* INPUT FIX */
+/* INPUT */
 input, select{
     width:100%;
     padding:12px;
@@ -62,7 +62,7 @@ input, select{
     box-sizing:border-box;
 }
 
-/* BUTTONS */
+/* BUTTON */
 button{
     width:48%;
     padding:12px;
@@ -93,11 +93,6 @@ button{
     line-height:1.7;
 }
 
-.small-note{
-    font-size:13px;
-    color:#555;
-}
-
 .footer{
     text-align:center;
     padding:20px;
@@ -117,18 +112,17 @@ button{
 
 <div class="header">
 <h1>Hopper Valley Angle Calculator</h1>
-<p>Plate Angle & Valley Angle (Industrial Design)</p>
+<p>Plate Angle, Surface Area & Volume (Industrial Design)</p>
 </div>
 
 <div class="wrapper">
 
 <div class="card">
 
-<!-- MODE SELECTION -->
-<label><b>Select Calculation Mode</b></label>
+<!-- MODE -->
 <select id="mode" onchange="toggleMode()">
-    <option value="1">Calculate Angles from Hopper Height</option>
-    <option value="2">Calculate Hopper Height from Valley Angle</option>
+    <option value="1">Calculate from Hopper Height</option>
+    <option value="2">Calculate Height from Valley Angle</option>
 </select>
 
 <!-- INPUTS -->
@@ -138,8 +132,7 @@ button{
 <input id="Wb" type="number" placeholder="Bottom Width (mm)">
 <input id="H" type="number" placeholder="Hopper Height (mm)">
 
-<!-- EXTRA INPUT FOR MODE 2 -->
-<input id="thetaV" type="number" placeholder="Valley Angle (degrees)" style="display:none;">
+<input id="thetaV" type="number" placeholder="Valley Angle (deg)" style="display:none;">
 
 <div style="display:flex;justify-content:space-between;">
 <button class="calc" onclick="calc()">Calculate</button>
@@ -148,30 +141,26 @@ button{
 
 <div id="output"></div>
 
-<!-- FORMULAS -->
 <div class="formula">
 <h3>Engineering Formulas</h3>
 
-<p><b>Geometric parameters:</b></p>
 <p>
 ΔL = (L<sub>t</sub> − L<sub>b</sub>) / 2<br>
 ΔW = (W<sub>t</sub> − W<sub>b</sub>) / 2
 </p>
 
-<p><b>Plate angles:</b></p>
 <p>
 θ<sub>L</sub> = tan⁻¹ ( H / ΔL )<br>
-θ<sub>W</sub> = tan⁻¹ ( H / ΔW )
-</p>
-
-<p><b>Valley angle:</b></p>
-<p>
+θ<sub>W</sub> = tan⁻¹ ( H / ΔW )<br>
 θ<sub>V</sub> = tan⁻¹ ( H / √(ΔL² + ΔW²) )
 </p>
 
-<p class="small-note">
-Mode 2 rearrangement:<br>
-H = tan(θ<sub>V</sub>) × √(ΔL² + ΔW²)
+<p>
+Surface Area (one plate) ≈ (average width × slant height)
+</p>
+
+<p>
+Volume ≈ (H / 3) × (A<sub>top</sub> + A<sub>bottom</sub> + √(A<sub>top</sub>A<sub>bottom</sub>))
 </p>
 
 </div>
@@ -186,18 +175,8 @@ H = tan(θ<sub>V</sub>) × √(ΔL² + ΔW²)
 <script>
 
 function toggleMode(){
-let mode = document.getElementById("mode").value;
-
-if(mode == "2"){
-document.getElementById("thetaV").style.display = "block";
-document.getElementById("H").placeholder = "Hopper Height (calculated)";
-document.getElementById("H").disabled = true;
-}
-else{
-document.getElementById("thetaV").style.display = "none";
-document.getElementById("H").placeholder = "Hopper Height (mm)";
-document.getElementById("H").disabled = false;
-}
+document.getElementById("thetaV").style.display =
+document.getElementById("mode").value == "2" ? "block" : "none";
 }
 
 function calc(){
@@ -206,12 +185,12 @@ let Lt = parseFloat(document.getElementById("Lt").value);
 let Wt = parseFloat(document.getElementById("Wt").value);
 let Lb = parseFloat(document.getElementById("Lb").value);
 let Wb = parseFloat(document.getElementById("Wb").value);
-
+let Hinput = parseFloat(document.getElementById("H").value);
 let mode = document.getElementById("mode").value;
 
-if(isNaN(Lt)||isNaN(Wt)||isNaN(Lb)||isNaN(Wb)){
+if([Lt,Wt,Lb,Wb].some(isNaN)){
 document.getElementById("output").innerHTML =
-"<div class='result' style='color:red'>Enter all geometry values</div>";
+"<div class='result' style='color:red'>Enter all dimensions</div>";
 return;
 }
 
@@ -220,7 +199,7 @@ let dW = (Wt - Wb)/2;
 
 if(dL<=0 || dW<=0){
 document.getElementById("output").innerHTML =
-"<div class='result' style='color:red'>Invalid geometry: Top must be larger than Bottom</div>";
+"<div class='result' style='color:red'>Invalid geometry</div>";
 return;
 }
 
@@ -230,50 +209,68 @@ let H;
 
 if(mode == "1"){
 
-H = parseFloat(document.getElementById("H").value);
+H = Hinput;
 
 if(isNaN(H) || H<=0){
 document.getElementById("output").innerHTML =
-"<div class='result' style='color:red'>Enter valid hopper height</div>";
+"<div class='result' style='color:red'>Enter valid height</div>";
 return;
 }
 
-let thetaL = Math.atan(H/dL) * 180/Math.PI;
-let thetaW = Math.atan(H/dW) * 180/Math.PI;
-let thetaV = Math.atan(H/diag) * 180/Math.PI;
-
-document.getElementById("output").innerHTML = `
-<div class="result">
-<h3>Results (From Height)</h3>
-<p><b>Plate Angle (Length side):</b> ${thetaL.toFixed(2)}°</p>
-<p><b>Plate Angle (Width side):</b> ${thetaW.toFixed(2)}°</p>
-<p><b>Valley Angle:</b> ${thetaV.toFixed(2)}°</p>
-</div>`;
 }
-
 else{
 
 let thetaV = parseFloat(document.getElementById("thetaV").value);
 
 if(isNaN(thetaV) || thetaV<=0){
 document.getElementById("output").innerHTML =
-"<div class='result' style='color:red'>Enter valid valley angle</div>";
+"<div class='result' style='color:red'>Enter valley angle</div>";
 return;
 }
 
-H = Math.tan(thetaV * Math.PI/180) * diag;
+H = Math.tan(thetaV*Math.PI/180) * diag;
+}
 
 let thetaL = Math.atan(H/dL) * 180/Math.PI;
 let thetaW = Math.atan(H/dW) * 180/Math.PI;
+let thetaV = Math.atan(H/diag) * 180/Math.PI;
+
+/* ---- UNIT CONVERSION ---- */
+let Lt_m = Lt/1000, Wt_m = Wt/1000;
+let Lb_m = Lb/1000, Wb_m = Wb/1000;
+let H_m = H/1000;
+
+/* ---- SLANT HEIGHTS ---- */
+let sL = Math.sqrt(H*H + dL*dL);
+let sW = Math.sqrt(H*H + dW*dW);
+
+/* ---- SURFACE AREA (4 plates approx trapezoids) ---- */
+let areaL = ((Lt_m + Lb_m)/2) * (sL/1000);
+let areaW = ((Wt_m + Wb_m)/2) * (sW/1000);
+
+let surfaceArea = 2*(areaL + areaW); // m² approx
+
+/* ---- VOLUME (frustum) ---- */
+let A1 = (Lt_m * Wt_m);
+let A2 = (Lb_m * Wb_m);
+
+let volume = (H_m/3) * (A1 + A2 + Math.sqrt(A1*A2));
 
 document.getElementById("output").innerHTML = `
 <div class="result">
-<h3>Results (From Valley Angle)</h3>
-<p><b>Calculated Height:</b> ${H.toFixed(2)} mm</p>
+<h3>Results</h3>
+
 <p><b>Plate Angle (Length side):</b> ${thetaL.toFixed(2)}°</p>
 <p><b>Plate Angle (Width side):</b> ${thetaW.toFixed(2)}°</p>
-</div>`;
-}
+<p><b>Valley Angle:</b> ${thetaV.toFixed(2)}°</p>
+
+<hr>
+
+<p><b>Plate Surface Area:</b> ${surfaceArea.toFixed(3)} m²</p>
+<p><b>Hopper Volume:</b> ${volume.toFixed(3)} m³</p>
+
+</div>
+`;
 }
 
 function reset(){
