@@ -14,7 +14,6 @@ body{
     color:white;
 }
 
-/* NAVBAR */
 .navbar{
     text-align:center;
     background:#444;
@@ -26,20 +25,17 @@ body{
     text-decoration:none;
 }
 
-/* HEADER */
 .header{
     text-align:center;
     padding:20px;
 }
 
-/* WRAPPER */
 .wrapper{
     display:flex;
     justify-content:center;
     padding:20px;
 }
 
-/* CARD */
 .card{
     background:white;
     color:#333;
@@ -51,7 +47,6 @@ body{
     box-sizing:border-box;
 }
 
-/* INPUT */
 input, select{
     width:100%;
     padding:12px;
@@ -62,7 +57,6 @@ input, select{
     box-sizing:border-box;
 }
 
-/* BUTTON */
 button{
     width:48%;
     padding:12px;
@@ -75,7 +69,6 @@ button{
 .calc{background:#2a5298;color:white;}
 .reset{background:#ccc;}
 
-/* RESULT */
 .result{
     margin-top:15px;
     padding:15px;
@@ -83,7 +76,6 @@ button{
     border-radius:10px;
 }
 
-/* FORMULA */
 .formula{
     margin-top:15px;
     padding:15px;
@@ -119,13 +111,11 @@ button{
 
 <div class="card">
 
-<!-- MODE -->
 <select id="mode" onchange="toggleMode()">
     <option value="1">Calculate from Hopper Height</option>
     <option value="2">Calculate Height from Valley Angle</option>
 </select>
 
-<!-- INPUTS -->
 <input id="Lt" type="number" placeholder="Top Length (mm)">
 <input id="Wt" type="number" placeholder="Top Width (mm)">
 <input id="Lb" type="number" placeholder="Bottom Length (mm)">
@@ -156,11 +146,11 @@ button{
 </p>
 
 <p>
-Surface Area (one plate) ≈ (average width × slant height)
+H = tan(θ<sub>V</sub>) × √(ΔL² + ΔW²)
 </p>
 
 <p>
-Volume ≈ (H / 3) × (A<sub>top</sub> + A<sub>bottom</sub> + √(A<sub>top</sub>A<sub>bottom</sub>))
+Volume = (H / 3) × (A<sub>top</sub> + A<sub>bottom</sub> + √(A<sub>top</sub>A<sub>bottom</sub>))
 </p>
 
 </div>
@@ -208,52 +198,45 @@ let diag = Math.sqrt(dL*dL + dW*dW);
 let H;
 
 if(mode == "1"){
-
 H = Hinput;
-
 if(isNaN(H) || H<=0){
 document.getElementById("output").innerHTML =
 "<div class='result' style='color:red'>Enter valid height</div>";
 return;
 }
-
 }
 else{
-
-let thetaV = parseFloat(document.getElementById("thetaV").value);
-
-if(isNaN(thetaV) || thetaV<=0){
+let thetaV_input = parseFloat(document.getElementById("thetaV").value);
+if(isNaN(thetaV_input) || thetaV_input<=0){
 document.getElementById("output").innerHTML =
 "<div class='result' style='color:red'>Enter valley angle</div>";
 return;
 }
-
-H = Math.tan(thetaV*Math.PI/180) * diag;
+H = Math.tan(thetaV_input*Math.PI/180) * diag;
 }
 
+/* ANGLES */
 let thetaL = Math.atan(H/dL) * 180/Math.PI;
 let thetaW = Math.atan(H/dW) * 180/Math.PI;
 let thetaV = Math.atan(H/diag) * 180/Math.PI;
 
-/* ---- UNIT CONVERSION ---- */
+/* CONVERSION */
 let Lt_m = Lt/1000, Wt_m = Wt/1000;
 let Lb_m = Lb/1000, Wb_m = Wb/1000;
 let H_m = H/1000;
 
-/* ---- SLANT HEIGHTS ---- */
+/* SLANT HEIGHT */
 let sL = Math.sqrt(H*H + dL*dL);
 let sW = Math.sqrt(H*H + dW*dW);
 
-/* ---- SURFACE AREA (4 plates approx trapezoids) ---- */
+/* AREA */
 let areaL = ((Lt_m + Lb_m)/2) * (sL/1000);
 let areaW = ((Wt_m + Wb_m)/2) * (sW/1000);
+let surfaceArea = 2*(areaL + areaW);
 
-let surfaceArea = 2*(areaL + areaW); // m² approx
-
-/* ---- VOLUME (frustum) ---- */
-let A1 = (Lt_m * Wt_m);
-let A2 = (Lb_m * Wb_m);
-
+/* VOLUME */
+let A1 = Lt_m * Wt_m;
+let A2 = Lb_m * Wb_m;
 let volume = (H_m/3) * (A1 + A2 + Math.sqrt(A1*A2));
 
 document.getElementById("output").innerHTML = `
@@ -266,8 +249,10 @@ document.getElementById("output").innerHTML = `
 
 <hr>
 
-<p><b>Plate Surface Area:</b> ${surfaceArea.toFixed(3)} m²</p>
-<p><b>Hopper Volume:</b> ${volume.toFixed(3)} m³</p>
+<p><b>Plate Surface Area:</b> ${surfaceArea.toFixed(2)} m²</p>
+<p><b>Hopper Volume:</b> ${volume.toFixed(2)} m³</p>
+
+${mode=="2" ? `<p><b>Calculated Height:</b> ${H.toFixed(2)} mm</p>` : ""}
 
 </div>
 `;
