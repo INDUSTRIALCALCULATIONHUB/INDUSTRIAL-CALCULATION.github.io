@@ -212,7 +212,6 @@ Thermal expansion is the tendency of materials to change their shape, area, and 
 </div>
 
 <script>
-
 // Material database
 const coefficients = {
     "Aluminium 5083": 23.8e-6,
@@ -229,7 +228,6 @@ const coefficients = {
     "Stainless Steel 316": 16.0e-6
 };
 
-// Populate dropdown
 const materialSelect = document.getElementById("material");
 Object.keys(coefficients).sort().forEach(mat => {
     let option = document.createElement("option");
@@ -288,7 +286,6 @@ function showError(message) {
     document.getElementById("output").innerHTML =
         `<p class="error">${message}</p>`;
 }
-
 </script>
 
 </body>
