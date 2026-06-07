@@ -6,84 +6,98 @@
 
 <title>Hopper Valley Angle Calculator | Industrial Calculation Hub</title>
 
-<meta name="description" content="Calculate hopper valley angle and plate angles with accurate 3D geometry. Engineering tool for hopper and silo design.">
-<meta name="keywords" content="hopper angle calculator, valley angle, silo design, hopper geometry, plate angle calculator">
+<meta name="description" content="Accurate hopper valley angle and plate angle calculator for industrial hopper and silo design.">
+<meta name="keywords" content="hopper angle calculator, valley angle, silo design, hopper geometry">
 <meta name="author" content="Industrial Calculation Hub">
 
 <style>
-body {
+body{
     margin:0;
     font-family:Segoe UI;
     background:linear-gradient(to right,#1e3c72,#2a5298);
-    color:#333;
+    color:white;
 }
 
+/* NAVBAR */
 .navbar{
     text-align:center;
     background:#444;
     padding:12px;
 }
-
 .navbar a{
     color:white;
     margin:10px;
     text-decoration:none;
 }
 
+/* HEADER */
 .header{
     text-align:center;
     padding:25px;
-    color:white;
 }
 
-.container{
+/* MAIN FIX: CENTERED WRAPPER */
+.wrapper{
+    display:flex;
+    justify-content:center;
+    padding:20px;
+}
+
+/* CARD FIX (NO FULL WIDTH ISSUE) */
+.card{
     background:white;
-    width:90%;
-    max-width:650px;
-    margin:20px auto;
+    color:#333;
+    width:100%;
+    max-width:520px;
     padding:20px;
     border-radius:12px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.2);
 }
 
+/* INPUTS */
 input{
     width:100%;
     padding:12px;
     margin:8px 0;
     border-radius:8px;
     border:1px solid #ccc;
+    font-size:14px;
 }
 
+/* BUTTONS */
 button{
     width:48%;
     padding:12px;
-    margin:8px 1%;
+    margin:10px 1%;
     border:none;
     border-radius:8px;
     cursor:pointer;
 }
-
 .calc{background:#2a5298;color:white;}
 .reset{background:#ccc;}
 
-.card{
-    background:white;
-    margin:15px auto;
+/* RESULT BOX */
+.result{
+    margin-top:15px;
     padding:15px;
-    border-radius:10px;
-    box-shadow:0 4px 10px rgba(0,0,0,0.1);
-}
-
-svg{
-    width:100%;
-    height:280px;
-    background:#f4f6f9;
+    background:#f7f7f7;
     border-radius:10px;
 }
 
+/* FORMULA BOX */
+.formula{
+    margin-top:15px;
+    padding:15px;
+    background:#f1f5ff;
+    border-radius:10px;
+    font-family:Arial;
+}
+
+/* FOOTER */
 .footer{
     text-align:center;
+    padding:20px;
     color:white;
-    margin:20px;
 }
 </style>
 </head>
@@ -99,10 +113,12 @@ svg{
 
 <div class="header">
 <h1>Hopper Valley Angle Calculator</h1>
-<p>Accurate 3D Hopper Geometry (Plate + Valley Angles)</p>
+<p>Plate Angle & Valley Angle (Industrial Design)</p>
 </div>
 
-<div class="container">
+<div class="wrapper">
+
+<div class="card">
 
 <input id="Lt" type="number" placeholder="Top Length (mm)">
 <input id="Wt" type="number" placeholder="Top Width (mm)">
@@ -110,92 +126,72 @@ svg{
 <input id="Wb" type="number" placeholder="Bottom Width (mm)">
 <input id="H"  type="number" placeholder="Hopper Height (mm)">
 
+<div style="display:flex;justify-content:space-between;">
 <button class="calc" onclick="calc()">Calculate</button>
 <button class="reset" onclick="reset()">Reset</button>
-
 </div>
 
 <div id="output"></div>
 
-<div class="container">
-<h3>Engineering Formula</h3>
+<div class="formula">
+<h3>Formulas</h3>
 
-<p><b>Side Plate Angles:</b></p>
-<p>θL = tan⁻¹(H / (ΔL/2))</p>
-<p>θW = tan⁻¹(H / (ΔW/2))</p>
+<p><b>Plate angle (long side):</b></p>
+<p>θ<sub>L</sub> = tan⁻¹ [ H / ( (L<sub>t</sub> − L<sub>b</sub>) / 2 ) ]</p>
 
-<p><b>Valley Angle:</b></p>
-<p>θV = tan⁻¹(H / √((ΔL/2)² + (ΔW/2)²))</p>
+<p><b>Plate angle (width side):</b></p>
+<p>θ<sub>W</sub> = tan⁻¹ [ H / ( (W<sub>t</sub> − W<sub>b</sub>) / 2 ) ]</p>
+
+<p><b>Valley angle:</b></p>
+<p>θ<sub>V</sub> = tan⁻¹ [ H / √( (ΔL/2)² + (ΔW/2)² ) ]</p>
+
 </div>
 
-<div class="container">
-<h3>Hopper Sketch</h3>
-<div id="svgBox"></div>
+</div>
 </div>
 
-<div class="footer">© 2026 Industrial Calculation Hub</div>
+<div class="footer">
+© 2026 Industrial Calculation Hub
+</div>
 
 <script>
 
 function calc(){
 
-let Lt = +document.getElementById("Lt").value;
-let Wt = +document.getElementById("Wt").value;
-let Lb = +document.getElementById("Lb").value;
-let Wb = +document.getElementById("Wb").value;
-let H  = +document.getElementById("H").value;
+let Lt = parseFloat(document.getElementById("Lt").value);
+let Wt = parseFloat(document.getElementById("Wt").value);
+let Lb = parseFloat(document.getElementById("Lb").value);
+let Wb = parseFloat(document.getElementById("Wb").value);
+let H  = parseFloat(document.getElementById("H").value);
 
-if(!Lt||!Wt||!Lb||!Wb||!H){
-alert("Enter all values");
+if(isNaN(Lt)||isNaN(Wt)||isNaN(Lb)||isNaN(Wb)||isNaN(H)){
+document.getElementById("output").innerHTML =
+"<div class='result' style='color:red'>Enter all values</div>";
 return;
 }
 
-// differences
 let dL = (Lt - Lb)/2;
 let dW = (Wt - Wb)/2;
 
-// plate angles
-let thetaL = Math.atan(H / dL) * 180/Math.PI;
-let thetaW = Math.atan(H / dW) * 180/Math.PI;
+if(dL<=0 || dW<=0){
+document.getElementById("output").innerHTML =
+"<div class='result' style='color:red'>Invalid geometry (check top and bottom sizes)</div>";
+return;
+}
 
-// valley angle (IMPORTANT FIX)
+let thetaL = Math.atan(H/dL) * 180/Math.PI;
+let thetaW = Math.atan(H/dW) * 180/Math.PI;
+
 let r = Math.sqrt(dL*dL + dW*dW);
-let thetaV = Math.atan(H / r) * 180/Math.PI;
-
-// SVG scale
-let scale = 0.08;
-
-let L1 = Lt*scale;
-let W1 = Wt*scale;
-let L2 = Lb*scale;
-let W2 = Wb*scale;
+let thetaV = Math.atan(H/r) * 180/Math.PI;
 
 document.getElementById("output").innerHTML = `
-<div class="card">
+<div class="result">
 <h3>Results</h3>
-<p><b>Left/Right Plate Angle:</b> ${thetaL.toFixed(2)}°</p>
-<p><b>Front/Back Plate Angle:</b> ${thetaW.toFixed(2)}°</p>
-<p><b style="color:#d9534f">VALLEY ANGLE:</b> ${thetaV.toFixed(2)}°</p>
+<p><b>Plate Angle (Length side):</b> ${thetaL.toFixed(2)}°</p>
+<p><b>Plate Angle (Width side):</b> ${thetaW.toFixed(2)}°</p>
+<p style="color:#d9534f"><b>Valley Angle:</b> ${thetaV.toFixed(2)}°</p>
 </div>
-`;
-
-// simple 3D sketch (engineering style)
-document.getElementById("svgBox").innerHTML = `
-<svg viewBox="0 0 300 250">
-<!-- top -->
-<polygon points="50,40 250,40 220,80 80,80"
-fill="none" stroke="#2a5298" stroke-width="2"/>
-
-<!-- bottom -->
-<polygon points="80,80 220,80 200,160 100,160"
-fill="none" stroke="#d9534f" stroke-width="2"/>
-
-<!-- vertical edges -->
-<line x1="50" y1="40" x2="80" y2="80" stroke="#333"/>
-<line x1="250" y1="40" x2="220" y2="80" stroke="#333"/>
-<line x1="80" y1="80" x2="100" y2="160" stroke="#333"/>
-<line x1="220" y1="80" x2="200" y2="160" stroke="#333"/>
-</svg>
 `;
 }
 
@@ -206,7 +202,6 @@ document.getElementById("Lb").value="";
 document.getElementById("Wb").value="";
 document.getElementById("H").value="";
 document.getElementById("output").innerHTML="";
-document.getElementById("svgBox").innerHTML="";
 }
 
 </script>
