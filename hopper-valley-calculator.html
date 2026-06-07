@@ -51,21 +51,15 @@ body{
     box-sizing:border-box;
 }
 
-/* HOPPER IMAGE */
-.svg-box{
-    text-align:center;
-    margin-bottom:15px;
-}
-
 /* INPUT FIX */
-input{
+input, select{
     width:100%;
     padding:12px;
     margin:8px 0;
     border-radius:8px;
     border:1px solid #ccc;
     font-size:14px;
-    box-sizing:border-box;   /* 🔥 FIX OVERFLOW */
+    box-sizing:border-box;
 }
 
 /* BUTTONS */
@@ -96,7 +90,12 @@ button{
     background:#eef3ff;
     border-radius:10px;
     font-family:Arial;
-    line-height:1.6;
+    line-height:1.7;
+}
+
+.small-note{
+    font-size:13px;
+    color:#555;
 }
 
 .footer{
@@ -125,23 +124,22 @@ button{
 
 <div class="card">
 
-<!-- ✅ HOPPER SKETCH (SVG IMAGE) -->
-<div class="svg-box">
-<svg width="260" height="200" viewBox="0 0 260 200">
-  <polygon points="40,20 220,20 180,180 80,180"
-           fill="none" stroke="#2a5298" stroke-width="3"/>
-  <line x1="40" y1="20" x2="80" y2="180" stroke="#d9534f" stroke-width="2"/>
-  <line x1="220" y1="20" x2="180" y2="180" stroke="#d9534f" stroke-width="2"/>
-  <text x="105" y="105" font-size="12" fill="#333">Hopper Body</text>
-</svg>
-</div>
+<!-- MODE SELECTION -->
+<label><b>Select Calculation Mode</b></label>
+<select id="mode" onchange="toggleMode()">
+    <option value="1">Calculate Angles from Hopper Height</option>
+    <option value="2">Calculate Hopper Height from Valley Angle</option>
+</select>
 
 <!-- INPUTS -->
 <input id="Lt" type="number" placeholder="Top Length (mm)">
 <input id="Wt" type="number" placeholder="Top Width (mm)">
 <input id="Lb" type="number" placeholder="Bottom Length (mm)">
 <input id="Wb" type="number" placeholder="Bottom Width (mm)">
-<input id="H"  type="number" placeholder="Hopper Height (mm)">
+<input id="H" type="number" placeholder="Hopper Height (mm)">
+
+<!-- EXTRA INPUT FOR MODE 2 -->
+<input id="thetaV" type="number" placeholder="Valley Angle (degrees)" style="display:none;">
 
 <div style="display:flex;justify-content:space-between;">
 <button class="calc" onclick="calc()">Calculate</button>
@@ -154,23 +152,26 @@ button{
 <div class="formula">
 <h3>Engineering Formulas</h3>
 
-<p><b>Plate angle (longitudinal sides):</b></p>
+<p><b>Geometric parameters:</b></p>
 <p>
-θ<sub>L</sub> = tan⁻¹ ( H / ΔL )
-<br>
-where ΔL = (L<sub>t</sub> − L<sub>b</sub>) / 2
+ΔL = (L<sub>t</sub> − L<sub>b</sub>) / 2<br>
+ΔW = (W<sub>t</sub> − W<sub>b</sub>) / 2
 </p>
 
-<p><b>Plate angle (transverse sides):</b></p>
+<p><b>Plate angles:</b></p>
 <p>
+θ<sub>L</sub> = tan⁻¹ ( H / ΔL )<br>
 θ<sub>W</sub> = tan⁻¹ ( H / ΔW )
-<br>
-where ΔW = (W<sub>t</sub> − W<sub>b</sub>) / 2
 </p>
 
-<p><b>Valley angle (diagonal):</b></p>
+<p><b>Valley angle:</b></p>
 <p>
 θ<sub>V</sub> = tan⁻¹ ( H / √(ΔL² + ΔW²) )
+</p>
+
+<p class="small-note">
+Mode 2 rearrangement:<br>
+H = tan(θ<sub>V</sub>) × √(ΔL² + ΔW²)
 </p>
 
 </div>
@@ -184,17 +185,33 @@ where ΔW = (W<sub>t</sub> − W<sub>b</sub>) / 2
 
 <script>
 
+function toggleMode(){
+let mode = document.getElementById("mode").value;
+
+if(mode == "2"){
+document.getElementById("thetaV").style.display = "block";
+document.getElementById("H").placeholder = "Hopper Height (calculated)";
+document.getElementById("H").disabled = true;
+}
+else{
+document.getElementById("thetaV").style.display = "none";
+document.getElementById("H").placeholder = "Hopper Height (mm)";
+document.getElementById("H").disabled = false;
+}
+}
+
 function calc(){
 
 let Lt = parseFloat(document.getElementById("Lt").value);
 let Wt = parseFloat(document.getElementById("Wt").value);
 let Lb = parseFloat(document.getElementById("Lb").value);
 let Wb = parseFloat(document.getElementById("Wb").value);
-let H  = parseFloat(document.getElementById("H").value);
 
-if(isNaN(Lt)||isNaN(Wt)||isNaN(Lb)||isNaN(Wb)||isNaN(H)){
+let mode = document.getElementById("mode").value;
+
+if(isNaN(Lt)||isNaN(Wt)||isNaN(Lb)||isNaN(Wb)){
 document.getElementById("output").innerHTML =
-"<div class='result' style='color:red'>Please enter all values correctly</div>";
+"<div class='result' style='color:red'>Enter all geometry values</div>";
 return;
 }
 
@@ -207,20 +224,56 @@ document.getElementById("output").innerHTML =
 return;
 }
 
+let diag = Math.sqrt(dL*dL + dW*dW);
+
+let H;
+
+if(mode == "1"){
+
+H = parseFloat(document.getElementById("H").value);
+
+if(isNaN(H) || H<=0){
+document.getElementById("output").innerHTML =
+"<div class='result' style='color:red'>Enter valid hopper height</div>";
+return;
+}
+
 let thetaL = Math.atan(H/dL) * 180/Math.PI;
 let thetaW = Math.atan(H/dW) * 180/Math.PI;
-
-let r = Math.sqrt(dL*dL + dW*dW);
-let thetaV = Math.atan(H/r) * 180/Math.PI;
+let thetaV = Math.atan(H/diag) * 180/Math.PI;
 
 document.getElementById("output").innerHTML = `
 <div class="result">
-<h3>Results</h3>
+<h3>Results (From Height)</h3>
 <p><b>Plate Angle (Length side):</b> ${thetaL.toFixed(2)}°</p>
 <p><b>Plate Angle (Width side):</b> ${thetaW.toFixed(2)}°</p>
-<p><b style="color:#d9534f">Valley Angle:</b> ${thetaV.toFixed(2)}°</p>
-</div>
-`;
+<p><b>Valley Angle:</b> ${thetaV.toFixed(2)}°</p>
+</div>`;
+}
+
+else{
+
+let thetaV = parseFloat(document.getElementById("thetaV").value);
+
+if(isNaN(thetaV) || thetaV<=0){
+document.getElementById("output").innerHTML =
+"<div class='result' style='color:red'>Enter valid valley angle</div>";
+return;
+}
+
+H = Math.tan(thetaV * Math.PI/180) * diag;
+
+let thetaL = Math.atan(H/dL) * 180/Math.PI;
+let thetaW = Math.atan(H/dW) * 180/Math.PI;
+
+document.getElementById("output").innerHTML = `
+<div class="result">
+<h3>Results (From Valley Angle)</h3>
+<p><b>Calculated Height:</b> ${H.toFixed(2)} mm</p>
+<p><b>Plate Angle (Length side):</b> ${thetaL.toFixed(2)}°</p>
+<p><b>Plate Angle (Width side):</b> ${thetaW.toFixed(2)}°</p>
+</div>`;
+}
 }
 
 function reset(){
@@ -229,6 +282,7 @@ document.getElementById("Wt").value="";
 document.getElementById("Lb").value="";
 document.getElementById("Wb").value="";
 document.getElementById("H").value="";
+document.getElementById("thetaV").value="";
 document.getElementById("output").innerHTML="";
 }
 
