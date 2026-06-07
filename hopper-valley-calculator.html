@@ -6,14 +6,10 @@
 
 <title>Hopper Valley Angle Calculator | Industrial Calculation Hub</title>
 
-<meta name="description" content="Accurate hopper valley angle and plate angle calculator for industrial hopper and silo design.">
-<meta name="keywords" content="hopper angle calculator, valley angle, silo design, hopper geometry">
-<meta name="author" content="Industrial Calculation Hub">
-
 <style>
 body{
     margin:0;
-    font-family:Segoe UI;
+    font-family:Segoe UI, sans-serif;
     background:linear-gradient(to right,#1e3c72,#2a5298);
     color:white;
 }
@@ -33,17 +29,17 @@ body{
 /* HEADER */
 .header{
     text-align:center;
-    padding:25px;
+    padding:20px;
 }
 
-/* MAIN FIX: CENTERED WRAPPER */
+/* WRAPPER */
 .wrapper{
     display:flex;
     justify-content:center;
     padding:20px;
 }
 
-/* CARD FIX (NO FULL WIDTH ISSUE) */
+/* CARD */
 .card{
     background:white;
     color:#333;
@@ -51,10 +47,17 @@ body{
     max-width:520px;
     padding:20px;
     border-radius:12px;
-    box-shadow:0 10px 25px rgba(0,0,0,0.2);
+    box-shadow:0 10px 25px rgba(0,0,0,0.25);
+    box-sizing:border-box;
 }
 
-/* INPUTS */
+/* HOPPER IMAGE */
+.svg-box{
+    text-align:center;
+    margin-bottom:15px;
+}
+
+/* INPUT FIX */
 input{
     width:100%;
     padding:12px;
@@ -62,6 +65,7 @@ input{
     border-radius:8px;
     border:1px solid #ccc;
     font-size:14px;
+    box-sizing:border-box;   /* 🔥 FIX OVERFLOW */
 }
 
 /* BUTTONS */
@@ -72,11 +76,12 @@ button{
     border:none;
     border-radius:8px;
     cursor:pointer;
+    font-weight:bold;
 }
 .calc{background:#2a5298;color:white;}
 .reset{background:#ccc;}
 
-/* RESULT BOX */
+/* RESULT */
 .result{
     margin-top:15px;
     padding:15px;
@@ -84,16 +89,16 @@ button{
     border-radius:10px;
 }
 
-/* FORMULA BOX */
+/* FORMULA */
 .formula{
     margin-top:15px;
     padding:15px;
-    background:#f1f5ff;
+    background:#eef3ff;
     border-radius:10px;
     font-family:Arial;
+    line-height:1.6;
 }
 
-/* FOOTER */
 .footer{
     text-align:center;
     padding:20px;
@@ -120,6 +125,18 @@ button{
 
 <div class="card">
 
+<!-- ✅ HOPPER SKETCH (SVG IMAGE) -->
+<div class="svg-box">
+<svg width="260" height="200" viewBox="0 0 260 200">
+  <polygon points="40,20 220,20 180,180 80,180"
+           fill="none" stroke="#2a5298" stroke-width="3"/>
+  <line x1="40" y1="20" x2="80" y2="180" stroke="#d9534f" stroke-width="2"/>
+  <line x1="220" y1="20" x2="180" y2="180" stroke="#d9534f" stroke-width="2"/>
+  <text x="105" y="105" font-size="12" fill="#333">Hopper Body</text>
+</svg>
+</div>
+
+<!-- INPUTS -->
 <input id="Lt" type="number" placeholder="Top Length (mm)">
 <input id="Wt" type="number" placeholder="Top Width (mm)">
 <input id="Lb" type="number" placeholder="Bottom Length (mm)">
@@ -133,17 +150,28 @@ button{
 
 <div id="output"></div>
 
+<!-- FORMULAS -->
 <div class="formula">
-<h3>Formulas</h3>
+<h3>Engineering Formulas</h3>
 
-<p><b>Plate angle (long side):</b></p>
-<p>θ<sub>L</sub> = tan⁻¹ [ H / ( (L<sub>t</sub> − L<sub>b</sub>) / 2 ) ]</p>
+<p><b>Plate angle (longitudinal sides):</b></p>
+<p>
+θ<sub>L</sub> = tan⁻¹ ( H / ΔL )
+<br>
+where ΔL = (L<sub>t</sub> − L<sub>b</sub>) / 2
+</p>
 
-<p><b>Plate angle (width side):</b></p>
-<p>θ<sub>W</sub> = tan⁻¹ [ H / ( (W<sub>t</sub> − W<sub>b</sub>) / 2 ) ]</p>
+<p><b>Plate angle (transverse sides):</b></p>
+<p>
+θ<sub>W</sub> = tan⁻¹ ( H / ΔW )
+<br>
+where ΔW = (W<sub>t</sub> − W<sub>b</sub>) / 2
+</p>
 
-<p><b>Valley angle:</b></p>
-<p>θ<sub>V</sub> = tan⁻¹ [ H / √( (ΔL/2)² + (ΔW/2)² ) ]</p>
+<p><b>Valley angle (diagonal):</b></p>
+<p>
+θ<sub>V</sub> = tan⁻¹ ( H / √(ΔL² + ΔW²) )
+</p>
 
 </div>
 
@@ -166,7 +194,7 @@ let H  = parseFloat(document.getElementById("H").value);
 
 if(isNaN(Lt)||isNaN(Wt)||isNaN(Lb)||isNaN(Wb)||isNaN(H)){
 document.getElementById("output").innerHTML =
-"<div class='result' style='color:red'>Enter all values</div>";
+"<div class='result' style='color:red'>Please enter all values correctly</div>";
 return;
 }
 
@@ -175,7 +203,7 @@ let dW = (Wt - Wb)/2;
 
 if(dL<=0 || dW<=0){
 document.getElementById("output").innerHTML =
-"<div class='result' style='color:red'>Invalid geometry (check top and bottom sizes)</div>";
+"<div class='result' style='color:red'>Invalid geometry: Top must be larger than Bottom</div>";
 return;
 }
 
@@ -190,7 +218,7 @@ document.getElementById("output").innerHTML = `
 <h3>Results</h3>
 <p><b>Plate Angle (Length side):</b> ${thetaL.toFixed(2)}°</p>
 <p><b>Plate Angle (Width side):</b> ${thetaW.toFixed(2)}°</p>
-<p style="color:#d9534f"><b>Valley Angle:</b> ${thetaV.toFixed(2)}°</p>
+<p><b style="color:#d9534f">Valley Angle:</b> ${thetaV.toFixed(2)}°</p>
 </div>
 `;
 }
