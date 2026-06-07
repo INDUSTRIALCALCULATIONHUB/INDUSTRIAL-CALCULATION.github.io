@@ -12,26 +12,33 @@ body {
     color: white;
 }
 
-.header {
-    text-align: center;
-    padding: 60px 20px 30px;
-}
-
 .navbar {
     text-align: center;
-    margin-bottom: 20px;
+    background: #444;
+    padding: 12px;
 }
 
 .navbar a {
     color: white;
-    margin: 0 15px;
+    margin: 10px;
     text-decoration: none;
+    font-weight: 500;
+}
+
+.navbar a:hover {
+    text-decoration: underline;
+}
+
+.header {
+    text-align: center;
+    padding: 60px 20px 30px;
 }
 
 .container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    padding-bottom: 20px;
 }
 
 .card {
@@ -43,11 +50,18 @@ body {
     border-radius: 12px;
     text-align: center;
     text-decoration: none;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.card:hover {
+    transform: scale(1.03);
+    transition: 0.3s;
 }
 
 .footer {
     text-align: center;
     margin-top: 30px;
+    padding: 20px;
 }
 </style>
 
@@ -55,46 +69,46 @@ body {
 
 <body>
 
-<div style="text-align:center; background:#444; padding:10px;">
-<a href="index.html" style="color:white; margin:10px;">Home</a>
-<a href="about.html" style="color:white; margin:10px;">About</a>
-<a href="contact.html" style="color:white; margin:10px;">Contact</a>
-<a href="privacy.html" style="color:white; margin:10px;">Privacy</a>
-<a href="terms.html" style="color:white; margin:10px;">Terms</a>
+<!-- Top Navigation -->
+<div class="navbar">
+<a href="index.html">Home</a>
+<a href="about.html">About</a>
+<a href="contact.html">Contact</a>
+<a href="privacy.html">Privacy</a>
+<a href="terms.html">Terms</a>
 </div>
-    
+
+<!-- Header -->
 <div class="header">
     <h1>Industrial Calculation Hub</h1>
     <p>Professional Engineering Calculators for Industrial Applications</p>
 </div>
 
-<div class="navbar">
-    <a href="about.html">About</a>
-    <a href="contact.html">Contact</a>
-    <a href="privacy.html">Privacy Policy</a>
-</div>
-
+<!-- Tools Section -->
 <div class="container">
 
     <a href="air-density.html" class="card">
         <h3>Air Density Calculator</h3>
-        <p>Professional tool for calculating air density accurately.</p>
+        <p>Calculate air density based on altitude and temperature.</p>
     </a>
 
     <a href="thermal-expansion.html" class="card">
         <h3>Thermal Expansion Calculator</h3>
-        <p>Professional tool for thermal expansion calculations.</p>
+        <p>Estimate expansion of materials due to temperature changes.</p>
     </a>
 
     <a href="weight-conversion.html" class="card">
         <h3>Weight Conversion Tool</h3>
-        <p>Professional unit conversion for engineering applications.</p>
+        <p>Convert weight across multiple engineering units.</p>
     </a>
 
 </div>
 
+<!-- Footer -->
 <div class="footer">
     <p>© 2026 Industrial Calculation Hub</p>
+    <a href="privacy.html" style="color:white;">Privacy Policy</a> |
+    <a href="terms.html" style="color:white;">Terms</a>
 </div>
 
 </body>
