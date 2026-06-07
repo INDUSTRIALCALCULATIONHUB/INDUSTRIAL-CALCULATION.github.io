@@ -6,17 +6,6 @@
 
 <title>Pump Power Calculator | Industrial Calculation Hub</title>
 
-<meta name="description" content="Industrial pump design calculator for hydraulic power, shaft power, motor selection based on flow rate, head, density and efficiency.">
-<meta name="keywords" content="pump power calculator, shaft power, motor selection, hydraulic power, fluid density, engineering calculator">
-<meta name="author" content="Industrial Calculation Hub">
-
-<!-- AdSense -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1658062441623612"
-crossorigin="anonymous"></script>
-
-<!-- CMP -->
-<script async src="https://fundingchoicesmessages.google.com/i/pub-1658062441623612?ers=1"></script>
-
 <style>
 body {
     margin: 0;
@@ -110,7 +99,7 @@ button {
 
 <div class="header">
 <h1>Pump Power Calculator</h1>
-<p>Industrial Pump Design: Hydraulic Power + Motor Selection</p>
+<p>Hydraulic Power + Shaft Power + Motor Selection</p>
 </div>
 
 <div class="container">
@@ -119,7 +108,7 @@ button {
 <input type="number" id="flow" placeholder="Flow Rate (m³/hr)">
 <input type="number" id="head" placeholder="Head (m)">
 <input type="number" id="eff" placeholder="Pump Efficiency (%)">
-<input type="number" id="meff" placeholder="Motor Efficiency (%) (e.g. 90)">
+<input type="number" id="meff" placeholder="Motor Efficiency (%)">
 
 <div style="text-align:center;">
 <button class="calc-btn" onclick="calculate()">Calculate</button>
@@ -130,40 +119,15 @@ button {
 
 <div id="output"></div>
 
-<div class="container">
-<h2>Engineering Formula</h2>
-
-<p><b>Hydraulic Power:</b></p>
-<p>Ph = (ρ × g × Q × H) / (3.6 × 10⁶)</p>
-
-<p><b>Shaft Power:</b></p>
-<p>Ps = Ph / ηpump</p>
-
-<p><b>Motor Power:</b></p>
-<p>Pm = Ps / ηmotor</p>
-</div>
-
-<div class="section">
-<h2>Standard Motor Selection</h2>
-<p>Motor is selected from nearest higher standard rating.</p>
-<p>Available: 0.75, 1.1, 1.5, 2.2, 3, 4, 5.5, 7.5, 11, 15, 18.5, 22, 30 kW</p>
-</div>
-
-<div class="footer">
-© 2026 Industrial Calculation Hub
-</div>
-
 <script>
 
-function getMotorRating(power) {
+function getMotorRating(power){
 let motors = [0.75,1.1,1.5,2.2,3,4,5.5,7.5,11,15,18.5,22,30];
 
 for(let i=0;i<motors.length;i++){
-if(power <= motors[i]){
-return motors[i];
+if(power <= motors[i]) return motors[i];
 }
-}
-return ">30 kW (custom design)";
+return ">30 kW (custom)";
 }
 
 function calculate(){
@@ -175,30 +139,41 @@ let eff = parseFloat(document.getElementById("eff").value);
 let meff = parseFloat(document.getElementById("meff").value);
 
 if(isNaN(rho)||isNaN(Q_hr)||isNaN(H)||isNaN(eff)||isNaN(meff)){
-alert("Enter all values");
+alert("Please fill all fields");
+return;
+}
+
+if(rho<=0 || Q_hr<=0 || H<=0){
+alert("Inputs must be greater than zero");
 return;
 }
 
 if(eff<=0||eff>100||meff<=0||meff>100){
-alert("Efficiency must be 1–100%");
+alert("Efficiency must be between 1 and 100%");
 return;
 }
 
-let Q = Q_hr / 3600;
+// conversions
+let Q = Q_hr / 3600; // m³/s
 let g = 9.81;
 
-let Ph = (rho*g*Q*H)/1000; // kW approx form scaling
-let Ps = Ph/(eff/100);
-let Pm = Ps/(meff/100);
+// Hydraulic Power (kW)
+let Ph = (rho * g * Q * H) / 1000;
+
+// Shaft Power
+let Ps = Ph / (eff / 100);
+
+// Motor Power
+let Pm = Ps / (meff / 100);
 
 let motor = getMotorRating(Pm);
 
 document.getElementById("output").innerHTML = `
 <div class="card">
 <h3>Results</h3>
-<p><b>Hydraulic Power:</b> ${Ph.toFixed(3)} kW</p>
-<p><b>Shaft Power:</b> ${Ps.toFixed(3)} kW</p>
-<p><b>Motor Power:</b> ${Pm.toFixed(3)} kW</p>
+<p><b>Hydraulic Power:</b> ${Ph.toFixed(2)} kW</p>
+<p><b>Shaft Power:</b> ${Ps.toFixed(2)} kW</p>
+<p><b>Motor Power:</b> ${Pm.toFixed(2)} kW</p>
 <p><b>Selected Motor:</b> ${motor}</p>
 </div>
 `;
