@@ -14,6 +14,7 @@ body {
     color: #333;
 }
 
+/* NAVBAR */
 .navbar {
     text-align: center;
     background: #444;
@@ -26,22 +27,25 @@ body {
     text-decoration: none;
 }
 
+/* HEADER */
 .header {
     text-align: center;
-    padding: 30px;
+    padding: 25px;
     color: white;
 }
 
+/* MAIN CONTAINER */
 .container {
     background: white;
     padding: 25px;
     margin: 20px auto;
     width: 90%;
-    max-width: 600px;
+    max-width: 650px;
     border-radius: 12px;
     box-shadow: 0 10px 25px rgba(0,0,0,0.2);
 }
 
+/* INPUT */
 input {
     width: 100%;
     padding: 12px;
@@ -50,6 +54,7 @@ input {
     border: 1px solid #ccc;
 }
 
+/* BUTTON */
 button {
     padding: 12px;
     margin: 10px 5px;
@@ -62,23 +67,18 @@ button {
 .calc-btn {background:#2a5298;color:white;}
 .reset-btn {background:#ccc;}
 
-.card {
+/* RESULT BOX (FIXED WIDTH ISSUE) */
+.result-box {
     background: white;
     padding: 20px;
-    margin: 15px auto;
-    border-radius: 12px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-}
-
-.section {
-    background: white;
-    padding: 25px;
     margin: 20px auto;
     width: 90%;
-    max-width: 600px;
+    max-width: 650px;
     border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
 }
 
+/* FOOTER */
 .footer {
     text-align: center;
     margin: 30px;
@@ -99,7 +99,7 @@ button {
 
 <div class="header">
 <h1>Pump Power Calculator</h1>
-<p>Hydraulic Power + Shaft Power + Motor Selection</p>
+<p>Hydraulic Design Tool (Motor Selection)</p>
 </div>
 
 <div class="container">
@@ -121,13 +121,23 @@ button {
 
 <script>
 
+/* IEC STANDARD MOTOR SERIES (EXPANDED) */
 function getMotorRating(power){
-let motors = [0.75,1.1,1.5,2.2,3,4,5.5,7.5,11,15,18.5,22,30];
+
+let motors = [
+0.18, 0.25, 0.37, 0.55, 0.75,
+1.1, 1.5, 2.2, 3, 4, 5.5, 7.5,
+11, 15, 18.5, 22, 30, 37, 45,
+55, 75, 90, 110, 132, 160, 200,
+250, 315
+];
 
 for(let i=0;i<motors.length;i++){
-if(power <= motors[i]) return motors[i];
+if(power <= motors[i]){
+return motors[i];
 }
-return ">30 kW (custom)";
+}
+return ">315 kW (custom design)";
 }
 
 function calculate(){
@@ -149,32 +159,29 @@ return;
 }
 
 if(eff<=0||eff>100||meff<=0||meff>100){
-alert("Efficiency must be between 1 and 100%");
+alert("Efficiency must be 1–100%");
 return;
 }
 
-// conversions
+/* UNIT CONVERSION */
 let Q = Q_hr / 3600; // m³/s
 let g = 9.81;
 
-// Hydraulic Power (kW)
-let Ph = (rho * g * Q * H) / 1000;
+/* POWER CALCULATION */
+let Ps = (rho * g * Q * H) / 1000;   // Shaft Power (kW approx form)
+let Pm = Ps / (eff/100) / (meff/100);
 
-// Shaft Power
-let Ps = Ph / (eff / 100);
-
-// Motor Power
-let Pm = Ps / (meff / 100);
-
+/* MOTOR SELECTION */
 let motor = getMotorRating(Pm);
 
 document.getElementById("output").innerHTML = `
-<div class="card">
+<div class="result-box">
 <h3>Results</h3>
-<p><b>Hydraulic Power:</b> ${Ph.toFixed(2)} kW</p>
+
 <p><b>Shaft Power:</b> ${Ps.toFixed(2)} kW</p>
 <p><b>Motor Power:</b> ${Pm.toFixed(2)} kW</p>
-<p><b>Selected Motor:</b> ${motor}</p>
+<p><b>Selected Motor:</b> ${motor} kW</p>
+
 </div>
 `;
 }
