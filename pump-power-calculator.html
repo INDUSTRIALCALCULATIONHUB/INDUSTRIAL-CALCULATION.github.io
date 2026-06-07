@@ -6,8 +6,8 @@
 
 <title>Pump Power Calculator | Industrial Calculation Hub</title>
 
-<meta name="description" content="Calculate pump power based on flow rate, head, efficiency, and fluid density. Engineering tool for hydraulic systems.">
-<meta name="keywords" content="pump power calculator, hydraulic power, fluid density, flow rate calculator, engineering tools">
+<meta name="description" content="Calculate pump power using flow rate, head, efficiency, and fluid density. Engineering hydraulic calculator.">
+<meta name="keywords" content="pump power calculator, hydraulic power, fluid density, flow rate, engineering calculator">
 <meta name="author" content="Industrial Calculation Hub">
 
 <!-- AdSense -->
@@ -53,7 +53,7 @@ body {
     box-shadow: 0 10px 25px rgba(0,0,0,0.2);
 }
 
-input, select {
+input {
     width: 100%;
     padding: 12px;
     margin: 10px 0;
@@ -116,19 +116,12 @@ button {
 
 <div class="header">
 <h1>Pump Power Calculator</h1>
-<p>Hydraulic power calculation with fluid selection</p>
+<p>Hydraulic power calculation using fluid density</p>
 </div>
 
 <div class="container">
 
-<select id="fluid" onchange="setDensity()">
-    <option value="1000">Water (1000 kg/m³)</option>
-    <option value="850">Oil (850 kg/m³)</option>
-    <option value="custom">Custom Density</option>
-</select>
-
-<input type="number" id="density" placeholder="Density (kg/m³) - auto / custom">
-
+<input type="number" id="density" placeholder="Fluid Density (kg/m³)">
 <input type="number" id="flow" placeholder="Flow Rate (m³/s)">
 <input type="number" id="head" placeholder="Head (m)">
 <input type="number" id="eff" placeholder="Efficiency (%)">
@@ -156,7 +149,7 @@ button {
 
 <div class="section">
 <h2>Engineering Notes</h2>
-<p>Includes fluid selection for realistic industrial pump calculations.</p>
+<p>This tool allows any fluid (water, oil, gas, slurry) by entering density manually.</p>
 </div>
 
 <div class="footer">
@@ -164,20 +157,6 @@ button {
 </div>
 
 <script>
-
-function setDensity() {
-    let fluid = document.getElementById("fluid").value;
-    let densityInput = document.getElementById("density");
-
-    if (fluid !== "custom") {
-        densityInput.value = fluid;
-        densityInput.disabled = true;
-    } else {
-        densityInput.value = "";
-        densityInput.disabled = false;
-    }
-}
-
 function calculate() {
 
 let rho = parseFloat(document.getElementById("density").value);
@@ -187,7 +166,7 @@ let eff = parseFloat(document.getElementById("eff").value);
 
 if (isNaN(rho) || isNaN(Q) || isNaN(H) || isNaN(eff)) {
 document.getElementById("output").innerHTML =
-"<p style='color:red;text-align:center;'>Please enter all values</p>";
+"<p style='color:red;text-align:center;'>Please fill all fields</p>";
 return;
 }
 
@@ -213,17 +192,12 @@ document.getElementById("output").innerHTML = `
 }
 
 function resetForm() {
-document.getElementById("fluid").value = "1000";
-document.getElementById("density").value = "1000";
-document.getElementById("density").disabled = true;
+document.getElementById("density").value = "";
 document.getElementById("flow").value = "";
 document.getElementById("head").value = "";
 document.getElementById("eff").value = "";
 document.getElementById("output").innerHTML = "";
 }
-
-window.onload = setDensity;
-
 </script>
 
 </body>
