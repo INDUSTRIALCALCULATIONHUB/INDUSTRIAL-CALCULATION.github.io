@@ -5,143 +5,32 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Weight Conversion Tool</title>
 
-<!-- Google AdSense -->
+<!-- AdSense -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1658062441623612"
 crossorigin="anonymous"></script>
 
-<!-- Google CMP (Funding Choices) -->
+<!-- CMP -->
 <script async src="https://fundingchoicesmessages.google.com/i/pub-1658062441623612?ers=1"></script>
 
 <style>
-body {
-    margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(to right, #1e3c72, #2a5298);
-    color: #333;
-}
-
-/* Navbar */
-.navbar {
-    text-align: center;
-    background: #444;
-    padding: 12px;
-}
-
-.navbar a {
-    color: white;
-    margin: 10px;
-    text-decoration: none;
-    font-weight: 500;
-}
-
-.navbar a:hover {
-    text-decoration: underline;
-}
-
-/* Header */
-.header {
-    text-align: center;
-    padding: 30px;
-    color: white;
-}
-
-/* Container */
-.container {
-    background: white;
-    padding: 25px;
-    margin: 20px auto;
-    width: 90%;
-    max-width: 500px;
-    border-radius: 12px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-}
-
-/* Inputs */
-input, select {
-    width: 100%;
-    padding: 12px;
-    margin: 10px 0;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    font-size: 15px;
-}
-
-/* Buttons */
-button {
-    padding: 12px;
-    margin: 10px 5px;
-    border: none;
-    border-radius: 8px;
-    font-size: 15px;
-    cursor: pointer;
-    width: 45%;
-}
-
-.calc-btn {
-    background: #2a5298;
-    color: white;
-}
-
-.reset-btn {
-    background: #ccc;
-}
-
-button:hover {
-    opacity: 0.9;
-}
-
-/* Output */
-#output {
-    width: 90%;
-    max-width: 600px;
-    margin: 20px auto;
-}
-
-.card {
-    background: white;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-th {
-    background: #2a5298;
-    color: white;
-}
-
-th, td {
-    padding: 10px;
-    text-align: center;
-    border-bottom: 1px solid #ddd;
-}
-
-/* Footer */
-.footer {
-    text-align: center;
-    margin: 30px;
-    color: white;
-}
-
-.footer a {
-    color: white;
-    text-decoration: none;
-}
-
-.footer a:hover {
-    text-decoration: underline;
-}
+body{margin:0;font-family:Segoe UI;background:linear-gradient(to right,#1e3c72,#2a5298);color:#333;}
+.navbar{text-align:center;background:#444;padding:12px;}
+.navbar a{color:white;margin:10px;text-decoration:none;}
+.header{text-align:center;padding:30px;color:white;}
+.container{background:white;padding:25px;margin:20px auto;width:90%;max-width:650px;border-radius:12px;}
+input,select{width:100%;padding:12px;margin:10px 0;}
+button{padding:12px;border:none;border-radius:8px;cursor:pointer;}
+.calc-btn{background:#2a5298;color:white;}
+.reset-btn{background:#ccc;}
+table{width:100%;border-collapse:collapse;margin-top:10px;}
+th{background:#2a5298;color:white;}
+th,td{padding:10px;text-align:center;}
+.footer{text-align:center;margin:30px;color:white;}
 </style>
-
 </head>
 
 <body>
 
-<!-- NAVBAR -->
 <div class="navbar">
 <a href="index.html">Home</a>
 <a href="about.html">About</a>
@@ -150,127 +39,106 @@ th, td {
 <a href="terms.html">Terms</a>
 </div>
 
-<!-- HEADER -->
 <div class="header">
-    <h1>⚖️ Weight Conversion Tool</h1>
-    <p>Convert weight across engineering units</p>
+<h1>Weight Conversion Tool</h1>
+<p>Convert engineering force and mass units</p>
 </div>
 
-<!-- INPUT -->
 <div class="container">
 
-<input type="number" id="inputValue" placeholder="Enter Value">
+<input type="number" id="value" placeholder="Enter Value">
 
 <select id="unit">
-    <option value="">Select Unit</option>
-    <option value="kg">kg</option>
-    <option value="N">N</option>
-    <option value="kN">kN</option>
-    <option value="Metric Ton (t)">Metric Ton (t)</option>
-    <option value="Pound (lb)">Pound (lb)</option>
-    <option value="Kip">Kip</option>
-    <option value="Kilogram-force (kgf)">Kilogram-force (kgf)</option>
-    <option value="Ton-force (tf)">Ton-force (tf)</option>
+<option value="kg">kg</option>
+<option value="N">N</option>
+<option value="kN">kN</option>
+<option value="lb">lb</option>
+<option value="kip">kip</option>
+<option value="ton">ton</option>
 </select>
 
 <div style="text-align:center;">
-    <button class="calc-btn" onclick="calculate()">Calculate</button>
-    <button class="reset-btn" onclick="resetForm()">Reset</button>
+<button class="calc-btn" onclick="calc()">Calculate</button>
+<button class="reset-btn" onclick="reset()">Reset</button>
 </div>
 
 </div>
 
-<!-- OUTPUT -->
 <div id="output"></div>
 
-<!-- INFO -->
 <div class="container">
 
 <h2>About Weight Conversion</h2>
-
 <p>
-This tool converts engineering force and mass units using Newton as the base reference.
+This tool converts between engineering force and mass units using Newton as the base reference system.
 </p>
 
-<h3>Units Included</h3>
+<h2>How It Works</h2>
+<p>
+All values are converted to Newton first, then converted into other units for accurate results.
+</p>
+
+<h2>Applications</h2>
 <ul>
-<li>Kilogram (kg)</li>
-<li>Newton (N)</li>
-<li>Kilonewton (kN)</li>
-<li>Pound (lb)</li>
-<li>Kip</li>
-<li>Ton-force (tf)</li>
+<li>Structural engineering</li>
+<li>Mechanical design</li>
+<li>Load analysis</li>
+<li>Material handling</li>
 </ul>
+
+<h2>FAQ</h2>
+<h3>Is this tool accurate?</h3>
+<p>Yes, it uses standard physical conversion constants.</p>
+
+<h3>What is base unit?</h3>
+<p>Newton is used as the base reference for all conversions.</p>
 
 </div>
 
-<!-- FOOTER -->
 <div class="footer">
-    <p>© 2026 Industrial Calculation Hub</p>
-    <a href="index.html">Home</a> |
-    <a href="privacy.html">Privacy</a> |
-    <a href="terms.html">Terms</a>
+© 2026 Industrial Calculation Hub
 </div>
 
 <script>
-
-const TO_NEWTON = {
-    "kg": 9.81,
-    "N": 1.0,
-    "kN": 1000.0,
-    "Metric Ton (t)": 9810.0,
-    "Pound (lb)": 4.44822,
-    "Kip": 4448.22,
-    "Kilogram-force (kgf)": 9.81,
-    "Ton-force (tf)": 9810.0
+const f={
+kg:9.81,N:1,kN:1000,lb:4.44822,kip:4448.22,ton:9810
 };
 
-function calculate() {
+function calc(){
+let v=parseFloat(document.getElementById("value").value);
+let u=document.getElementById("unit").value;
 
-    let value = parseFloat(document.getElementById("inputValue").value);
-    let unit = document.getElementById("unit").value;
-
-    if (unit === "" || isNaN(value)) {
-        document.getElementById("output").innerHTML =
-            "<p style='color:red; text-align:center;'>Please select unit and enter valid value</p>";
-        return;
-    }
-
-    let newton = value * TO_NEWTON[unit];
-
-    let results = {
-        "Kilogram (kg)": newton / 9.81,
-        "Newton (N)": newton,
-        "Kilonewton (kN)": newton / 1000,
-        "Metric Ton (t)": newton / 9810,
-        "Pound (lb)": newton / 4.44822,
-        "Kip": newton / 4448.22,
-        "Kilogram-force (kgf)": newton / 9.81,
-        "Ton-force (tf)": newton / 9810
-    };
-
-    let table = `
-    <div class="card">
-        <h3 style="text-align:center;">Conversion Results</h3>
-        <table>
-            <tr><th>Unit</th><th>Value</th></tr>
-    `;
-
-    for (let key in results) {
-        table += `<tr><td>${key}</td><td>${results[key].toFixed(2)}</td></tr>`;
-    }
-
-    table += `</table></div>`;
-
-    document.getElementById("output").innerHTML = table;
+if(isNaN(v)){
+document.getElementById("output").innerHTML="<p style='color:red;text-align:center;'>Invalid input</p>";
+return;
 }
 
-function resetForm() {
-    document.getElementById("inputValue").value = "";
-    document.getElementById("unit").value = "";
-    document.getElementById("output").innerHTML = "";
+let N=v*f[u];
+
+let r={
+"kg":N/9.81,
+"N":N,
+"kN":N/1000,
+"lb":N/4.44822,
+"kip":N/4448.22,
+"ton":N/9810
+};
+
+let t="<div class='container'><h3>Result</h3><table><tr><th>Unit</th><th>Value</th></tr>";
+
+for(let k in r){
+t+=`<tr><td>${k}</td><td>${r[k].toFixed(2)}</td></tr>`;
 }
 
+t+="</table></div>";
+
+document.getElementById("output").innerHTML=t;
+}
+
+function reset(){
+document.getElementById("value").value="";
+document.getElementById("output").innerHTML="";
+}
 </script>
 
 </body>
