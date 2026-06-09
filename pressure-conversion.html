@@ -3,140 +3,205 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pressure Conversion Tool</title>
 
-<!-- Google AdSense -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1658062441623612" crossorigin="anonymous"></script>
+<title>Pressure Conversion Tool | Industrial Calculation Hub</title>
+
+<meta name="description" content="Convert pressure units like Pa, bar, psi, atm, mmWC using engineering-standard formulas.">
+<meta name="keywords" content="pressure conversion, psi to bar, atm conversion, engineering calculator">
+<meta name="author" content="Industrial Calculation Hub">
+
+<!-- AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1658062441623612"
+crossorigin="anonymous"></script>
 
 <!-- CMP -->
 <script async src="https://fundingchoicesmessages.google.com/i/pub-1658062441623612?ers=1"></script>
 
 <style>
-body {
-    margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(to right, #1e3c72, #2a5298);
-    color: #333;
+
+/* ================= GLOBAL THEME ================= */
+body{
+    margin:0;
+    font-family:Segoe UI, Arial, sans-serif;
+    background:linear-gradient(to right,#1e3c72,#2a5298);
+    color:white;
 }
 
-.navbar {
-    text-align: center;
-    background: #444;
-    padding: 12px;
+/* ================= FIXED HEADER ================= */
+.header-bar{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    background:#444;
+    color:white;
+    padding:12px;
+    text-align:center;
+    z-index:1000;
 }
 
-.navbar a {
-    color: white;
-    margin: 10px;
-    text-decoration: none;
+.header-bar a{
+    color:white;
+    margin:10px;
+    text-decoration:none;
+    font-weight:500;
 }
 
-.header {
-    text-align: center;
-    padding: 30px;
-    color: white;
+/* ================= FIXED FOOTER ================= */
+.footer-bar{
+    position:fixed;
+    bottom:0;
+    left:0;
+    width:100%;
+    background:#444;
+    color:white;
+    text-align:center;
+    padding:10px;
+    z-index:1000;
 }
 
-.container {
-    background: white;
-    padding: 25px;
-    margin: 20px auto;
-    width: 90%;
-    max-width: 520px;
-    border-radius: 12px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+/* ================= MAIN CONTAINER (80% STANDARD) ================= */
+.container{
+    width:80%;
+    max-width:900px;
+    margin:100px auto 80px auto;
+    background:white;
+    color:black;
+    padding:25px;
+    border-radius:12px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.25);
 }
 
-input, select {
-    width: 100%;
-    padding: 12px;
-    margin: 10px 0;
-    border-radius: 8px;
-    border: 1px solid #ccc;
+/* ================= TITLE ================= */
+h1,h2{
+    text-align:center;
+    margin-top:0;
 }
 
-button {
-    padding: 12px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    width: 45%;
+/* ================= INPUTS ================= */
+input, select{
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+    border:1px solid #ccc;
+    border-radius:8px;
+    box-sizing:border-box;
+    font-size:15px;
 }
 
-.calc-btn {background:#2a5298;color:white;}
-.reset-btn {background:#ccc;}
-
-#output {
-    width: 90%;
-    max-width: 600px;
-    margin: 20px auto;
+/* REMOVE SPINNERS (GLOBAL STANDARD) */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button{
+    -webkit-appearance:none;
+    margin:0;
+}
+input[type=number]{
+    -moz-appearance:textfield;
 }
 
-.card {
-    background: white;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+/* ================= BUTTONS ================= */
+.button-group{
+    display:flex;
+    gap:10px;
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
+button{
+    flex:1;
+    padding:12px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:15px;
 }
 
-th {
-    background: #2a5298;
-    color: white;
+.calc-btn{
+    background:#2a5298;
+    color:white;
 }
 
-th, td {
-    padding: 10px;
-    text-align: center;
-    border-bottom: 1px solid #ddd;
+.reset-btn{
+    background:#ccc;
 }
 
-/* Engineering Notes */
-.section {
-    background: white;
-    padding: 25px;
-    margin: 20px auto;
-    width: 90%;
-    max-width: 520px;
-    border-radius: 12px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+/* ================= OUTPUT ================= */
+#output{
+    margin-top:20px;
 }
 
-.footer {
-    text-align: center;
-    margin: 30px;
-    color: white;
+.card{
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.15);
 }
+
+/* TABLE */
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:10px;
+}
+
+th{
+    background:#2a5298;
+    color:white;
+    padding:10px;
+}
+
+td{
+    padding:10px;
+    text-align:center;
+    border-bottom:1px solid #ddd;
+}
+
+/* ================= CMP BANNER ================= */
+#consent-banner{
+    position:fixed;
+    bottom:50px;
+    left:50%;
+    transform:translateX(-50%);
+    width:80%;
+    max-width:900px;
+    background:#222;
+    color:white;
+    padding:15px;
+    border-radius:10px;
+    display:none;
+    z-index:2000;
+    text-align:center;
+}
+
+#consent-banner button{
+    margin:5px;
+    padding:8px 12px;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+.accept{background:#4CAF50;color:white;}
+.reject{background:#f44336;color:white;}
+.manage{background:#2196F3;color:white;}
+
 </style>
-
 </head>
 
 <body>
 
-<!-- NAVBAR -->
-<div class="navbar">
+<!-- FIXED HEADER -->
+<div class="header-bar">
+⚙️ Pressure Conversion Tool |
 <a href="index.html">Home</a>
 <a href="about.html">About</a>
 <a href="contact.html">Contact</a>
-<a href="privacy.html">Privacy</a>
-<a href="terms.html">Terms</a>
 </div>
 
-<!-- HEADER -->
-<div class="header">
-<h1>Pressure Conversion Tool</h1>
-<p>Convert pressure units used in engineering and industrial applications</p>
-</div>
-
-<!-- INPUT -->
+<!-- MAIN CONTAINER -->
 <div class="container">
 
-<input type="number" id="inputValue" placeholder="Enter Value">
+<h2>📊 Pressure Unit Conversion</h2>
+
+<input type="number" id="inputValue" placeholder="Enter Pressure Value">
 
 <select id="unit">
     <option value="Pa">Pascal (Pa)</option>
@@ -147,46 +212,26 @@ th, td {
     <option value="mmWC">mm Water Column</option>
 </select>
 
-<div style="text-align:center;">
+<div class="button-group">
 <button class="calc-btn" onclick="calculate()">Calculate</button>
 <button class="reset-btn" onclick="resetForm()">Reset</button>
 </div>
 
-</div>
-
-<!-- OUTPUT -->
 <div id="output"></div>
 
-<!-- INFO -->
-<div class="container">
-<h2>About Pressure Conversion</h2>
-<p>This tool converts pressure values using Pascal (Pa) as the base SI unit to ensure accurate engineering calculations.</p>
-
-<h3>Applications</h3>
-<ul>
-<li>HVAC systems</li>
-<li>Fluid mechanics</li>
-<li>Process engineering</li>
-<li>Industrial equipment design</li>
-</ul>
 </div>
 
-<!-- ENGINEERING NOTES -->
-<div class="section">
-<h2>Engineering Notes</h2>
-<p>This calculator is based on standard engineering formulas used in real-world industrial design and analysis.</p>
-
-<h3>Reference Standards</h3>
-<ul>
-<li>SI unit system</li>
-<li>ISO engineering standards</li>
-<li>Fluid mechanics principles</li>
-</ul>
-</div>
-
-<!-- FOOTER -->
-<div class="footer">
+<!-- FIXED FOOTER -->
+<div class="footer-bar">
 © 2026 Industrial Calculation Hub
+</div>
+
+<!-- CMP BANNER -->
+<div id="consent-banner">
+<p>This website uses cookies for analytics and personalized ads.</p>
+<button class="accept" onclick="acceptConsent()">Accept</button>
+<button class="reject" onclick="rejectConsent()">Reject</button>
+<button class="manage" onclick="manageConsent()">Manage</button>
 </div>
 
 <script>
@@ -200,43 +245,68 @@ const TO_PASCAL = {
     mmWC: 9.80665
 };
 
-function calculate() {
+function calculate(){
 
-let value = parseFloat(document.getElementById("inputValue").value);
-let unit = document.getElementById("unit").value;
+    let value = parseFloat(document.getElementById("inputValue").value);
+    let unit = document.getElementById("unit").value;
 
-if(isNaN(value)){
-document.getElementById("output").innerHTML="<p style='color:red;text-align:center;'>Invalid input</p>";
-return;
-}
+    if(isNaN(value)){
+        document.getElementById("output").innerHTML =
+        "<p style='color:red;text-align:center;'>Please enter valid value</p>";
+        return;
+    }
 
-let pa = value * TO_PASCAL[unit];
+    let pa = value * TO_PASCAL[unit];
 
-let results = {
-"Pascal (Pa)": pa,
-"Kilopascal (kPa)": pa / 1000,
-"Bar": pa / 100000,
-"Atmosphere (atm)": pa / 101325,
-"PSI": pa / 6894.76,
-"mm Water Column": pa / 9.80665
-};
+    let results = {
+        "Pascal (Pa)": pa,
+        "Kilopascal (kPa)": pa / 1000,
+        "Bar": pa / 100000,
+        "Atmosphere (atm)": pa / 101325,
+        "PSI": pa / 6894.76,
+        "mm Water Column": pa / 9.80665
+    };
 
-let table = `<div class="card"><h3>Results</h3><table><tr><th>Unit</th><th>Value</th></tr>`;
+    let table = `<div class="card"><h3>Converted Values</h3><table>
+    <tr><th>Unit</th><th>Value</th></tr>`;
 
-for(let k in results){
-table += `<tr><td>${k}</td><td>${results[k].toFixed(3)}</td></tr>`;
-}
+    for(let k in results){
+        table += `<tr><td>${k}</td><td>${results[k].toFixed(3)}</td></tr>`;
+    }
 
-table += `</table></div>`;
+    table += `</table></div>`;
 
-document.getElementById("output").innerHTML = table;
+    document.getElementById("output").innerHTML = table;
 }
 
 function resetForm(){
-document.getElementById("inputValue").value="";
-document.getElementById("unit").value="Pa";
-document.getElementById("output").innerHTML="";
+    document.getElementById("inputValue").value = "";
+    document.getElementById("unit").value = "Pa";
+    document.getElementById("output").innerHTML = "";
 }
+
+/* CMP */
+function showBanner(){
+    if(!localStorage.getItem("consent")){
+        document.getElementById("consent-banner").style.display="block";
+    }
+}
+
+function acceptConsent(){
+    localStorage.setItem("consent","accepted");
+    document.getElementById("consent-banner").style.display="none";
+}
+
+function rejectConsent(){
+    localStorage.setItem("consent","rejected");
+    document.getElementById("consent-banner").style.display="none";
+}
+
+function manageConsent(){
+    alert("Open privacy settings page.");
+}
+
+window.onload = showBanner;
 
 </script>
 
