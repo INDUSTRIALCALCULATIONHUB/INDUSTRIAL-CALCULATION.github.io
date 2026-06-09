@@ -4,52 +4,106 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Pump Power Calculator | Industrial Calculation Hub</title>
+<title>Pump Motor Selection Calculator | Industrial Calculation Hub</title>
+
+<meta name="description" content="Calculate pump power and select suitable motor size based on flow rate, head, and efficiency.">
+<meta name="keywords" content="pump power calculator, pump motor selection, hydraulic power, fluid mechanics calculator">
+<meta name="author" content="Industrial Calculation Hub">
+
+<!-- AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1658062441623612" crossorigin="anonymous"></script>
+
+<!-- CMP -->
+<script async src="https://fundingchoicesmessages.google.com/i/pub-1658062441623612?ers=1"></script>
 
 <style>
-body {
+* {
+    box-sizing: border-box;
     margin: 0;
+    padding: 0;
+}
+
+body {
     font-family: Arial, sans-serif;
     background: linear-gradient(to right, #1e3c72, #2a5298);
-    color: white;
+    color: #333;
 }
 
-/* NAVBAR */
-.navbar {
-    position: sticky;
+/* FIXED HEADER */
+.topbar {
+    position: fixed;
     top: 0;
-    background: #1e3c72;
-    padding: 12px;
-    text-align: center;
+    left: 0;
+    width: 100%;
+    background: #1f1f1f;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 10px;
+    z-index: 1000;
 }
-.navbar a {
+
+.topbar a {
     color: white;
-    margin: 8px;
+    margin: 5px 12px;
     text-decoration: none;
+    font-size: 14px;
 }
 
-/* CONTAINER */
+/* PAGE WRAPPER */
+.page {
+    padding-top: 70px;
+    padding-bottom: 70px;
+}
+
+/* MAIN CONTAINER (75% STANDARD) */
 .container {
-    width: 80%;
-    max-width: 600px;
-    margin: 20px auto;
+    width: 75%;
+    max-width: 900px;
+    margin: auto;
     background: white;
-    color: black;
-    padding: 20px;
-    border-radius: 10px;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
 }
 
-/* INPUT */
-input, select {
+@media (max-width: 768px) {
+    .container {
+        width: 92%;
+    }
+}
+
+/* HEADER TEXT */
+.header {
+    text-align: center;
+    color: white;
+    margin-bottom: 20px;
+}
+
+.header h1 {
+    font-size: 26px;
+}
+
+/* INPUT STYLES */
+label {
+    font-weight: bold;
+    display: block;
+    margin-top: 10px;
+}
+
+input {
     width: 100%;
     padding: 10px;
-    margin: 8px 0;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
 }
 
-/* REMOVE ARROWS */
+/* REMOVE SPINNERS */
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none;
+    margin: 0;
 }
 input[type=number] {
     -moz-appearance: textfield;
@@ -58,11 +112,18 @@ input[type=number] {
 /* BUTTON */
 button {
     width: 100%;
+    margin-top: 15px;
     padding: 12px;
     background: #1e3c72;
     color: white;
     border: none;
+    border-radius: 6px;
     cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background: #16325c;
 }
 
 /* RESULT */
@@ -70,30 +131,57 @@ button {
     margin-top: 15px;
     font-weight: bold;
     line-height: 1.6;
+    background: #f4f6f8;
+    padding: 10px;
+    border-left: 4px solid #2a5298;
+}
+
+/* SECTION */
+.section {
+    margin-top: 22px;
+}
+
+.section h2 {
+    color: #1e3c72;
+    margin-bottom: 8px;
 }
 
 /* FOOTER */
 .footer {
-    position: sticky;
+    position: fixed;
     bottom: 0;
-    background: #1e3c72;
+    left: 0;
+    width: 100%;
+    background: #1f1f1f;
+    color: white;
     text-align: center;
     padding: 10px;
+    font-size: 13px;
 }
 </style>
+
 </head>
 
 <body>
 
-<div class="navbar">
+<!-- HEADER -->
+<div class="topbar">
 <a href="index.html">Home</a>
 <a href="about.html">About</a>
 <a href="contact.html">Contact</a>
+<a href="privacy.html">Privacy</a>
+<a href="terms.html">Terms</a>
 </div>
 
-<div class="container">
+<div class="page">
 
-<h2>Pump Power Calculator</h2>
+<div class="header">
+<h1>⚙️ Pump Motor Selection Calculator</h1>
+<p>Calculate hydraulic power and select standard motor size</p>
+</div>
+
+<!-- MAIN TOOL -->
+<div class="container">
 
 <label>Flow Rate (m³/hr)</label>
 <input type="number" id="flow">
@@ -108,52 +196,62 @@ button {
 
 <div class="result" id="result"></div>
 
+<!-- THEORY SECTION -->
+<div class="section">
+<h2>📘 Theory / Information / Notes</h2>
+<p>
+Pump power depends on flow rate, head, fluid density, and efficiency.
+Correct motor selection avoids overload, energy loss, and cavitation issues in pumping systems.
+</p>
 </div>
 
+</div>
+</div>
+
+<!-- FOOTER -->
 <div class="footer">
-© 2026 Industrial Calculation Hub
+© 2026 Industrial Calculation Hub | Engineering Design Portal
 </div>
 
 <script>
-
 function calculate() {
 
     let Q = parseFloat(document.getElementById("flow").value);
     let H = parseFloat(document.getElementById("head").value);
     let eff = parseFloat(document.getElementById("eff").value) / 100;
 
-    if(isNaN(Q) || isNaN(H) || isNaN(eff) || eff === 0){
-        document.getElementById("result").innerHTML = "Please enter valid inputs";
+    if (isNaN(Q) || isNaN(H) || isNaN(eff) || eff <= 0) {
+        document.getElementById("result").innerHTML = "⚠️ Please enter valid inputs";
         return;
     }
 
-    // Convert m3/hr to m3/s
+    // Convert m³/hr to m³/s
     Q = Q / 3600;
 
-    // Power (kW)
+    // Hydraulic Power (kW)
     let power = (1000 * 9.81 * Q * H) / (eff * 1000);
 
     let motor = selectMotor(power);
 
     document.getElementById("result").innerHTML =
-        "Required Power = " + power.toFixed(2) + " kW<br>" +
-        "Recommended Motor = " + motor + " kW";
+        "✔ Required Power: " + power.toFixed(2) + " kW<br>" +
+        "✔ Recommended Motor: " + motor + " kW";
 }
 
-// STANDARD MOTOR SIZES
+// STANDARD MOTOR SELECTION
 function selectMotor(power){
     let motors = [
-    0.37,0.55,0.75,1.1,1.5,2.2,3,4,5.5,7.5,11,15,18.5,22,
-    30,37,45,55,75,90,110,132,160,200,250,315,355];
+        0.37,0.55,0.75,1.1,1.5,2.2,3,4,5.5,7.5,11,15,18.5,22,
+        30,37,45,55,75,90,110,132,160,200,250,315,355
+    ];
 
-    for(let i=0;i<motors.length;i++){
-        if(power <= motors[i]){
+    for (let i = 0; i < motors.length; i++) {
+        if (power <= motors[i]) {
             return motors[i];
         }
     }
     return "Above standard range";
 }
-
 </script>
 
 </body>
