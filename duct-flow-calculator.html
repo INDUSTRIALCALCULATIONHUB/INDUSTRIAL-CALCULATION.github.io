@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Duct Flow Calculator | Industrial Calculation Hub</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #1e3c72, #2a5298);
+    color: white;
+}
+
+/* NAVBAR */
+.navbar {
+    position: sticky;
+    top: 0;
+    background: #1e3c72;
+    padding: 12px;
+    text-align: center;
+}
+.navbar a {
+    color: white;
+    margin: 8px;
+    text-decoration: none;
+}
+
+/* CONTAINER */
+.container {
+    width: 80%;
+    max-width: 600px;
+    margin: 20px auto;
+    background: white;
+    color: black;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+/* INPUT */
+input, select {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+}
+
+/* REMOVE ARROWS */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+}
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+/* BUTTON */
+button {
+    width: 100%;
+    padding: 12px;
+    background: #1e3c72;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+/* RESULT */
+.result {
+    margin-top: 15px;
+    font-weight: bold;
+    line-height: 1.6;
+}
+
+/* FOOTER */
+.footer {
+    position: sticky;
+    bottom: 0;
+    background: #1e3c72;
+    text-align: center;
+    padding: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="navbar">
+<a href="index.html">Home</a>
+<a href="about.html">About</a>
+<a href="contact.html">Contact</a>
+</div>
+
+<div class="container">
+
+<h2>Duct Flow Calculator</h2>
+
+<label>Select Calculation Mode</label>
+<select id="mode">
+<option value="flow">Flow Rate (Q)</option>
+<option value="velocity">Velocity (V)</option>
+<option value="size">Duct Size</option>
+</select>
+
+<label>Duct Type</label>
+<select id="ductType">
+<option value="rect">Rectangular</option>
+<option value="circular">Circular</option>
+</select>
+
+<div id="inputs"></div>
+
+<button onclick="calculate()">Calculate</button>
+
+<div class="result" id="result"></div>
+
+</div>
+
+<div class="footer">
+© 2026 Industrial Calculation Hub
+</div>
+
+<script>
+
+function renderInputs(){
+    let mode = document.getElementById("mode").value;
+    let type = document.getElementById("ductType").value;
+
+    let html = "";
+
+    if(mode === "flow"){
+        if(type === "rect"){
+            html = `
+            Width (m): <input type="number" id="w">
+            Height (m): <input type="number" id="h">
+            Velocity (m/s): <input type="number" id="v">
+            `;
+        } else {
+            html = `
+            Diameter (m): <input type="number" id="d">
+            Velocity (m/s): <input type="number" id="v">
+            `;
+        }
+    }
+
+    else if(mode === "velocity"){
+        if(type === "rect"){
+            html = `
+            Width (m): <input type="number" id="w">
+            Height (m): <input type="number" id="h">
+            Flow Rate (m³/s): <input type="number" id="q">
+            `;
+        } else {
+            html = `
+            Diameter (m): <input type="number" id="d">
+            Flow Rate (m³/s): <input type="number" id="q">
+            `;
+        }
+    }
+
+    else {
+        html = `
+        Flow Rate (m³/s): <input type="number" id="q">
+        Velocity (m/s): <input type="number" id="v">
+        `;
+    }
+
+    document.getElementById("inputs").innerHTML = html;
+}
+
+document.getElementById("mode").addEventListener("change", renderInputs);
+document.getElementById("ductType").addEventListener("change", renderInputs);
+renderInputs();
+
+function calculate(){
+
+    let mode = document.getElementById("mode").value;
+    let type = document.getElementById("ductType").value;
+    let result = "";
+
+    if(mode === "flow"){
+        let v = parseFloat(document.getElementById("v").value);
+
+        let area;
+
+        if(type === "rect"){
+            let w = parseFloat(document.getElementById("w").value);
+            let h = parseFloat(document.getElementById("h").value);
+            area = w * h;
+        } else {
+            let d = parseFloat(document.getElementById("d").value);
+            area = Math.PI * d * d / 4;
+        }
+
+        let q = area * v;
+        result = "Flow Rate = " + q.toFixed(3) + " m³/s";
+    }
+
+    else if(mode === "velocity"){
+        let q = parseFloat(document.getElementById("q").value);
+
+        let area;
+
+        if(type === "rect"){
+            let w = parseFloat(document.getElementById("w").value);
+            let h = parseFloat(document.getElementById("h").value);
+            area = w * h;
+        } else {
+            let d = parseFloat(document.getElementById("d").value);
+            area = Math.PI * d * d / 4;
+        }
+
+        let v = q / area;
+        result = "Velocity = " + v.toFixed(2) + " m/s";
+    }
+
+    else {
+        let q = parseFloat(document.getElementById("q").value);
+        let v = parseFloat(document.getElementById("v").value);
+
+        let area = q / v;
+
+        let diameter = Math.sqrt((4 * area) / Math.PI);
+
+        result =
+        "Required Area = " + area.toFixed(3) + " m²<br>" +
+        "Equivalent Circular Diameter = " + diameter.toFixed(3) + " m";
+    }
+
+    document.getElementById("result").innerHTML = result;
+}
+
+</script>
+
+</body>
+</html>
