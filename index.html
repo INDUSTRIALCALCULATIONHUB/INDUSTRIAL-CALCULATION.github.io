@@ -8,38 +8,50 @@
 <meta name="description" content="Professional engineering calculators, converters, and industrial tools.">
 
 <!-- AdSense -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1658062441623612"
-crossorigin="anonymous"></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1658062441623612" crossorigin="anonymous"></script>
+
+<!-- CMP -->
+<script async src="https://fundingchoicesmessages.google.com/i/pub-1658062441623612?ers=1"></script>
 
 <style>
-body {
+* {
     margin: 0;
+    padding: 0;
+    box-sizing: border-box;
     font-family: 'Segoe UI', sans-serif;
+}
+
+body {
     background: linear-gradient(to right, #1e3c72, #2a5298);
     color: white;
 }
 
-/* FIXED NAVBAR */
+/* FIXED HEADER */
 .navbar {
-    position: sticky;
+    position: fixed;
     top: 0;
-    z-index: 1000;
-    background: #1e3c72;
+    width: 100%;
+    background: #1f1f1f;
     padding: 12px;
     text-align: center;
+    z-index: 1000;
 }
 
 .navbar a {
     color: white;
-    margin: 8px 12px;
+    margin: 0 12px;
     text-decoration: none;
-    font-weight: 500;
+    font-size: 14px;
 }
 
 /* HEADER */
 .header {
     text-align: center;
-    padding: 30px 20px 10px;
+    padding: 90px 20px 10px;
+}
+
+.header h1 {
+    font-size: 26px;
 }
 
 /* SEARCH */
@@ -49,51 +61,19 @@ body {
 }
 
 .search-box input {
-    width: 60%;
+    width: 70%;
     max-width: 500px;
     padding: 12px;
     border-radius: 25px;
     border: none;
+    outline: none;
 }
 
-/* WRAPPER */
+/* MAIN WRAPPER (GLOBAL 78% WIDTH RULE) */
 .wrapper {
+    width: 78%;
     max-width: 1100px;
     margin: auto;
-    padding: 10px;
-}
-
-/* GRID */
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 15px;
-}
-
-/* CARD */
-.card {
-    background: white;
-    color: #222;
-    padding: 18px;
-    border-radius: 10px;
-    text-decoration: none;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
-    transition: 0.2s;
-    display: block;
-    text-align: center;
-    font-weight: 500;
-}
-
-.card:hover {
-    transform: translateY(-4px);
-}
-
-/* MOBILE FIX */
-@media(max-width:600px){
-    .card {
-        width: 80%;
-        margin: auto;
-    }
 }
 
 /* SECTION */
@@ -103,15 +83,62 @@ body {
 
 .section h2 {
     text-align: center;
+    margin-bottom: 15px;
 }
 
-/* FOOTER */
+/* GRID SYSTEM */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 15px;
+}
+
+/* TOOL CARD */
+.card {
+    background: white;
+    color: #222;
+    padding: 16px;
+    border-radius: 12px;
+    text-decoration: none;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    transition: 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-weight: 500;
+    min-height: 70px;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+}
+
+/* ICON STYLE */
+.card span {
+    margin-right: 8px;
+}
+
+/* FIX MOBILE WIDTH RULE (70–80%) */
+@media (max-width: 768px) {
+    .wrapper {
+        width: 88%;
+    }
+
+    .card {
+        width: 100%;
+    }
+}
+
+/* FIX FOOTER */
 .footer {
-    position: sticky;
+    position: fixed;
     bottom: 0;
-    background: #1e3c72;
+    width: 100%;
+    background: #1f1f1f;
     text-align: center;
     padding: 10px;
+    font-size: 13px;
 }
 </style>
 </head>
@@ -129,7 +156,7 @@ body {
 <!-- HEADER -->
 <div class="header">
 <h1>Industrial Calculation Hub</h1>
-<p>Engineering Tools • Converters • Knowledge</p>
+<p>Engineering Tools • Converters • Knowledge Base</p>
 </div>
 
 <!-- SEARCH -->
@@ -139,23 +166,23 @@ body {
 
 <div class="wrapper">
 
-<!-- TOOLS -->
+<!-- ENGINEERING TOOLS -->
 <div class="section" id="tools">
 <h2>🔧 Engineering Tools</h2>
 
 <div class="grid">
 
-<a class="card" href="pump-power-calculator.html">⚡ Pump Motor Selection</a>
-<a class="card" href="pipe-flow-calculator.html">🚰 Pipe Flow Rate</a>
-<a class="card" href="duct-flow-calculator.html">🌬️ Duct Flow Rate</a>
-<a class="card" href="air-density.html">🌫️ Air Density</a>
-<a class="card" href="heat-transfer.html">🔥 Heat Transfer</a>
-<a class="card" href="hopper-valley-angle-calculator.html">📐 Hopper Angle</a>
-<a class="card" href="thermal-expansion.html">🌡️ Thermal Expansion</a>
+<a class="card" href="pump-power-calculator.html"><span>⚡</span>Pump Motor Selection</a>
+<a class="card" href="pipe-flow-calculator.html"><span>🚰</span>Pipe Flow Rate</a>
+<a class="card" href="duct-flow-calculator.html"><span>🌬️</span>Duct Flow Rate</a>
+<a class="card" href="air-density.html"><span>🌫️</span>Air Density</a>
+<a class="card" href="heat-transfer.html"><span>🔥</span>Heat Transfer</a>
+<a class="card" href="hopper-valley-angle-calculator.html"><span>📐</span>Hopper Angle</a>
+<a class="card" href="thermal-expansion.html"><span>🌡️</span>Thermal Expansion</a>
 
-<a class="card" href="duct-weight.html">🏗️ Duct Weight</a>
-<a class="card" href="plate-weight.html">🧱 Plate Weight</a>
-<a class="card" href="flange-weight.html">🔩 Flange Weight</a>
+<a class="card" href="duct-weight.html"><span>🏗️</span>Duct Weight</a>
+<a class="card" href="plate-weight.html"><span>🧱</span>Plate Weight</a>
+<a class="card" href="flange-weight.html"><span>🔩</span>Flange Weight</a>
 
 </div>
 </div>
@@ -166,12 +193,12 @@ body {
 
 <div class="grid">
 
-<a class="card" href="weight-conversion.html">⚖️ Weight</a>
-<a class="card" href="length-conversion.html">📏 Length</a>
-<a class="card" href="pressure-conversion.html">🧪 Pressure</a>
-<a class="card" href="temperature-conversion.html">🌡️ Temperature</a>
-<a class="card" href="area-conversion.html">📐 Area</a>
-<a class="card" href="volume-conversion.html">🧊 Volume</a>
+<a class="card" href="weight-conversion.html"><span>⚖️</span>Weight</a>
+<a class="card" href="length-conversion.html"><span>📏</span>Length</a>
+<a class="card" href="pressure-conversion.html"><span>🧪</span>Pressure</a>
+<a class="card" href="temperature-conversion.html"><span>🌡️</span>Temperature</a>
+<a class="card" href="area-conversion.html"><span>📐</span>Area</a>
+<a class="card" href="volume-conversion.html"><span>🧊</span>Volume</a>
 
 </div>
 </div>
@@ -197,12 +224,15 @@ body {
 © 2026 Industrial Calculation Hub
 </div>
 
+<!-- SEARCH SCRIPT -->
 <script>
-document.getElementById("searchInput").addEventListener("keyup", function(){
-let val = this.value.toLowerCase();
-document.querySelectorAll(".card").forEach(card=>{
-card.style.display = card.textContent.toLowerCase().includes(val) ? "block" : "none";
-});
+document.getElementById("searchInput").addEventListener("keyup", function () {
+    let val = this.value.toLowerCase();
+    document.querySelectorAll(".card").forEach(card => {
+        card.style.display = card.textContent.toLowerCase().includes(val)
+            ? "flex"
+            : "none";
+    });
 });
 </script>
 
