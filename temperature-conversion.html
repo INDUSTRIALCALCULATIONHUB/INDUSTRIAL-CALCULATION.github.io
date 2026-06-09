@@ -3,56 +3,110 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Temperature Conversion Tool</title>
 
-<!-- Google AdSense -->
+<title>Temperature Conversion Tool | Industrial Calculation Hub</title>
+
+<meta name="description" content="Convert Celsius, Fahrenheit, and Kelvin with this engineering temperature conversion tool used in thermodynamics and industrial applications.">
+<meta name="keywords" content="temperature conversion, celsius fahrenheit kelvin, thermodynamics calculator, engineering tools">
+<meta name="author" content="Industrial Calculation Hub">
+
+<!-- AdSense -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1658062441623612" crossorigin="anonymous"></script>
 
 <!-- CMP -->
 <script async src="https://fundingchoicesmessages.google.com/i/pub-1658062441623612?ers=1"></script>
 
 <style>
+/* =========================
+GLOBAL RESET
+========================= */
+* {
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
     font-family: 'Segoe UI', sans-serif;
     background: linear-gradient(to right, #1e3c72, #2a5298);
     color: #333;
+    padding-top: 60px;
+    padding-bottom: 60px;
 }
 
+/* =========================
+FIXED HEADER
+========================= */
 .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
     text-align: center;
-    background: #444;
+    background: #1f2d3d;
     padding: 12px;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
 }
 
 .navbar a {
     color: white;
     margin: 10px;
     text-decoration: none;
+    font-weight: 500;
 }
 
+/* =========================
+HEADER SECTION
+========================= */
 .header {
     text-align: center;
-    padding: 30px;
+    padding: 30px 15px;
     color: white;
 }
 
+/* =========================
+MAIN CONTAINER (70–80% WIDTH RULE)
+========================= */
 .container {
     background: white;
-    padding: 25px;
+    width: 80%;
+    max-width: 700px;
     margin: 20px auto;
-    width: 90%;
-    max-width: 520px;
+    padding: 25px;
     border-radius: 12px;
     box-shadow: 0 10px 25px rgba(0,0,0,0.2);
 }
 
+/* =========================
+INPUT STYLING
+========================= */
 input, select {
     width: 100%;
     padding: 12px;
     margin: 10px 0;
     border-radius: 8px;
     border: 1px solid #ccc;
+    font-size: 15px;
+}
+
+/* Remove number spinner globally */
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+/* =========================
+BUTTONS
+========================= */
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
 }
 
 button {
@@ -60,25 +114,34 @@ button {
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    width: 45%;
+    width: 100%;
+    font-weight: 600;
 }
 
-.calc-btn {background:#2a5298;color:white;}
-.reset-btn {background:#ccc;}
-
-#output {
-    width: 90%;
-    max-width: 600px;
-    margin: 20px auto;
+.calc-btn {
+    background: #2a5298;
+    color: white;
 }
 
+.reset-btn {
+    background: #ccc;
+    color: black;
+}
+
+/* =========================
+OUTPUT CARD
+========================= */
 .card {
     background: white;
     padding: 20px;
     border-radius: 12px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    margin-top: 20px;
 }
 
+/* =========================
+TABLE
+========================= */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -96,21 +159,37 @@ th, td {
     border-bottom: 1px solid #ddd;
 }
 
-/* Engineering Notes */
-.section {
-    background: white;
-    padding: 25px;
-    margin: 20px auto;
-    width: 90%;
-    max-width: 520px;
-    border-radius: 12px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+/* =========================
+FOOTER
+========================= */
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    background: #1f2d3d;
+    color: white;
+    padding: 10px;
+    font-size: 14px;
 }
 
-.footer {
-    text-align: center;
-    margin: 30px;
-    color: white;
+/* =========================
+RESPONSIVE
+========================= */
+@media screen and (max-width: 768px) {
+    .container {
+        width: 92%;
+    }
+
+    .navbar a {
+        font-size: 14px;
+        margin: 5px;
+    }
+
+    .button-group {
+        flex-direction: column;
+    }
 }
 </style>
 
@@ -118,7 +197,7 @@ th, td {
 
 <body>
 
-<!-- NAVBAR -->
+<!-- FIXED NAVBAR -->
 <div class="navbar">
 <a href="index.html">Home</a>
 <a href="about.html">About</a>
@@ -130,13 +209,13 @@ th, td {
 <!-- HEADER -->
 <div class="header">
 <h1>Temperature Conversion Tool</h1>
-<p>Convert temperature units used in engineering and science</p>
+<p>Engineering Thermodynamics Conversion Calculator</p>
 </div>
 
 <!-- INPUT -->
 <div class="container">
 
-<input type="number" id="inputValue" placeholder="Enter Temperature">
+<input type="number" id="inputValue" placeholder="Enter Temperature Value">
 
 <select id="unit">
     <option value="C">Celsius (°C)</option>
@@ -144,7 +223,7 @@ th, td {
     <option value="K">Kelvin (K)</option>
 </select>
 
-<div style="text-align:center;">
+<div class="button-group">
 <button class="calc-btn" onclick="calculate()">Calculate</button>
 <button class="reset-btn" onclick="resetForm()">Reset</button>
 </div>
@@ -152,32 +231,42 @@ th, td {
 </div>
 
 <!-- OUTPUT -->
-<div id="output"></div>
+<div id="output" class="container"></div>
 
 <!-- INFO -->
 <div class="container">
 <h2>About Temperature Conversion</h2>
-<p>This tool converts temperature values using standard thermodynamic relationships between Celsius, Fahrenheit, and Kelvin scales.</p>
+<p>
+This tool converts temperature values using standard thermodynamic relationships between Celsius, Fahrenheit, and Kelvin scales used in engineering calculations.
+</p>
 
 <h3>Applications</h3>
 <ul>
 <li>Thermodynamics</li>
-<li>HVAC systems</li>
-<li>Process engineering</li>
-<li>Scientific calculations</li>
+<li>HVAC Systems</li>
+<li>Process Engineering</li>
+<li>Industrial Design Calculations</li>
 </ul>
 </div>
 
 <!-- ENGINEERING NOTES -->
-<div class="section">
-<h2>Engineering Notes</h2>
-<p>This calculator is based on standard engineering formulas used in real-world industrial design and analysis.</p>
+<div class="container">
+<h2>Theory</h2>
+<p>
+Temperature conversion is based on linear relationships between absolute and relative temperature scales used in SI and imperial systems.
+</p>
 
-<h3>Reference Standards</h3>
+<h3>Information</h3>
 <ul>
-<li>SI unit system</li>
-<li>Thermodynamic principles</li>
-<li>International temperature scales</li>
+<li>Celsius is based on water freezing/boiling points</li>
+<li>Kelvin is absolute thermodynamic scale</li>
+<li>Fahrenheit is commonly used in legacy systems</li>
+</ul>
+
+<h3>Notes</h3>
+<ul>
+<li>Always use Kelvin for thermodynamic equations</li>
+<li>Negative Kelvin values are not physically possible</li>
 </ul>
 </div>
 
@@ -187,20 +276,19 @@ th, td {
 </div>
 
 <script>
-
 function calculate() {
 
 let value = parseFloat(document.getElementById("inputValue").value);
 let unit = document.getElementById("unit").value;
 
 if(isNaN(value)){
-document.getElementById("output").innerHTML="<p style='color:red;text-align:center;'>Invalid input</p>";
+document.getElementById("output").innerHTML =
+"<div class='card' style='color:red;text-align:center;'>Invalid input</div>";
 return;
 }
 
 let C, F, K;
 
-// Convert input to Celsius first
 if(unit === "C"){
     C = value;
 } else if(unit === "F"){
@@ -209,7 +297,6 @@ if(unit === "C"){
     C = value - 273.15;
 }
 
-// Convert from Celsius to others
 F = (C * 9/5) + 32;
 K = C + 273.15;
 
@@ -231,11 +318,10 @@ document.getElementById("output").innerHTML = table;
 }
 
 function resetForm(){
-document.getElementById("inputValue").value="";
-document.getElementById("unit").value="C";
-document.getElementById("output").innerHTML="";
+document.getElementById("inputValue").value = "";
+document.getElementById("unit").value = "C";
+document.getElementById("output").innerHTML = "";
 }
-
 </script>
 
 </body>
