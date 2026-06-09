@@ -3,138 +3,186 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Length Conversion Tool</title>
 
-<!-- Google AdSense -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1658062441623612" crossorigin="anonymous"></script>
+<title>Length Conversion Tool | Industrial Calculation Hub</title>
+
+<meta name="description" content="Convert length units used in engineering and industry including meter, mm, cm, km, inch, foot and yard.">
+<meta name="keywords" content="length conversion tool, unit converter, engineering calculator, meter to inch, ft conversion">
+<meta name="author" content="Industrial Calculation Hub">
+
+<!-- AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1658062441623612"
+crossorigin="anonymous"></script>
 
 <!-- CMP -->
 <script async src="https://fundingchoicesmessages.google.com/i/pub-1658062441623612?ers=1"></script>
 
 <style>
-body {
-    margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(to right, #1e3c72, #2a5298);
-    color: #333;
+
+/* ================= GLOBAL THEME ================= */
+body{
+    margin:0;
+    font-family:Segoe UI, sans-serif;
+    background:#1e3c72;
+    color:#fff;
 }
 
-.navbar {
-    text-align: center;
-    background: #444;
-    padding: 12px;
+/* ================= FIXED HEADER ================= */
+header{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    background:#2a2a2a;
+    padding:12px;
+    text-align:center;
+    z-index:1000;
 }
 
-.navbar a {
-    color: white;
-    margin: 10px;
-    text-decoration: none;
+header a{
+    color:#fff;
+    margin:0 10px;
+    text-decoration:none;
+    font-weight:500;
 }
 
-.header {
-    text-align: center;
-    padding: 30px;
-    color: white;
+/* ================= FIXED FOOTER ================= */
+footer{
+    position:fixed;
+    bottom:0;
+    left:0;
+    width:100%;
+    background:#2a2a2a;
+    text-align:center;
+    padding:10px;
+    font-size:14px;
 }
 
-.container {
-    background: white;
-    padding: 25px;
-    margin: 20px auto;
-    width: 90%;
-    max-width: 520px;
-    border-radius: 12px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+/* ================= WRAPPER (70–80%) ================= */
+.wrapper{
+    width:80%;
+    max-width:900px;
+    margin:90px auto 80px auto;
 }
 
-input, select {
-    width: 100%;
-    padding: 12px;
-    margin: 10px 0;
-    border-radius: 8px;
-    border: 1px solid #ccc;
+/* ================= CARD ================= */
+.card{
+    background:#fff;
+    color:#333;
+    padding:25px;
+    border-radius:12px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.2);
 }
 
-button {
-    padding: 12px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    width: 45%;
+/* ================= INPUT ================= */
+input, select{
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+    border-radius:8px;
+    border:1px solid #ccc;
+    font-size:14px;
+    box-sizing:border-box;
 }
 
-.calc-btn {background:#2a5298;color:white;}
-.reset-btn {background:#ccc;}
-
-#output {
-    width: 90%;
-    max-width: 600px;
-    margin: 20px auto;
+/* REMOVE SPINNER */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button{
+    -webkit-appearance:none;
+    margin:0;
 }
 
-.card {
-    background: white;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+input[type=number]{
+    -moz-appearance:textfield;
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
+/* BUTTON */
+button{
+    padding:12px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    width:48%;
+    font-size:14px;
 }
 
-th {
-    background: #2a5298;
-    color: white;
+.calc-btn{
+    background:#1e3c72;
+    color:#fff;
 }
 
-th, td {
-    padding: 10px;
-    text-align: center;
-    border-bottom: 1px solid #ddd;
+.reset-btn{
+    background:#ccc;
+    color:#000;
 }
 
-/* Engineering Notes */
-.section {
-    background: white;
-    padding: 25px;
-    margin: 20px auto;
-    width: 90%;
-    max-width: 520px;
-    border-radius: 12px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+/* OUTPUT */
+.output{
+    margin-top:20px;
 }
 
-.footer {
-    text-align: center;
-    margin: 30px;
-    color: white;
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:10px;
 }
+
+th{
+    background:#1e3c72;
+    color:#fff;
+}
+
+th, td{
+    padding:10px;
+    text-align:center;
+    border-bottom:1px solid #ddd;
+}
+
+/* CARD WRAPPER FOR OUTPUT */
+.result-card{
+    background:#fff;
+    color:#333;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.15);
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+    .wrapper{
+        width:92%;
+    }
+
+    button{
+        width:100%;
+        margin-top:8px;
+    }
+}
+
+h2{
+    text-align:center;
+    color:#1e3c72;
+}
+
 </style>
-
 </head>
 
 <body>
 
-<!-- NAVBAR -->
-<div class="navbar">
+<!-- FIXED HEADER -->
+<header>
 <a href="index.html">Home</a>
 <a href="about.html">About</a>
 <a href="contact.html">Contact</a>
 <a href="privacy.html">Privacy</a>
 <a href="terms.html">Terms</a>
-</div>
+</header>
 
-<!-- HEADER -->
-<div class="header">
-<h1>Length Conversion Tool</h1>
-<p>Convert length units used in engineering and industry</p>
-</div>
+<div class="wrapper">
 
-<!-- INPUT -->
-<div class="container">
+<div class="card">
+
+<h2>Length Conversion Tool</h2>
 
 <input type="number" id="inputValue" placeholder="Enter Value">
 
@@ -153,42 +201,18 @@ th, td {
 <button class="reset-btn" onclick="resetForm()">Reset</button>
 </div>
 
+<div class="output" id="output"></div>
+
 </div>
 
-<!-- OUTPUT -->
-<div id="output"></div>
-
-<!-- INFO -->
-<div class="container">
-<h2>About Length Conversion</h2>
-<p>This tool converts length units using meter (m) as the base reference unit to ensure high accuracy.</p>
-
-<h3>Applications</h3>
-<ul>
-<li>Engineering design</li>
-<li>Construction and civil works</li>
-<li>Manufacturing processes</li>
-<li>Industrial measurements</li>
-</ul>
 </div>
 
-<!-- ENGINEERING NOTES -->
-<div class="section">
-<h2>Engineering Notes</h2>
-<p>This calculator is based on standard engineering formulas used in real-world industrial design and analysis.</p>
-
-<h3>Reference Standards</h3>
-<ul>
-<li>ISO engineering standards</li>
-<li>SI unit system</li>
-<li>International measurement standards</li>
-</ul>
-</div>
-
-<!-- FOOTER -->
-<div class="footer">
-© 2026 Industrial Calculation Hub
-</div>
+<!-- FIXED FOOTER -->
+<footer>
+© 2026 Industrial Calculation Hub |
+<a href="privacy.html" style="color:white;">Privacy</a> |
+<a href="terms.html" style="color:white;">Terms</a>
+</footer>
 
 <script>
 
@@ -202,14 +226,15 @@ const TO_METER = {
     yd: 0.9144
 };
 
-function calculate() {
+function calculate(){
 
 let value = parseFloat(document.getElementById("inputValue").value);
 let unit = document.getElementById("unit").value;
 
 if(isNaN(value)){
-document.getElementById("output").innerHTML="<p style='color:red;text-align:center;'>Invalid input</p>";
-return;
+    document.getElementById("output").innerHTML =
+    "<div class='result-card' style='color:red;'>Please enter valid value</div>";
+    return;
 }
 
 let meter = value * TO_METER[unit];
@@ -224,10 +249,11 @@ let results = {
 "Yard (yd)": meter / 0.9144
 };
 
-let table = `<div class="card"><h3>Results</h3><table><tr><th>Unit</th><th>Value</th></tr>`;
+let table = `<div class='result-card'><h3>Conversion Results</h3><table>
+<tr><th>Unit</th><th>Value</th></tr>`;
 
 for(let k in results){
-table += `<tr><td>${k}</td><td>${results[k].toFixed(3)}</td></tr>`;
+table += `<tr><td>${k}</td><td>${results[k].toFixed(4)}</td></tr>`;
 }
 
 table += `</table></div>`;
