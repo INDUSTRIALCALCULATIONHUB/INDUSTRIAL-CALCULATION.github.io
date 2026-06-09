@@ -3,69 +3,227 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Air Density Calculator</title>
 
-<!-- Google AdSense -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1658062441623612" crossorigin="anonymous"></script>
+<title>Air Density Calculator | Industrial Calculation Hub</title>
 
-<!-- Google CMP -->
+<meta name="description" content="Calculate air density using altitude and temperature with engineering accuracy.">
+
+<!-- ================= ADSENSE ================= -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1658062441623612"
+ crossorigin="anonymous"></script>
+
+<!-- ================= CMP (Funding Choices) ================= -->
 <script async src="https://fundingchoicesmessages.google.com/i/pub-1658062441623612?ers=1"></script>
 
 <style>
-body {font-family:Segoe UI;background:linear-gradient(to right,#1e3c72,#2a5298);margin:0;color:#333;}
-.navbar{text-align:center;background:#444;padding:12px;}
-.navbar a{color:white;margin:10px;text-decoration:none;}
-.header{text-align:center;padding:30px;color:white;}
-.container{background:white;padding:25px;margin:20px auto;width:90%;max-width:500px;border-radius:12px;box-shadow:0 10px 25px rgba(0,0,0,0.2);}
-input{width:100%;padding:12px;margin:10px 0;border-radius:8px;border:1px solid #ccc;}
-button{padding:12px 20px;border:none;border-radius:8px;cursor:pointer;}
-.calc-btn{background:#2a5298;color:white;}
-.reset-btn{background:#ccc;}
-#output{margin:20px auto;width:90%;max-width:600px;}
-.card{background:white;padding:20px;border-radius:12px;box-shadow:0 5px 15px rgba(0,0,0,0.1);}
-.section{background:white;padding:25px;margin:20px auto;width:90%;max-width:500px;border-radius:12px;box-shadow:0 5px 15px rgba(0,0,0,0.1);}
-.footer{text-align:center;color:white;margin:30px;}
+
+/* ================= GLOBAL RESET ================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ================= BODY ================= */
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: linear-gradient(to right, #1e3c72, #2a5298);
+    color: #333;
+}
+
+/* ================= FIXED HEADER ================= */
+.header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: #1e3c72;
+    color: white;
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+    padding: 12px;
+    z-index: 1000;
+}
+
+.header a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+/* ================= FIXED FOOTER ================= */
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: #1e3c72;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    font-size: 13px;
+}
+
+/* ================= MAIN CONTAINER (70–80%) ================= */
+.container {
+    width: 75%;
+    max-width: 850px;
+    margin: 85px auto 85px auto;
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+}
+
+/* ================= MOBILE FIX ================= */
+@media (max-width: 768px) {
+    .container {
+        width: 78%;
+        padding: 18px;
+    }
+
+    .header {
+        flex-wrap: wrap;
+        font-size: 12px;
+    }
+}
+
+/* ================= HEADINGS ================= */
+h1, h2, h3 {
+    color: #1e3c72;
+    margin-bottom: 10px;
+}
+
+/* ================= TEXT ================= */
+p, ul {
+    line-height: 1.6;
+    margin-bottom: 12px;
+}
+
+ul {
+    padding-left: 20px;
+}
+
+/* ================= INPUT FIX ================= */
+input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    outline: none;
+}
+
+/* REMOVE SPINNER (GLOBAL REQUIREMENT) */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+/* ================= BUTTONS ================= */
+button {
+    padding: 12px 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.calc-btn {
+    background: #2a5298;
+    color: white;
+}
+
+.reset-btn {
+    background: #ccc;
+}
+
+/* ================= OUTPUT CARD ================= */
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* ================= AD SLOT (CLS SAFE) ================= */
+.ad-slot {
+    width: 100%;
+    min-height: 90px;
+    margin: 20px 0;
+    text-align: center;
+}
+
+/* ================= SECTION BOX ================= */
+.section {
+    background: white;
+    padding: 25px;
+    margin: 20px auto;
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
 </style>
 </head>
 
 <body>
 
-<div class="navbar">
-<a href="index.html">Home</a>
-<a href="about.html">About</a>
-<a href="contact.html">Contact</a>
-<a href="privacy.html">Privacy</a>
-<a href="terms.html">Terms</a>
-</div>
-
+<!-- FIXED HEADER -->
 <div class="header">
-<h1>Air Density Calculator</h1>
-<p>Calculate air density based on altitude and temperature</p>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="privacy.html">Privacy</a>
+    <a href="terms.html">Terms</a>
 </div>
 
+<!-- MAIN -->
 <div class="container">
+
+<h1>Air Density Calculator</h1>
+<p>Calculate air density using altitude and temperature based on engineering atmospheric model.</p>
+
+<!-- ADS SLOT -->
+<div class="ad-slot"></div>
+
 <input type="number" id="altitude" placeholder="Altitude (m)">
 <input type="number" id="temperature" placeholder="Temperature (°C)">
 
 <div style="text-align:center;">
-<button class="calc-btn" onclick="calculate()">Calculate</button>
-<button class="reset-btn" onclick="resetForm()">Reset</button>
-</div>
+    <button class="calc-btn" onclick="calculate()">Calculate</button>
+    <button class="reset-btn" onclick="resetForm()">Reset</button>
 </div>
 
 <div id="output"></div>
 
-<!-- ✅ ENGINEERING NOTES SECTION ADDED -->
+<!-- THEORY SECTION (STANDARDIZED FORMAT REQUIREMENT) -->
 <div class="section">
-<h2>Engineering Notes</h2>
-<p>This calculator is based on standard engineering formulas used in real-world industrial design and analysis.</p>
+<h2>Theory</h2>
+<p>Air density is mass per unit volume of air and varies with temperature and pressure.</p>
 
-<h3>Reference Standards</h3>
+<h3>Information</h3>
 <ul>
-<li>ISO engineering standards</li>
-<li>Standard atmospheric equations</li>
-<li>Material property constants</li>
+<li>Higher temperature reduces density</li>
+<li>Higher pressure increases density</li>
+<li>Used in HVAC, aerodynamics and fluid flow</li>
 </ul>
+
+<h3>Notes</h3>
+<ul>
+<li>Standard density at sea level: 1.225 kg/m³</li>
+<li>Based on ideal gas law</li>
+</ul>
+</div>
+
+</div>
+
+<!-- FIXED FOOTER -->
+<div class="footer">
+© 2026 Industrial Calculation Hub | Engineering Tools Portal
 </div>
 
 <script>
@@ -73,28 +231,31 @@ function calculate() {
 let altitude = parseFloat(document.getElementById("altitude").value);
 let temp = parseFloat(document.getElementById("temperature").value);
 
-if(isNaN(altitude)||isNaN(temp)){
-document.getElementById("output").innerHTML="Invalid input";
+if (isNaN(altitude) || isNaN(temp)) {
+document.getElementById("output").innerHTML = "<div class='card'>Invalid input</div>";
 return;
 }
 
-let P0=101325, T0=288.16, L=0.0065, g=9.80665, M=0.0289644, R=8.314462618, R_specific=287.058;
-let exponent=(g*M)/(R*L);
-let P=P0*Math.pow((1-(L*altitude)/T0),exponent);
-let T=temp+273.15;
-let rho=P/(R_specific*T);
+let P0 = 101325;
+let T0 = 288.16;
+let L = 0.0065;
+let g = 9.80665;
+let M = 0.0289644;
+let R = 287.058;
 
-document.getElementById("output").innerHTML=`
-<div class="card">
-<h3>Result</h3>
-<p>Density: ${rho.toFixed(2)} kg/m³</p>
-</div>`;
+let exponent = (g * M) / (R * L);
+let P = P0 * Math.pow((1 - (L * altitude) / T0), exponent);
+let T = temp + 273.15;
+let rho = P / (R * T);
+
+document.getElementById("output").innerHTML =
+"<div class='card'><h3>Result</h3><p>Density: " + rho.toFixed(2) + " kg/m³</p></div>";
 }
 
-function resetForm(){
-document.getElementById("altitude").value="";
-document.getElementById("temperature").value="";
-document.getElementById("output").innerHTML="";
+function resetForm() {
+document.getElementById("altitude").value = "";
+document.getElementById("temperature").value = "";
+document.getElementById("output").innerHTML = "";
 }
 </script>
 
