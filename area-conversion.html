@@ -3,73 +3,149 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Area Conversion Tool</title>
 
-<!-- Google AdSense -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1658062441623612" crossorigin="anonymous"></script>
+<title>Area Conversion Tool | Industrial Calculation Hub</title>
 
-<!-- CMP -->
+<meta name="description" content="Convert area units like m², ft², acre, hectare with engineering accuracy.">
+
+<!-- ================= ADSENSE ================= -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1658062441623612"
+ crossorigin="anonymous"></script>
+
+<!-- ================= CMP ================= -->
 <script async src="https://fundingchoicesmessages.google.com/i/pub-1658062441623612?ers=1"></script>
 
 <style>
-body {
+
+/* ================= GLOBAL RESET ================= */
+* {
     margin: 0;
-    font-family: 'Segoe UI', sans-serif;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ================= BODY ================= */
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
     background: linear-gradient(to right, #1e3c72, #2a5298);
     color: #333;
 }
 
-.navbar {
-    text-align: center;
-    background: #444;
-    padding: 12px;
-}
-
-.navbar a {
-    color: white;
-    margin: 10px;
-    text-decoration: none;
-}
-
+/* ================= FIXED HEADER ================= */
 .header {
-    text-align: center;
-    padding: 30px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: #1e3c72;
     color: white;
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+    padding: 12px;
+    z-index: 1000;
 }
 
+.header a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+/* ================= FIXED FOOTER ================= */
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: #1e3c72;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    font-size: 13px;
+}
+
+/* ================= MAIN CONTAINER (70–80%) ================= */
 .container {
-    background: white;
+    width: 75%;
+    max-width: 850px;
+    margin: 85px auto 85px auto;
+    background: #ffffff;
     padding: 25px;
-    margin: 20px auto;
-    width: 90%;
-    max-width: 520px;
     border-radius: 12px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
 }
 
+/* ================= MOBILE FIX ================= */
+@media (max-width: 768px) {
+    .container {
+        width: 78%;
+        padding: 18px;
+    }
+
+    .header {
+        flex-wrap: wrap;
+        font-size: 12px;
+    }
+}
+
+/* ================= HEADINGS ================= */
+h1, h2, h3 {
+    color: #1e3c72;
+    margin-bottom: 10px;
+}
+
+/* ================= TEXT ================= */
+p, ul {
+    line-height: 1.6;
+    margin-bottom: 12px;
+}
+
+ul {
+    padding-left: 20px;
+}
+
+/* ================= INPUTS ================= */
 input, select {
     width: 100%;
     padding: 12px;
     margin: 10px 0;
     border-radius: 8px;
     border: 1px solid #ccc;
+    outline: none;
 }
 
+/* REMOVE NUMBER SPINNER (GLOBAL RULE) */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+/* ================= BUTTONS ================= */
 button {
     padding: 12px;
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    width: 45%;
+    width: 48%;
 }
 
-.calc-btn {background:#2a5298;color:white;}
-.reset-btn {background:#ccc;}
+.calc-btn {
+    background: #2a5298;
+    color: white;
+}
 
+.reset-btn {
+    background: #ccc;
+}
+
+/* ================= OUTPUT ================= */
 #output {
-    width: 90%;
-    max-width: 600px;
-    margin: 20px auto;
+    width: 100%;
+    margin-top: 20px;
 }
 
 .card {
@@ -79,6 +155,7 @@ button {
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
+/* ================= TABLE ================= */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -95,39 +172,46 @@ th, td {
     border-bottom: 1px solid #ddd;
 }
 
+/* ================= SECTION ================= */
 .section {
     background: white;
     padding: 25px;
-    margin: 20px auto;
-    width: 90%;
-    max-width: 520px;
+    margin-top: 20px;
     border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
-.footer {
+/* ================= AD SLOT ================= */
+.ad-slot {
+    width: 100%;
+    min-height: 90px;
+    margin: 20px 0;
     text-align: center;
-    margin: 30px;
-    color: white;
 }
+
 </style>
 </head>
 
 <body>
 
-<div class="navbar">
-<a href="index.html">Home</a>
-<a href="about.html">About</a>
-<a href="contact.html">Contact</a>
-<a href="privacy.html">Privacy</a>
-<a href="terms.html">Terms</a>
-</div>
-
+<!-- FIXED HEADER -->
 <div class="header">
-<h1>Area Conversion Tool</h1>
-<p>Convert area units used in engineering & land measurement</p>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="privacy.html">Privacy</a>
+    <a href="terms.html">Terms</a>
 </div>
 
+<!-- MAIN -->
 <div class="container">
+
+<h1>Area Conversion Tool</h1>
+<p>Convert engineering and land measurement units with accuracy.</p>
+
+<!-- AD SLOT -->
+<div class="ad-slot"></div>
+
 <input type="number" id="inputValue" placeholder="Enter Value">
 
 <select id="unit">
@@ -142,21 +226,34 @@ th, td {
 <button class="calc-btn" onclick="calculate()">Calculate</button>
 <button class="reset-btn" onclick="resetForm()">Reset</button>
 </div>
-</div>
 
 <div id="output"></div>
 
+<!-- THEORY SECTION (STANDARDIZED FORMAT) -->
 <div class="section">
-<h2>Engineering Notes</h2>
-<p>This calculator uses standard area conversion relationships used in civil and land engineering.</p>
+<h2>Theory</h2>
+<p>Area conversion is based on standard SI unit relationships used in engineering and surveying.</p>
+
+<h3>Information</h3>
 <ul>
-<li>SI unit: square meter (m²)</li>
-<li>Common in construction and surveying</li>
-<li>Based on ISO measurement standards</li>
+<li>SI unit: m²</li>
+<li>Used in civil engineering and land measurement</li>
+<li>Based on ISO standards</li>
+</ul>
+
+<h3>Notes</h3>
+<ul>
+<li>1 acre = 4046.86 m²</li>
+<li>1 hectare = 10000 m²</li>
 </ul>
 </div>
 
-<div class="footer">© 2026 Industrial Calculation Hub</div>
+</div>
+
+<!-- FIXED FOOTER -->
+<div class="footer">
+© 2026 Industrial Calculation Hub | Engineering Tools Portal
+</div>
 
 <script>
 const TO_SQM = {
@@ -168,33 +265,37 @@ hectare:10000
 };
 
 function calculate(){
-let val=parseFloat(document.getElementById("inputValue").value);
-let unit=document.getElementById("unit").value;
+let val = parseFloat(document.getElementById("inputValue").value);
+let unit = document.getElementById("unit").value;
 
-if(isNaN(val)){output.innerHTML="Invalid input";return;}
+if(isNaN(val)){
+document.getElementById("output").innerHTML = "<div class='card'>Invalid input</div>";
+return;
+}
 
-let sqm=val*TO_SQM[unit];
+let sqm = val * TO_SQM[unit];
 
-let res={
-"Square Meter":sqm,
-"Square Foot":sqm/0.092903,
-"Square Inch":sqm/0.00064516,
-"Acre":sqm/4046.86,
-"Hectare":sqm/10000
+let res = {
+"Square Meter": sqm,
+"Square Foot": sqm / 0.092903,
+"Square Inch": sqm / 0.00064516,
+"Acre": sqm / 4046.86,
+"Hectare": sqm / 10000
 };
 
-let html=`<div class="card"><table><tr><th>Unit</th><th>Value</th></tr>`;
+let html = `<div class="card"><table><tr><th>Unit</th><th>Value</th></tr>`;
 for(let k in res){
-html+=`<tr><td>${k}</td><td>${res[k].toFixed(2)}</td></tr>`;
+html += `<tr><td>${k}</td><td>${res[k].toFixed(2)}</td></tr>`;
 }
-html+=`</table></div>`;
-output.innerHTML=html;
+html += `</table></div>`;
+
+document.getElementById("output").innerHTML = html;
 }
 
 function resetForm(){
-inputValue.value="";
-unit.value="sqm";
-output.innerHTML="";
+document.getElementById("inputValue").value = "";
+document.getElementById("unit").value = "sqm";
+document.getElementById("output").innerHTML = "";
 }
 </script>
 
