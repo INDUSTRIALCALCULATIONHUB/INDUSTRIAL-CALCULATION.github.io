@@ -14,131 +14,131 @@
 <script async src="https://fundingchoicesmessages.google.com/i/pub-1658062441623612?ers=1"></script>
 
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', sans-serif;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI', sans-serif;
 }
 
-body {
-    background: linear-gradient(to right, #1e3c72, #2a5298);
-    color: white;
+body{
+    background:linear-gradient(to right,#1e3c72,#2a5298);
+    color:white;
+    overflow-x:hidden;
 }
 
-/* FIXED HEADER */
-.navbar {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    background: #1f1f1f;
-    padding: 12px;
-    text-align: center;
-    z-index: 1000;
+/* FIXED NAVBAR */
+.navbar{
+    position:fixed;
+    top:0;
+    width:100%;
+    background:#1f1f1f;
+    padding:12px;
+    text-align:center;
+    z-index:1000;
 }
 
-.navbar a {
-    color: white;
-    margin: 0 12px;
-    text-decoration: none;
-    font-size: 14px;
+.navbar a{
+    color:white;
+    margin:0 12px;
+    text-decoration:none;
+    font-size:14px;
 }
 
 /* HEADER */
-.header {
-    text-align: center;
-    padding: 90px 20px 10px;
-}
-
-.header h1 {
-    font-size: 26px;
+.header{
+    text-align:center;
+    padding:90px 20px 10px;
 }
 
 /* SEARCH */
-.search-box {
-    text-align: center;
-    margin: 20px;
+.search-box{
+    text-align:center;
+    margin:20px;
 }
 
-.search-box input {
-    width: 70%;
-    max-width: 500px;
-    padding: 12px;
-    border-radius: 25px;
-    border: none;
-    outline: none;
+.search-box input{
+    width:70%;
+    max-width:500px;
+    padding:12px;
+    border-radius:25px;
+    border:none;
+    outline:none;
 }
 
-/* MAIN WRAPPER (GLOBAL 78% WIDTH RULE) */
-.wrapper {
-    width: 78%;
-    max-width: 1100px;
-    margin: auto;
+/* MAIN WRAPPER (GLOBAL 78% RULE) */
+.wrapper{
+    width:78%;
+    max-width:1100px;
+    margin:auto;
+    padding-bottom:120px; /* ✅ FIX: prevents footer overlap */
 }
 
 /* SECTION */
-.section {
-    margin-top: 30px;
+.section{
+    margin-top:40px;
 }
 
-.section h2 {
-    text-align: center;
-    margin-bottom: 15px;
+.section h2{
+    text-align:center;
+    margin-bottom:18px;
 }
 
-/* GRID SYSTEM */
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 15px;
+/* GRID */
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:15px;
 }
 
-/* TOOL CARD */
-.card {
-    background: white;
-    color: #222;
-    padding: 16px;
-    border-radius: 12px;
-    text-decoration: none;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
-    transition: 0.2s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    font-weight: 500;
-    min-height: 70px;
+/* CARD */
+.card{
+    background:white;
+    color:#222;
+    padding:16px;
+    border-radius:12px;
+    text-decoration:none;
+    box-shadow:0 3px 10px rgba(0,0,0,0.2);
+    transition:0.2s;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    font-weight:500;
+    min-height:70px;
 }
 
-.card:hover {
-    transform: translateY(-4px);
+.card:hover{
+    transform:translateY(-4px);
 }
 
-/* ICON STYLE */
-.card span {
-    margin-right: 8px;
+/* ICON */
+.card span{
+    margin-right:8px;
 }
 
-/* FIX MOBILE WIDTH RULE (70–80%) */
-@media (max-width: 768px) {
-    .wrapper {
-        width: 88%;
+/* MOBILE */
+@media (max-width:768px){
+    .wrapper{
+        width:88%;
+        padding-bottom:140px; /* extra safe space */
     }
 
-    .card {
-        width: 100%;
+    .card{
+        width:100%;
     }
 }
 
-/* FIX FOOTER */
-.footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background: #1f1f1f;
-    text-align: center;
-    padding: 10px;
-    font-size: 13px;
+/* FIXED FOOTER */
+.footer{
+    position:fixed;
+    bottom:0;
+    width:100%;
+    background:#1f1f1f;
+    text-align:center;
+    padding:10px;
+    font-size:13px;
+    z-index:1000;
 }
 </style>
 </head>
@@ -166,7 +166,7 @@ body {
 
 <div class="wrapper">
 
-<!-- ENGINEERING TOOLS -->
+<!-- TOOLS -->
 <div class="section" id="tools">
 <h2>🔧 Engineering Tools</h2>
 
@@ -177,7 +177,7 @@ body {
 <a class="card" href="duct-flow-calculator.html"><span>🌬️</span>Duct Flow Rate</a>
 <a class="card" href="air-density.html"><span>🌫️</span>Air Density</a>
 <a class="card" href="heat-transfer.html"><span>🔥</span>Heat Transfer</a>
-<a class="card" href="hopper-valley-angle-calculator.html"><span>📐</span>Hopper Angle</a>
+<a class="card" href="hopper-valley-angle-calculator.html"><span>📐</span>Hopper Valley Angle</a>
 <a class="card" href="thermal-expansion.html"><span>🌡️</span>Thermal Expansion</a>
 
 <a class="card" href="duct-weight.html"><span>🏗️</span>Duct Weight</a>
@@ -228,6 +228,7 @@ body {
 <script>
 document.getElementById("searchInput").addEventListener("keyup", function () {
     let val = this.value.toLowerCase();
+
     document.querySelectorAll(".card").forEach(card => {
         card.style.display = card.textContent.toLowerCase().includes(val)
             ? "flex"
