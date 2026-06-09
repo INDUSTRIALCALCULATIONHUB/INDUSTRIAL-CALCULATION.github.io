@@ -6,104 +6,196 @@
 
 <title>Thermal Expansion Calculator | Industrial Calculation Hub</title>
 
+<meta name="description" content="Calculate thermal expansion of materials using engineering formulas for structural and mechanical design applications.">
+<meta name="keywords" content="thermal expansion calculator, expansion formula, engineering materials, steel expansion, heat expansion">
+<meta name="author" content="Industrial Calculation Hub">
+
+<!-- AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1658062441623612" crossorigin="anonymous"></script>
+
+<!-- CMP -->
+<script async src="https://fundingchoicesmessages.google.com/i/pub-1658062441623612?ers=1"></script>
+
 <style>
+/* =========================
+GLOBAL RESET
+========================= */
+* {
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', sans-serif;
     background: linear-gradient(to right, #1e3c72, #2a5298);
-    color: white;
+    color: #333;
+    padding-top: 60px;
+    padding-bottom: 60px;
 }
 
-/* NAVBAR */
+/* =========================
+FIXED HEADER
+========================= */
 .navbar {
-    position: sticky;
+    position: fixed;
     top: 0;
-    background: #1e3c72;
-    padding: 12px;
+    left: 0;
+    width: 100%;
+    background: #1f2d3d;
     text-align: center;
+    padding: 12px;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
 }
+
 .navbar a {
     color: white;
-    margin: 8px;
+    margin: 10px;
     text-decoration: none;
+    font-weight: 500;
 }
 
-/* CONTAINER */
+/* =========================
+HEADER
+========================= */
+.header {
+    text-align: center;
+    padding: 35px 15px;
+    color: white;
+}
+
+/* =========================
+MAIN CONTAINER (80% WIDTH RULE)
+========================= */
 .container {
-    width: 80%;
-    max-width: 600px;
-    margin: 20px auto;
     background: white;
-    color: black;
-    padding: 20px;
-    border-radius: 10px;
+    width: 80%;
+    max-width: 850px;
+    margin: 20px auto;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
 }
 
-/* INPUT */
+/* =========================
+INPUT + SELECT STYLING
+========================= */
+label {
+    font-weight: 600;
+}
+
 input, select {
     width: 100%;
-    padding: 10px;
-    margin: 8px 0;
+    padding: 12px;
+    margin: 8px 0 15px 0;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 15px;
 }
 
-/* REMOVE ARROWS */
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
+/* REMOVE NUMBER SPINNER */
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
     -webkit-appearance: none;
+    margin: 0;
 }
+
 input[type=number] {
     -moz-appearance: textfield;
 }
 
-/* BUTTON */
+/* =========================
+BUTTON
+========================= */
 button {
     width: 100%;
     padding: 12px;
-    background: #1e3c72;
+    background: #2a5298;
     color: white;
     border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
     cursor: pointer;
 }
 
-/* RESULT */
-.result {
-    margin-top: 15px;
-    font-weight: bold;
+button:hover {
+    background: #1e3c72;
 }
 
-/* FOOTER */
+/* =========================
+RESULT
+========================= */
+.result {
+    margin-top: 15px;
+    font-weight: 600;
+    background: #f4f6f9;
+    padding: 12px;
+    border-radius: 8px;
+}
+
+/* =========================
+FOOTER
+========================= */
 .footer {
-    position: sticky;
+    position: fixed;
     bottom: 0;
-    background: #1e3c72;
+    left: 0;
+    width: 100%;
+    background: #1f2d3d;
     text-align: center;
     padding: 10px;
+    color: white;
+    font-size: 14px;
+}
+
+/* =========================
+RESPONSIVE
+========================= */
+@media screen and (max-width: 768px) {
+    .container {
+        width: 92%;
+    }
+
+    .navbar a {
+        font-size: 14px;
+        margin: 5px;
+    }
 }
 </style>
 </head>
 
 <body>
 
+<!-- NAVBAR -->
 <div class="navbar">
 <a href="index.html">Home</a>
 <a href="about.html">About</a>
 <a href="contact.html">Contact</a>
+<a href="privacy.html">Privacy</a>
+<a href="terms.html">Terms</a>
 </div>
 
+<!-- HEADER -->
+<div class="header">
+<h1>Thermal Expansion Calculator</h1>
+<p>Engineering material expansion under temperature change</p>
+</div>
+
+<!-- CALCULATOR -->
 <div class="container">
 
-<h2>Thermal Expansion Calculator</h2>
-
 <label>Initial Length (m)</label>
-<input type="number" id="length">
+<input type="number" id="length" placeholder="Enter length in meters">
 
 <label>Temperature Change (°C)</label>
-<input type="number" id="temp">
+<input type="number" id="temp" placeholder="Enter temperature change">
 
 <label>Select Material</label>
 <select id="material">
-<option value="12e-6">Mild Steel</option>
-<option value="12e-6">IS 2062</option>
+
+<option value="12e-6">Mild Steel (General)</option>
+<option value="12e-6">IS 2062 (Structural Steel)</option>
 <option value="12e-6">Carbon Steel</option>
 <option value="17e-6">Stainless Steel 304</option>
 <option value="16e-6">Stainless Steel 316</option>
@@ -115,6 +207,7 @@ button {
 <option value="18e-6">Bronze</option>
 <option value="8.5e-6">Titanium</option>
 <option value="13e-6">Nickel</option>
+
 </select>
 
 <button onclick="calculate()">Calculate Expansion</button>
@@ -123,12 +216,35 @@ button {
 
 </div>
 
+<!-- THEORY SECTION -->
+<div class="container">
+
+<h2>Theory</h2>
+<p>
+Thermal expansion occurs when materials expand due to heat energy increasing atomic vibration.
+</p>
+
+<h3>Information</h3>
+<ul>
+<li>Metals expand more than ceramics</li>
+<li>Expansion depends on coefficient of material</li>
+<li>Important in piping and structural design</li>
+</ul>
+
+<h3>Notes</h3>
+<ul>
+<li>Always include expansion gaps in long structures</li>
+<li>Use correct α values for accurate design</li>
+</ul>
+
+</div>
+
+<!-- FOOTER -->
 <div class="footer">
 © 2026 Industrial Calculation Hub
 </div>
 
 <script>
-
 function calculate() {
 
     let L = parseFloat(document.getElementById("length").value);
@@ -136,7 +252,7 @@ function calculate() {
     let alpha = parseFloat(document.getElementById("material").value);
 
     if(isNaN(L) || isNaN(dT)){
-        document.getElementById("result").innerHTML = "Please enter all values";
+        document.getElementById("result").innerHTML = "Please enter valid values";
         return;
     }
 
@@ -146,7 +262,6 @@ function calculate() {
         "Expansion = " + expansion.toFixed(6) + " m<br>" +
         "Expansion = " + (expansion * 1000).toFixed(3) + " mm";
 }
-
 </script>
 
 </body>
