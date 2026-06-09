@@ -4,224 +4,178 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Pipe Flow Rate Calculator | Industrial Calculation Hub</title>
-
-<meta name="description" content="Calculate pipe flow rate using diameter and velocity. Engineering tool for fluid mechanics and pipeline design.">
-<meta name="keywords" content="pipe flow calculator, flow rate calculator, fluid mechanics, discharge calculation, engineering tool">
-<meta name="author" content="Industrial Calculation Hub">
-
-<!-- AdSense -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1658062441623612"
-crossorigin="anonymous"></script>
-
-<!-- CMP -->
-<script async src="https://fundingchoicesmessages.google.com/i/pub-1658062441623612?ers=1"></script>
+<title>Pipe Flow Calculator | Industrial Calculation Hub</title>
 
 <style>
 body {
     margin: 0;
-    font-family: 'Segoe UI', sans-serif;
+    font-family: Arial, sans-serif;
     background: linear-gradient(to right, #1e3c72, #2a5298);
-    color: #333;
+    color: white;
 }
 
+/* NAVBAR */
 .navbar {
-    text-align: center;
-    background: #444;
+    position: sticky;
+    top: 0;
+    background: #1e3c72;
     padding: 12px;
+    text-align: center;
 }
-
 .navbar a {
     color: white;
-    margin: 10px;
+    margin: 8px;
     text-decoration: none;
 }
 
-.header {
-    text-align: center;
-    padding: 30px;
-    color: white;
-}
-
+/* CONTAINER */
 .container {
-    background: white;
-    padding: 25px;
-    margin: 20px auto;
-    width: 90%;
-    max-width: 520px;
-    border-radius: 12px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-}
-
-input {
-    width: 100%;
-    padding: 12px;
-    margin: 10px 0;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-}
-
-button {
-    padding: 12px;
-    margin: 10px 5px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    width: 45%;
-}
-
-.calc-btn {background:#2a5298;color:white;}
-.reset-btn {background:#ccc;}
-
-#output {
-    width: 90%;
+    width: 80%;
     max-width: 600px;
     margin: 20px auto;
-}
-
-.card {
     background: white;
+    color: black;
     padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    border-radius: 10px;
 }
 
-table {
+/* INPUT */
+input, select {
     width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-}
-
-table td {
     padding: 10px;
-    border-bottom: 1px solid #eee;
+    margin: 8px 0;
 }
 
-table td:first-child {
+/* REMOVE ARROWS */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+}
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+/* BUTTON */
+button {
+    width: 100%;
+    padding: 12px;
+    background: #1e3c72;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+/* RESULT */
+.result {
+    margin-top: 15px;
     font-weight: bold;
 }
 
+/* FOOTER */
 .footer {
+    position: sticky;
+    bottom: 0;
+    background: #1e3c72;
     text-align: center;
-    margin: 30px;
-    color: white;
+    padding: 10px;
 }
 </style>
-
 </head>
 
 <body>
 
-<!-- NAVBAR -->
 <div class="navbar">
 <a href="index.html">Home</a>
 <a href="about.html">About</a>
 <a href="contact.html">Contact</a>
-<a href="privacy.html">Privacy</a>
-<a href="terms.html">Terms</a>
 </div>
 
-<!-- HEADER -->
-<div class="header">
-<h1>Pipe Flow Rate Calculator</h1>
-<p>Diameter in mm | Velocity in m/s</p>
-</div>
-
-<!-- INPUT -->
 <div class="container">
 
-<input type="number" id="diameter" placeholder="Pipe Diameter (mm)">
-<input type="number" id="velocity" placeholder="Fluid Velocity (m/s)">
+<h2>Pipe Flow Calculator</h2>
 
-<div style="text-align:center;">
-<button class="calc-btn" onclick="calculate()">Calculate</button>
-<button class="reset-btn" onclick="resetForm()">Reset</button>
-</div>
+<label>Select Calculation Type</label>
+<select id="mode">
+<option value="flow">Flow Rate (Q)</option>
+<option value="velocity">Velocity (V)</option>
+<option value="diameter">Diameter (D)</option>
+</select>
 
-</div>
+<div id="inputs"></div>
 
-<!-- OUTPUT -->
-<div id="output"></div>
+<button onclick="calculate()">Calculate</button>
 
-<!-- INFO -->
-<div class="container">
-
-<h2>About Pipe Flow Rate</h2>
-
-<p>
-Flow rate is the volume of fluid passing through a pipe per unit time using the continuity equation.
-</p>
-
-<h3>Formula</h3>
-<p><b>Q = A × V</b></p>
-
-<ul>
-<li>Q = Flow rate</li>
-<li>A = Cross-sectional area</li>
-<li>V = Velocity</li>
-</ul>
-
-<p><b>A = π × D² / 4</b> (D in meters)</p>
+<div class="result" id="result"></div>
 
 </div>
 
-<!-- FOOTER -->
 <div class="footer">
 © 2026 Industrial Calculation Hub
 </div>
 
 <script>
+
+function renderInputs() {
+    let mode = document.getElementById("mode").value;
+    let html = "";
+
+    if(mode === "flow"){
+        html = `
+        Diameter (m): <input type="number" id="d">
+        Velocity (m/s): <input type="number" id="v">
+        `;
+    }
+    else if(mode === "velocity"){
+        html = `
+        Diameter (m): <input type="number" id="d">
+        Flow Rate (m³/s): <input type="number" id="q">
+        `;
+    }
+    else {
+        html = `
+        Flow Rate (m³/s): <input type="number" id="q">
+        Velocity (m/s): <input type="number" id="v">
+        `;
+    }
+
+    document.getElementById("inputs").innerHTML = html;
+}
+
+document.getElementById("mode").addEventListener("change", renderInputs);
+renderInputs();
+
 function calculate() {
 
-let D_mm = parseFloat(document.getElementById("diameter").value);
-let V = parseFloat(document.getElementById("velocity").value);
+    let mode = document.getElementById("mode").value;
+    let result = "";
 
-if (isNaN(D_mm) || isNaN(V)) {
-document.getElementById("output").innerHTML =
-"<p style='color:red;text-align:center;'>Please enter valid numeric values</p>";
-return;
+    if(mode === "flow"){
+        let d = parseFloat(document.getElementById("d").value);
+        let v = parseFloat(document.getElementById("v").value);
+
+        let q = (Math.PI * d * d / 4) * v;
+        result = "Flow Rate = " + q.toFixed(4) + " m³/s";
+    }
+
+    else if(mode === "velocity"){
+        let d = parseFloat(document.getElementById("d").value);
+        let q = parseFloat(document.getElementById("q").value);
+
+        let v = q / (Math.PI * d * d / 4);
+        result = "Velocity = " + v.toFixed(4) + " m/s";
+    }
+
+    else {
+        let q = parseFloat(document.getElementById("q").value);
+        let v = parseFloat(document.getElementById("v").value);
+
+        let d = Math.sqrt((4*q)/(Math.PI*v));
+        result = "Diameter = " + d.toFixed(4) + " m";
+    }
+
+    document.getElementById("result").innerHTML = result;
 }
 
-if (D_mm <= 0 || V <= 0) {
-document.getElementById("output").innerHTML =
-"<p style='color:red;text-align:center;'>Values must be greater than zero</p>";
-return;
-}
-
-// conversions
-let D = D_mm / 1000; // mm to m
-
-// area
-let area_m2 = Math.PI * Math.pow(D, 2) / 4;
-let area_mm2 = Math.PI * Math.pow(D_mm, 2) / 4;
-
-// flow
-let Q_m3s = area_m2 * V;
-let Q_m3hr = Q_m3s * 3600;
-let Q_cfm = Q_m3s * 2118.88;
-
-// output table
-document.getElementById("output").innerHTML = `
-<div class="card">
-<h3>Results</h3>
-
-<table>
-<tr><td>Area</td><td>${area_m2.toFixed(2)} m²</td></tr>
-<tr><td>Area</td><td>${area_mm2.toFixed(2)} mm²</td></tr>
-<tr><td>Flow Rate</td><td>${Q_m3s.toFixed(2)} m³/s</td></tr>
-<tr><td>Flow Rate</td><td>${Q_m3hr.toFixed(2)} m³/hr</td></tr>
-<tr><td>Flow Rate</td><td>${Q_cfm.toFixed(2)} CFM</td></tr>
-</table>
-
-</div>
-`;
-}
-
-function resetForm(){
-document.getElementById("diameter").value = "";
-document.getElementById("velocity").value = "";
-document.getElementById("output").innerHTML = "";
-}
 </script>
 
 </body>
