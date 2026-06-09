@@ -8,14 +8,18 @@
 
 <title>Contact Us - Industrial Calculation Hub</title>
 
+<!-- CMP (MUST LOAD FIRST) -->
+<script async src="https://fundingchoicesmessages.google.com/i/pub-1658062441623612?ers=1"></script>
+
 <!-- AdSense -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1658062441623612"
  crossorigin="anonymous"></script>
 
-<!-- CMP -->
-<script async src="https://fundingchoicesmessages.google.com/i/pub-1658062441623612?ers=1"></script>
-
 <style>
+* {
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
     font-family: 'Segoe UI', sans-serif;
@@ -23,73 +27,83 @@ body {
     color: white;
 }
 
+/* FIXED HEADER */
 .navbar {
-    text-align: center;
-    background: #444;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #1e3c72;
     padding: 12px;
+    text-align: center;
+    z-index: 1000;
 }
 
 .navbar a {
     color: white;
-    margin: 10px;
+    margin: 8px 12px;
     text-decoration: none;
     font-weight: 500;
 }
 
-.navbar a:hover {
-    text-decoration: underline;
-}
-
-.header {
+/* FIXED FOOTER */
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #1e3c72;
     text-align: center;
-    padding: 40px 20px;
+    padding: 10px;
+    z-index: 1000;
 }
 
+/* MAIN CONTAINER (70–80% RULE) */
 .container {
-    max-width: 600px;
-    margin: 30px auto;
+    width: 80%;
+    max-width: 700px;
+    margin: 90px auto 80px auto;
     background: white;
     color: #333;
     padding: 25px;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
 }
 
-h2 {
-    text-align: center;
+/* MOBILE FIX */
+@media (max-width: 768px) {
+    .container {
+        width: 85%;
+    }
 }
 
-.info {
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-.info a {
-    color: #2a5298;
-    text-decoration: none;
-}
-
-.info a:hover {
-    text-decoration: underline;
-}
-
-form {
-    display: flex;
-    flex-direction: column;
-}
-
+/* FORM FIX */
 input, textarea {
-    margin-bottom: 12px;
+    width: 100%;
     padding: 12px;
-    font-size: 14px;
+    margin: 10px 0;
     border: 1px solid #ccc;
     border-radius: 6px;
+    font-size: 14px;
 }
 
+/* REMOVE SPINNER (GLOBAL STANDARD) */
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+/* BUTTON */
 button {
+    width: 100%;
     padding: 12px;
     background-color: #2a5298;
-    color: #fff;
+    color: white;
     border: none;
     cursor: pointer;
     border-radius: 6px;
@@ -99,22 +113,18 @@ button:hover {
     background-color: #1e3c72;
 }
 
-.footer {
+/* INFO */
+.info {
     text-align: center;
-    margin-top: 30px;
-    padding: 20px;
-    color: white;
+    margin-bottom: 20px;
 }
 
-.footer a {
-    color: white;
+.info a {
+    color: #2a5298;
     text-decoration: none;
 }
-
-.footer a:hover {
-    text-decoration: underline;
-}
 </style>
+
 </head>
 
 <body>
@@ -122,49 +132,43 @@ button:hover {
 <!-- NAVBAR -->
 <div class="navbar">
 <a href="index.html">Home</a>
-<a href="about.html">About</a>
 <a href="contact.html">Contact</a>
 <a href="privacy.html">Privacy</a>
 <a href="terms.html">Terms</a>
 </div>
 
-<!-- HEADER -->
-<div class="header">
-    <h1>Contact Us</h1>
-    <p>We’d love to hear from you</p>
-</div>
-
-<!-- CONTACT -->
+<!-- CONTACT BOX -->
 <div class="container">
 
-    <h2>Get in Touch</h2>
+<h2 style="text-align:center;">Contact Us</h2>
+<p style="text-align:center;">We’d love to hear from you</p>
 
-    <div class="info">
-        <p>Email us at:</p>
-        <a href="mailto:contact@industrialcalculation.com">
-            contact@industrialcalculation.com
-        </a>
-    </div>
+<div class="info">
+<p>Email:</p>
+<a href="mailto:contact@industrialcalculation.com">
+contact@industrialcalculation.com
+</a>
+</div>
 
-    <form action="mailto:contact@industrialcalculation.com" method="post" enctype="text/plain">
-        <input type="text" name="name" placeholder="Your Name" required>
-        <input type="email" name="email" placeholder="Your Email" required>
-        <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
-        <button type="submit">Send Message</button>
-    </form>
+<form action="mailto:contact@industrialcalculation.com" method="post" enctype="text/plain">
 
-    <p style="font-size:12px; text-align:center; margin-top:10px;">
-        We typically respond within 24–48 hours.
-    </p>
+<input type="text" name="name" placeholder="Your Name" required>
+<input type="email" name="email" placeholder="Your Email" required>
+<textarea name="message" rows="6" placeholder="Your Message" required></textarea>
+
+<button type="submit">Send Message</button>
+
+</form>
+
+<p style="font-size:12px; text-align:center; margin-top:10px;">
+We typically respond within 24–48 hours.
+</p>
 
 </div>
 
 <!-- FOOTER -->
 <div class="footer">
-    <p>© 2026 Industrial Calculation Hub</p>
-    <a href="index.html">Home</a> |
-    <a href="privacy.html">Privacy Policy</a> |
-    <a href="terms.html">Terms</a>
+© 2026 Industrial Calculation Hub
 </div>
 
 </body>
