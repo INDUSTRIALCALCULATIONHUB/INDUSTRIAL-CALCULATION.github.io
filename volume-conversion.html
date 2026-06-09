@@ -3,35 +3,197 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Volume Conversion Tool</title>
 
-<!-- Google AdSense -->
+<title>Volume Conversion Tool | Industrial Calculation Hub</title>
+
+<meta name="description" content="Convert volume units like cubic meter, litre, cubic foot, cubic inch and gallons for engineering applications.">
+<meta name="keywords" content="volume conversion, cubic meter to litre, engineering calculator, fluid volume conversion">
+<meta name="author" content="Industrial Calculation Hub">
+
+<!-- AdSense -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1658062441623612" crossorigin="anonymous"></script>
 
 <!-- CMP -->
 <script async src="https://fundingchoicesmessages.google.com/i/pub-1658062441623612?ers=1"></script>
 
 <style>
-body {margin:0;font-family:'Segoe UI';background:linear-gradient(to right,#1e3c72,#2a5298);}
-.navbar{text-align:center;background:#444;padding:12px;}
-.navbar a{color:white;margin:10px;text-decoration:none;}
-.header{text-align:center;padding:30px;color:white;}
-.container{background:white;padding:25px;margin:20px auto;width:90%;max-width:520px;border-radius:12px;}
-input,select{width:100%;padding:12px;margin:10px 0;border-radius:8px;border:1px solid #ccc;}
-button{padding:12px;border:none;border-radius:8px;width:45%;}
-.calc-btn{background:#2a5298;color:white;}
-.reset-btn{background:#ccc;}
-.card{background:white;padding:20px;border-radius:12px;}
-table{width:100%;border-collapse:collapse;}
-th{background:#2a5298;color:white;}
-th,td{padding:10px;text-align:center;border-bottom:1px solid #ddd;}
-.section{background:white;padding:25px;margin:20px auto;width:90%;max-width:520px;border-radius:12px;}
-.footer{text-align:center;margin:30px;color:white;}
+/* =========================
+GLOBAL RESET
+========================= */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to right, #1e3c72, #2a5298);
+    color: #333;
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+
+/* =========================
+FIXED HEADER
+========================= */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #1f2d3d;
+    text-align: center;
+    padding: 12px;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+.navbar a {
+    color: white;
+    margin: 10px;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+/* =========================
+HEADER
+========================= */
+.header {
+    text-align: center;
+    padding: 35px 15px;
+    color: white;
+}
+
+/* =========================
+MAIN CONTAINER (80% WIDTH RULE)
+========================= */
+.container {
+    background: white;
+    width: 80%;
+    max-width: 750px;
+    margin: 20px auto;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+/* =========================
+INPUTS
+========================= */
+input, select {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+}
+
+/* REMOVE SPINNER */
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+/* =========================
+BUTTONS
+========================= */
+.button-group {
+    display: flex;
+    gap: 10px;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.calc-btn {
+    background: #2a5298;
+    color: white;
+}
+
+.reset-btn {
+    background: #ccc;
+}
+
+/* =========================
+RESULT CARD
+========================= */
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    margin-top: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* =========================
+TABLE
+========================= */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    background: #2a5298;
+    color: white;
+}
+
+th, td {
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+/* =========================
+FOOTER
+========================= */
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #1f2d3d;
+    text-align: center;
+    padding: 10px;
+    color: white;
+    font-size: 14px;
+}
+
+/* =========================
+RESPONSIVE
+========================= */
+@media screen and (max-width: 768px) {
+    .container {
+        width: 92%;
+    }
+
+    .button-group {
+        flex-direction: column;
+    }
+
+    .navbar a {
+        font-size: 14px;
+        margin: 5px;
+    }
+}
 </style>
 </head>
 
 <body>
 
+<!-- NAVBAR -->
 <div class="navbar">
 <a href="index.html">Home</a>
 <a href="about.html">About</a>
@@ -40,13 +202,16 @@ th,td{padding:10px;text-align:center;border-bottom:1px solid #ddd;}
 <a href="terms.html">Terms</a>
 </div>
 
+<!-- HEADER -->
 <div class="header">
 <h1>Volume Conversion Tool</h1>
-<p>Convert volume units for engineering & industrial use</p>
+<p>Engineering fluid and storage volume converter</p>
 </div>
 
+<!-- INPUT -->
 <div class="container">
-<input type="number" id="inputValue" placeholder="Enter Value">
+
+<input type="number" id="inputValue" placeholder="Enter Volume Value">
 
 <select id="unit">
 <option value="m3">Cubic Meter (m³)</option>
@@ -56,63 +221,86 @@ th,td{padding:10px;text-align:center;border-bottom:1px solid #ddd;}
 <option value="gallon">US Gallon</option>
 </select>
 
-<div style="text-align:center;">
+<div class="button-group">
 <button class="calc-btn" onclick="calculate()">Calculate</button>
 <button class="reset-btn" onclick="resetForm()">Reset</button>
 </div>
+
 </div>
 
+<!-- OUTPUT -->
 <div id="output"></div>
 
-<div class="section">
-<h2>Engineering Notes</h2>
-<p>This calculator converts volume using SI base unit cubic meter (m³).</p>
+<!-- ENGINEERING NOTES -->
+<div class="container">
+<h2>Theory</h2>
+<p>
+Volume conversion is based on SI unit cubic meter (m³), which is the standard reference for all engineering calculations.
+</p>
+
+<h3>Information</h3>
 <ul>
-<li>Used in fluid systems</li>
-<li>Storage tank design</li>
-<li>Process engineering</li>
+<li>Used in fluid systems and tanks</li>
+<li>Important in process engineering</li>
+<li>Essential for hydraulic calculations</li>
+</ul>
+
+<h3>Notes</h3>
+<ul>
+<li>Always convert through SI base unit</li>
+<li>Maintain unit consistency in design calculations</li>
 </ul>
 </div>
 
-<div class="footer">© 2026 Industrial Calculation Hub</div>
+<!-- FOOTER -->
+<div class="footer">
+© 2026 Industrial Calculation Hub
+</div>
 
 <script>
-const TO_M3={
-m3:1,
-litre:0.001,
-ft3:0.0283168,
-in3:0.0000163871,
-gallon:0.00378541
+const TO_M3 = {
+    m3: 1,
+    litre: 0.001,
+    ft3: 0.0283168,
+    in3: 0.0000163871,
+    gallon: 0.00378541
 };
 
-function calculate(){
-let val=parseFloat(inputValue.value);
-let unit=document.getElementById("unit").value;
+function calculate() {
+    let val = parseFloat(document.getElementById("inputValue").value);
+    let unit = document.getElementById("unit").value;
 
-if(isNaN(val)){output.innerHTML="Invalid input";return;}
+    if (isNaN(val)) {
+        document.getElementById("output").innerHTML =
+        "<div class='container' style='color:red;'>Invalid input</div>";
+        return;
+    }
 
-let m3=val*TO_M3[unit];
+    let m3 = val * TO_M3[unit];
 
-let res={
-"Cubic Meter":m3,
-"Litre":m3/0.001,
-"Cubic Foot":m3/0.0283168,
-"Cubic Inch":m3/0.0000163871,
-"US Gallon":m3/0.00378541
-};
+    let res = {
+        "Cubic Meter": m3,
+        "Litre": m3 / 0.001,
+        "Cubic Foot": m3 / 0.0283168,
+        "Cubic Inch": m3 / 0.0000163871,
+        "US Gallon": m3 / 0.00378541
+    };
 
-let html=`<div class="card"><table><tr><th>Unit</th><th>Value</th></tr>`;
-for(let k in res){
-html+=`<tr><td>${k}</td><td>${res[k].toFixed(2)}</td></tr>`;
+    let html = `<div class="container card"><table><tr><th>Unit</th><th>Value</th></tr>`;
+
+    for (let k in res) {
+        html += `<tr><td>${k}</td><td>${res[k].toFixed(2)}</td></tr>`;
+    }
+
+    html += `</table></div>`;
+
+    document.getElementById("output").innerHTML = html;
 }
-html+=`</table></div>`;
-output.innerHTML=html;
-}
 
-function resetForm(){
-inputValue.value="";
-unit.value="m3";
-output.innerHTML="";
+function resetForm() {
+    document.getElementById("inputValue").value = "";
+    document.getElementById("unit").value = "m3";
+    document.getElementById("output").innerHTML = "";
 }
 </script>
 
