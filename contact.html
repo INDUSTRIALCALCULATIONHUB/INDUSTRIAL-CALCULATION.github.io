@@ -18,51 +18,46 @@
 <style>
 * {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-    margin: 0;
     font-family: 'Segoe UI', sans-serif;
     background: linear-gradient(to right, #1e3c72, #2a5298);
     color: white;
+    padding-top: 70px;
+    padding-bottom: 90px;
 }
 
-/* FIXED HEADER */
+/* NAVBAR (MATCH INDEX) */
 .navbar {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    background: #1e3c72;
-    padding: 12px;
+    background: #0f2f5f;
+    padding: 14px;
     text-align: center;
     z-index: 1000;
 }
 
 .navbar a {
     color: white;
-    margin: 8px 12px;
+    margin: 0 12px;
     text-decoration: none;
-    font-weight: 500;
+    font-size: 14px;
 }
 
-/* FIXED FOOTER */
-.footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background: #1e3c72;
-    text-align: center;
-    padding: 10px;
-    z-index: 1000;
+.navbar a:hover {
+    text-decoration: underline;
 }
 
-/* MAIN CONTAINER (70–80% RULE) */
+/* CONTAINER */
 .container {
     width: 80%;
     max-width: 700px;
-    margin: 90px auto 80px auto;
+    margin: 20px auto;
     background: white;
     color: #333;
     padding: 25px;
@@ -70,35 +65,22 @@ body {
     box-shadow: 0 8px 25px rgba(0,0,0,0.2);
 }
 
-/* MOBILE FIX */
+/* MOBILE */
 @media (max-width: 768px) {
     .container {
-        width: 85%;
+        width: 92%;
     }
 }
 
-/* FORM FIX */
+/* FORM */
 input, textarea {
     width: 100%;
     padding: 12px;
     margin: 10px 0;
     border: 1px solid #ccc;
     border-radius: 6px;
-    font-size: 14px;
 }
 
-/* REMOVE SPINNER (GLOBAL STANDARD) */
-input[type=number]::-webkit-outer-spin-button,
-input[type=number]::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
-input[type=number] {
-    -moz-appearance: textfield;
-}
-
-/* BUTTON */
 button {
     width: 100%;
     padding: 12px;
@@ -123,6 +105,33 @@ button:hover {
     color: #2a5298;
     text-decoration: none;
 }
+
+/* FOOTER (MATCH INDEX) */
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: #0f2f5f;
+    text-align: center;
+    padding: 10px;
+    font-size: 13px;
+    z-index: 1000;
+}
+
+.footer-links {
+    margin-top: 5px;
+}
+
+.footer-links a {
+    color: #ddd;
+    margin: 0 8px;
+    text-decoration: none;
+    font-size: 12px;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+}
 </style>
 
 </head>
@@ -131,10 +140,10 @@ button:hover {
 
 <!-- NAVBAR -->
 <div class="navbar">
-<a href="index.html">Home</a>
-<a href="contact.html">Contact</a>
-<a href="privacy.html">Privacy</a>
-<a href="terms.html">Terms</a>
+    <a href="index.html">Home</a>
+    <a href="index.html#tools">Tools</a>
+    <a href="index.html#converters">Converters</a>
+    <a href="index.html#blogs">Knowledge</a>
 </div>
 
 <!-- CONTACT BOX -->
@@ -168,7 +177,15 @@ We typically respond within 24–48 hours.
 
 <!-- FOOTER -->
 <div class="footer">
-© 2026 Industrial Calculation Hub
+© 2026 Industrial Calculation Hub | Engineering Tools Portal
+
+<div class="footer-links">
+<a href="index.html">Home</a>
+<a href="contact.html">Contact</a>
+<a href="privacy.html">Privacy</a>
+<a href="terms.html">Terms</a>
+</div>
+
 </div>
 
 </body>
