@@ -27,7 +27,7 @@ body{
     overflow-x:hidden;
 }
 
-/* ✅ MATCHED COLOR (AIR DENSITY STYLE) */
+/* NAVBAR */
 .navbar{
     position:fixed;
     top:0;
@@ -71,7 +71,7 @@ body{
     width:78%;
     max-width:1100px;
     margin:auto;
-    padding-bottom:120px;
+    padding-bottom:140px;
 }
 
 /* SECTION */
@@ -120,20 +120,36 @@ body{
 @media (max-width:768px){
     .wrapper{
         width:88%;
-        padding-bottom:140px;
+        padding-bottom:160px;
     }
 }
 
-/* ✅ MATCHED FOOTER COLOR */
+/* FOOTER */
 .footer{
     position:fixed;
     bottom:0;
     width:100%;
     background:#0f2f5f;
     text-align:center;
-    padding:10px;
+    padding:10px 5px;
     font-size:13px;
     z-index:1000;
+}
+
+/* FOOTER LINKS */
+.footer-links{
+    margin-top:5px;
+}
+
+.footer-links a{
+    color:#ddd;
+    margin:0 8px;
+    text-decoration:none;
+    font-size:12px;
+}
+
+.footer-links a:hover{
+    text-decoration:underline;
 }
 </style>
 </head>
@@ -164,7 +180,6 @@ body{
 <!-- TOOLS -->
 <div class="section" id="tools">
 <h2>🔧 Engineering Tools</h2>
-
 <div class="grid">
 
 <a class="card" href="pump-power-calculator.html"><span>⚡</span>Pump Motor Selection</a>
@@ -172,16 +187,10 @@ body{
 <a class="card" href="duct-flow-calculator.html"><span>🌬️</span>Duct Flow Rate</a>
 <a class="card" href="air-density.html"><span>🌫️</span>Air Density</a>
 <a class="card" href="heat-transfer.html"><span>🔥</span>Heat Transfer</a>
-
-<!-- ✅ FIXED ICON -->
 <a class="card" href="hopper-valley-angle-calculator.html"><span>⛰️</span>Hopper Valley Angle</a>
-
 <a class="card" href="thermal-expansion.html"><span>🌡️</span>Thermal Expansion</a>
 <a class="card" href="duct-weight.html"><span>🏗️</span>Duct Weight</a>
-
-<!-- ✅ FIXED ICON -->
 <a class="card" href="plate-weight.html"><span>📏</span>Plate Weight</a>
-
 <a class="card" href="flange-weight.html"><span>🔩</span>Flange Weight</a>
 
 </div>
@@ -190,15 +199,11 @@ body{
 <!-- CONVERTERS -->
 <div class="section" id="converters">
 <h2>⚙️ Unit Converters</h2>
-
 <div class="grid">
 
 <a class="card" href="weight-conversion.html"><span>⚖️</span>Weight</a>
 <a class="card" href="length-conversion.html"><span>📏</span>Length</a>
-
-<!-- ✅ FIXED ICON -->
 <a class="card" href="pressure-conversion.html"><span>📊</span>Pressure</a>
-
 <a class="card" href="temperature-conversion.html"><span>🌡️</span>Temperature</a>
 <a class="card" href="area-conversion.html"><span>📐</span>Area</a>
 <a class="card" href="volume-conversion.html"><span>🧊</span>Volume</a>
@@ -209,16 +214,12 @@ body{
 <!-- KNOWLEDGE -->
 <div class="section" id="blogs">
 <h2>📘 Engineering Knowledge</h2>
-
 <div class="grid">
 
-<!-- EXISTING -->
 <a class="card" href="reynolds-number-explained.html">Reynolds Number</a>
 <a class="card" href="bernoulli-equation-explained.html">Bernoulli Equation</a>
 <a class="card" href="heat-transfer-explained.html">Heat Transfer</a>
 <a class="card" href="pipe-flow-basics.html">Pipe Flow Basics</a>
-
-<!-- ✅ NEWLY ADDED PAGES -->
 <a class="card" href="air-density-explained.html">Air Density Explained</a>
 <a class="card" href="boiler-efficiency-explained.html">Boiler Efficiency</a>
 <a class="card" href="engineering-calculations-in-real-world.html">Real-World Engineering Calculations</a>
@@ -234,7 +235,16 @@ body{
 
 <!-- FOOTER -->
 <div class="footer">
-© 2026 Industrial Calculation Hub
+© 2026 Industrial Calculation Hub | Engineering Tools Portal
+
+<div class="footer-links">
+<a href="index.html">Home</a>
+<a href="about.html">About</a>
+<a href="contact.html">Contact</a>
+<a href="privacy.html">Privacy</a>
+<a href="terms.html">Terms</a>
+</div>
+
 </div>
 
 <!-- SEARCH SCRIPT -->
