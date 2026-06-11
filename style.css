@@ -1,194 +1,64 @@
-/* =========================
-   GLOBAL RESET
-========================= */
+/* GLOBAL RESET */
 * {
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Arial, sans-serif;
 }
 
-/* =========================
-   BODY
-========================= */
+/* BODY */
 body {
-    font-family: 'Segoe UI', Arial, sans-serif;
     background: linear-gradient(to right, #1e3c72, #2a5298);
     color: #333;
-    line-height: 1.6;
+    min-height: 100vh;
+    padding-top: 70px;
+    padding-bottom: 80px;
 }
 
-/* =========================
-   GLOBAL CONTAINER SYSTEM (70–80% WIDTH FIX)
-========================= */
-.container,
-.section,
-.card,
-.content-wrapper {
-    width: 80%;
-    max-width: 1100px;
-    margin: 20px auto;
-    background: #fff;
-    border-radius: 12px;
-    padding: 20px;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.12);
-}
-
-/* Mobile responsiveness */
-@media (max-width: 768px) {
-    .container,
-    .section,
-    .card,
-    .content-wrapper {
-        width: 92%;
-        padding: 15px;
-    }
-}
-
-/* =========================
-   HEADERS (GLOBAL)
-========================= */
-.header {
-    text-align: center;
-    padding: 40px 15px;
-    color: white;
-}
-
-/* =========================
-   NAVBAR (FIXED STYLE BASE)
-========================= */
+/* NAVBAR */
 .navbar {
-    position: sticky;
+    position: fixed;
     top: 0;
-    z-index: 1000;
-    background: #1e3c72;
+    width: 100%;
+    background: #0f2f5f;
     text-align: center;
     padding: 12px;
+    z-index: 1000;
 }
 
 .navbar a {
     color: white;
+    margin: 0 10px;
     text-decoration: none;
-    margin: 10px;
-    font-weight: 500;
-}
-
-/* =========================
-   INPUT STANDARDIZATION (GLOBAL FIX)
-========================= */
-input,
-select,
-textarea {
-    width: 100%;
-    padding: 12px;
-    margin: 8px 0;
-    border: 1px solid #ccc;
-    border-radius: 8px;
     font-size: 14px;
-    outline: none;
 }
 
-/* REMOVE NUMBER SPINNERS (ALL BROWSERS) */
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
-input[type=number] {
-    -moz-appearance: textfield;
-}
-
-/* =========================
-   BUTTONS
-========================= */
-button {
-    padding: 12px 18px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: 0.2s;
-}
-
-button:hover {
-    opacity: 0.9;
-}
-
-/* Primary button */
-.btn-primary {
-    background: #1e3c72;
-    color: white;
-}
-
-/* Secondary button */
-.btn-secondary {
-    background: #ccc;
-    color: #000;
-}
-
-/* =========================
-   CARDS (TOOLS UI)
-========================= */
-.card {
-    background: #fff;
-    padding: 18px;
+/* CONTENT BOX */
+.container {
+    width: 78%;
+    max-width: 900px;
+    margin: 20px auto;
+    background: white;
+    padding: 25px;
     border-radius: 12px;
-    margin: 15px auto;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    line-height: 1.7;
 }
 
-/* =========================
-   TABLES
-========================= */
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-th {
-    background: #1e3c72;
-    color: white;
-    padding: 10px;
-}
-
-td {
-    padding: 10px;
-    border-bottom: 1px solid #eee;
-    text-align: center;
-}
-
-/* =========================
-   FOOTER (GLOBAL FIX STYLE)
-========================= */
+/* FOOTER */
 .footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: #0f2f5f;
     text-align: center;
-    padding: 15px;
-    background: #1e3c72;
+    padding: 10px;
+    font-size: 13px;
     color: white;
-    margin-top: 30px;
 }
 
-/* =========================
-   TOOL TITLE STYLE (CONSISTENCY)
-========================= */
-h1, h2, h3 {
-    color: #1e3c72;
-}
-
-/* =========================
-   LINKS
-========================= */
-a {
-    color: #1e3c72;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
-/* =========================
-   RESPONSIVE SAFETY (NO OVERFLOW)
-========================= */
-img, iframe {
-    max-width: 100%;
+.footer a {
+    color: #ddd;
+    margin: 0 8px;
+    text-decoration: none;
+    font-size: 12px;
 }
