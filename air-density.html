@@ -190,9 +190,10 @@ button {
 <!-- ADS SLOT -->
 <div class="ad-slot"></div>
 
-<input type="number" id="altitude" placeholder="Altitude (m)">
-<input type="number" id="temperature" placeholder="Temperature (°C)">
-
+<input type="number" id="altitude" placeholder="Altitude (m)" min="0" max="11000">
+<input type="number" id="temperature" placeholder="Temperature (°C)" min="-50" max="60">
+<p><small>Enter altitude in meters and temperature in °C</small></p>
+ 
 <div style="text-align:center;">
     <button class="calc-btn" onclick="calculate()">Calculate</button>
     <button class="reset-btn" onclick="resetForm()">Reset</button>
@@ -209,17 +210,53 @@ button {
 <ul>
 <li>Higher temperature reduces density</li>
 <li>Higher pressure increases density</li>
-<li>Used in HVAC, aerodynamics and fluid flow</li>
+<li>HVAC system design (airflow, duct sizing, load calculation)</li>
+<li>Fan and blower selection (CFM, static pressure, performance correction)</li>
+<li>Duct and chimney draft calculations</li>
+<li>Aerodynamic analysis (drag and lift estimation)</li>
+<li>Air pollution control systems (ESP, bag filter, scrubber sizing)</li>
+<li>Combustion air requirement calculations</li>
+<li>Process engineering and fluid flow analysis</li>
 </ul>
 
 <h3>Notes</h3>
 <ul>
 <li>Standard density at sea level: 1.225 kg/m³</li>
 <li>Based on ideal gas law</li>
+<li>Valid for standard atmosphere (0–11 km altitude)</li>
+</ul>
+ <h3>Formula</h3>
+<ul>
+<li>ρ = P / (R × T)</li>
+<li>P = P₀ × (T_atm / T₀)^(g / (R × L))</li>
+<li>T_atm = T₀ − L × altitude</li>
+</ul>
+ <h3>Example</h3>
+<p>At sea level (0 m) and 15°C:</p>
+<ul>
+<li>Density ≈ 1.225 kg/m³</li>
+</ul>
+ <h3>Engineering Note</h3>
+<p>Fan performance depends on air density. At lower density (high temperature or altitude), flow rate and pressure reduce. Always apply density correction while selecting fans and blowers.</p>
+<h3>References</h3>
+<ul>
+<li>International Standard Atmosphere (ISA)</li>
+<li>ASHRAE Handbook – Fundamentals</li>
+<li>Fluid Mechanics – Frank M. White</li>
 </ul>
 </div>
 
+ <div class="section">
+<h3>Related Tools</h3>
+<ul>
+<li><a href="duct-flow.html">Duct Flow Calculator</a></li>
+<li><a href="fan-power.html">Fan Power Calculator</a></li>
+<li><a href="reynolds-number.html">Reynolds Number Calculator</a></li>
+</ul>
 </div>
+ 
+</div>
+
 
 <!-- FIXED FOOTER -->
 <div class="footer">
@@ -236,22 +273,30 @@ document.getElementById("output").innerHTML = "<div class='card'>Invalid input</
 return;
 }
 
+if (altitude < 0 || altitude > 11000) {
+document.getElementById("output").innerHTML =
+"<div class='card'>Valid altitude range: 0 to 11,000 m</div>";
+return;
+}
+ 
 let P0 = 101325;
-let T0 = 288.16;
+let T0 = 288.15;
 let L = 0.0065;
 let g = 9.80665;
 let R = 287.058;
 
 let exponent = g / (R * L);
 
-let T_atm = T0 - (L * altitude);
+let T_atm = Math.max(1, T0 - (L * altitude));
 let P = P0 * Math.pow((T_atm / T0), exponent);
 
 let T = temp + 273.15;
 let rho = P / (R * T);
 
 document.getElementById("output").innerHTML =
-"<div class='card'><h3>Result</h3><p>Density: " + rho.toFixed(2) + " kg/m³</p></div>";
+"<div class='card'><h3>Result</h3>" +
+"<p><strong>Air Density:</strong> " + rho.toFixed(3) + " kg/m³</p>" +
+"<p><small>Based on International Standard Atmosphere (ISA)</small></p></div>";
 }
 
 function resetForm() {
